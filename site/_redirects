@@ -1,0 +1,12 @@
+# Sprachweiche: nur das Herkunftsland (IP) entscheidet.
+# Deutschland, Oesterreich, Schweiz, Liechtenstein -> Deutsch, alles andere -> Englisch.
+# Die Sprachversionen selbst leiten nie weiter — der Umschalter bleibt schleifenfrei.
+/                /de/    302!   Country=de,at,ch,li
+/                /en/    302!
+/index.html      /en/    302!
+
+# Rechtstexte kurz halten
+/impressum       /de/impressum.html      301
+/datenschutz     /de/datenschutz.html    301
+/legal-notice    /en/legal-notice.html   301
+/privacy         /en/privacy.html        301

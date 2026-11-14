@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aureon · 3D Erlebnis</title>
+<meta name="description" content="Aureon: Industrie, Commerce und Technologie. Erleben Sie es in 3D.">
+<link rel="alternate" hreflang="de" href="/de/3d.html"><link rel="alternate" hreflang="en" href="/en/3d.html">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,300..700&family=Martian+Mono:wght@300;400&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07080a;--ink:#ECE6D6;--mut:#9a968a;--g2:#B8912A;--g3:#E3C468;--g4:#F4E1A8;--line:rgba(227,196,104,.22)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}
+body{background:var(--bg);color:var(--ink);font-family:'Archivo',system-ui,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+#gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
+.vig{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 70% 50%,transparent 30%,rgba(7,8,10,.55) 100%),linear-gradient(90deg,rgba(7,8,10,.72) 0%,rgba(7,8,10,0) 55%)}
+header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(18px,4vw,56px)}
+header img{height:30px;display:block}
+nav{display:flex;gap:22px;align-items:center;font-family:'Martian Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+nav a{color:var(--ink);text-decoration:none;opacity:.8;transition:.2s}
+nav a:hover{opacity:1;color:var(--g3)}
+nav .cta{border:1px solid var(--g2);padding:9px 16px;color:var(--g3);opacity:1}
+nav .cta:hover{background:var(--g2);color:#07080a}
+main{position:relative;z-index:5}
+section{min-height:100vh;display:flex;align-items:center;padding:110px clamp(18px,6vw,96px) 80px}
+.card{max-width:540px}
+.eb{font-family:'Martian Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--g3);display:flex;align-items:center;gap:12px;margin-bottom:26px}
+.eb i{display:block;width:38px;height:1px;background:var(--g2)}
+h1,h2{font-family:'Newsreader',serif;font-weight:300;line-height:1.02;letter-spacing:-.015em}
+h1{font-size:clamp(44px,7.4vw,112px)}
+h2{font-size:clamp(34px,4.8vw,70px)}
+h1 em,h2 em{font-style:italic;color:var(--g3)}
+.lead{margin-top:26px;font-size:clamp(15px,1.25vw,18px);line-height:1.65;color:#cfc9b8;max-width:46ch}
+ul{list-style:none;margin-top:30px;border-top:1px solid var(--line)}
+li{padding:14px 0;border-bottom:1px solid var(--line);font-size:15px;display:flex;gap:16px;align-items:baseline}
+li b{font-family:'Martian Mono',monospace;font-weight:400;font-size:11px;color:var(--g2);letter-spacing:.1em}
+.hint{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);z-index:20;font-family:'Martian Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut);transition:opacity .4s;text-align:center}
+.hint span{display:block;width:1px;height:34px;background:linear-gradient(var(--g3),transparent);margin:10px auto 0;animation:dr 1.8s infinite}
+@keyframes dr{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.dots{position:fixed;right:clamp(14px,2.4vw,34px);top:50%;transform:translateY(-50%);z-index:20;display:flex;flex-direction:column;gap:14px}
+.dots a{display:block;width:7px;height:7px;border-radius:50%;border:1px solid var(--g2);transition:.3s}
+.dots a.on{background:var(--g3);transform:scale(1.4)}
+.num{position:fixed;left:clamp(18px,4vw,56px);bottom:26px;z-index:20;font-family:'Martian Mono',monospace;font-size:11px;letter-spacing:.18em;color:var(--mut)}
+.num b{color:var(--g3);font-weight:400}
+.btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+.btn{font-family:'Martian Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:15px 24px;border:1px solid var(--g2);color:var(--g3);transition:.25s;display:inline-flex;gap:10px;align-items:center}
+.btn:hover{background:var(--g2);color:#07080a}
+.btn.solid{background:var(--g2);color:#07080a}.btn.solid:hover{background:var(--g3)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+section.in .rv{opacity:1;transform:none}
+section.in .rv:nth-child(2){transition-delay:.12s}section.in .rv:nth-child(3){transition-delay:.24s}section.in .rv:nth-child(4){transition-delay:.36s}section.in .rv:nth-child(5){transition-delay:.48s}
+#waF{position:fixed;right:clamp(14px,2.4vw,34px);bottom:22px;z-index:25;width:52px;height:52px;border-radius:50%;background:#128C4A;display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.45);transition:.25s}
+#waF:hover{transform:scale(1.08)}
+#waF svg{width:26px;height:26px;fill:#fff}
+.nogl #gl{display:none}.nogl .vig{background:radial-gradient(ellipse at 70% 40%,#1a1710,#07080a 70%)}
+@media(max-width:760px){nav a:not(.cta){display:none}.vig{background:rgba(7,8,10,.5)}.dots{display:none}.card{max-width:100%}header img{height:24px}}
+@media(prefers-reduced-motion:reduce){.rv{transition:none;opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<canvas id="gl"></canvas><div class="vig"></div>
+<header>
+<a href="/de/"><img src="../aureon-logo-light.png" alt="Aureon"></a>
+<nav><a href="/de/">Gesamte Seite</a><a href="#contact" class="cta">Kontakt</a></nav>
+</header>
+<div class="dots" id="dots"></div>
+<div class="num"><b id="cur">01</b> / 06</div>
+<div class="hint" id="hint">Scrollen<span></span></div>
+<a id="waF" href="https://wa.me/971541623091?text=Guten%20Tag%20Aureon%2C%20ich%20m%C3%B6chte%20gerne%20sprechen." target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 32 32"><path d="M16 3C9 3 3.4 8.6 3.4 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2c1.8 1 3.800 1.500 5.600 1.500 7 0 12.600-5.600 12.600-12.500S23 3 16 3zm0 22.800c-1.800 0-3.500-.5-5-1.400l-.4-.2-4.400 1.200 1.200-4.300-.3-.4a10 10 0 0 1-1.600-5.400C5.500 10 10.200 5.400 16 5.400s10.500 4.600 10.500 10.200S21.800 25.800 16 25.800zm5.800-7.500c-.3-.2-1.900-.9-2.200-1s-.5-.2-.7.200-.8 1-1 1.200-.4.200-.7.100a8.500 8.500 0 0 1-4.200-3.700c-.3-.6.300-.5.900-1.700.1-.2 0-.4 0-.5l-1-2.300c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.100-.8.400s-1 1-1 2.500 1.100 2.900 1.200 3.100 2.100 3.300 5.200 4.500c1.900.8 2.700.9 3.600.7.600-.1 1.900-.8 2.200-1.600s.3-1.400.2-1.600-.3-.2-.6-.4z"/></svg></a>
+<main>
+<section data-i="0"><div class="card">
+<div class="eb rv"><i></i>Aureon · Industrial Office</div>
+<h1 class="rv">Wir bauen, was Geschäft <em>voranbringt</em>.</h1>
+<p class="lead rv">Aureon arbeitet an der Schnittstelle von Industrie, Commerce und Technologie. Scrollen Sie, um durch unsere Arbeit zu fliegen.</p>
+</div></section>
+<section data-i="1"><div class="card">
+<div class="eb rv"><i></i>01 · Industry</div>
+<h2 class="rv">Vom Rohmaterial zum <em>Bauteil</em>.</h2>
+<p class="lead rv">Sourcing, Lieferantenentwicklung und Teilehandel für die Automobilwelt, auf Basis langer praktischer Erfahrung in der Branche.</p>
+<ul class="rv"><li><b>01</b>Rohmaterial: Aluminium, Stahl, Carbon</li><li><b>02</b>CNC und Bauteil-Beschaffung</li><li><b>03</b>Lieferantennetzwerke und Logistik</li></ul>
+</div></section>
+<section data-i="2"><div class="card">
+<div class="eb rv"><i></i>02 · Advisory</div>
+<h2 class="rv">Strategie, die Lücke zwischen <em>Plan</em> und Werk schließt.</h2>
+<p class="lead rv">Beratung aus echten Mandaten der Automobilindustrie, anonymisiert, mit messbarem Mehrwert für unsere Kunden.</p>
+<ul class="rv"><li><b>01</b>Einkaufsstrategie und Kostenstruktur</li><li><b>02</b>Lieferantenportfolio und Verhandlung</li><li><b>03</b>Vertragsmodelle und Risikosteuerung</li></ul>
+</div></section>
+<section data-i="3"><div class="card">
+<div class="eb rv"><i></i>03 · Commerce</div>
+<h2 class="rv">Commerce, <em>durchdacht</em> von Anfang bis Ende.</h2>
+<p class="lead rv">Vom Shop über das Lager bis zum Container: Wir gestalten Handelsflüsse, die skalieren, für B2B und B2C.</p>
+<ul class="rv"><li><b>01</b>Shopify und B2B Shops</li><li><b>02</b>Marktplätze und internationaler Handel</li><li><b>03</b>Fulfilment und Logistikflüsse</li></ul>
+</div></section>
+<section data-i="4"><div class="card">
+<div class="eb rv"><i></i>04 · Digital</div>
+<h2 class="rv">Digital, das wie eine <em>Maschine</em> läuft.</h2>
+<p class="lead rv">Webdesign, Automatisierung und Datenplattformen mit der Präzision eines Industrieprozesses, nicht mit dem Look einer Agentur.</p>
+<ul class="rv"><li><b>01</b>Webdesign und Markenauftritt</li><li><b>02</b>Prozessautomatisierung und Schnittstellen</li><li><b>03</b>Datenplattformen und KI-gestützte Abläufe</li></ul>
+</div></section>
+<section data-i="5" id="contact"><div class="card">
+<div class="eb rv"><i></i>05 · Contact</div>
+<h2 class="rv">Lassen Sie uns <em>sprechen</em>.</h2>
+<p class="lead rv">Sagen Sie uns, was Sie voranbringen wollen. Wir antworten persönlich.</p>
+<div class="btns rv">
+<a class="btn solid" href="mailto:info@aureon-trading.com">info@aureon-trading.com</a>
+<a class="btn" href="https://wa.me/971541623091?text=Guten%20Tag%20Aureon%2C%20ich%20m%C3%B6chte%20gerne%20sprechen." target="_blank" rel="noopener">WhatsApp</a>
+<a class="btn" href="/de/">Gesamte Seite</a>
+</div>
+</div></section>
+</main>
+<script src="../vendor/three.min.js"></script>
+<script>
+(function(){
+var secs=[].slice.call(document.querySelectorAll('section'));
+var dots=document.getElementById('dots'),cur=document.getElementById('cur'),hint=document.getElementById('hint');
+secs.forEach(function(s,i){var a=document.createElement('a');a.href='#'+(s.id||'s'+i);s.id=s.id||'s'+i;dots.appendChild(a)});
+var da=[].slice.call(dots.children);
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.35});
+secs.forEach(function(s){io.observe(s)});
+function setDot(i){da.forEach(function(d,k){d.classList.toggle('on',k===i)});cur.textContent=('0'+(i+1)).slice(-2)}
+var N=secs.length,GAP=34,reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var renderer;
+try{
+ if(!window.THREE)throw 0;
+ renderer=new THREE.WebGLRenderer({canvas:document.getElementById('gl'),antialias:true,alpha:false,powerPreference:'high-performance'});
+}catch(e){document.body.classList.add('nogl');secs.forEach(function(s){s.classList.add('in')});setDot(0);return}
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+renderer.outputEncoding=THREE.sRGBEncoding;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.8;
+var scene=new THREE.Scene();scene.background=new THREE.Color(0x07080a);scene.fog=new THREE.FogExp2(0x07080a,.016);
+var cam=new THREE.PerspectiveCamera(48,1,.1,300);
+// environment for metal reflections
+(function(){
+ var es=new THREE.Scene();es.background=new THREE.Color(0x0b0b0c);
+ function panel(w,h,x,y,z,c,i){var m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({color:new THREE.Color(c).multiplyScalar(i),side:THREE.DoubleSide}));m.position.set(x,y,z);m.lookAt(0,0,0);es.add(m)}
+ panel(14,5,0,9,0,0xfff1cf,1.5);panel(5,14,-10,0,3,0xE3C468,1.2);panel(6,6,9,2,-6,0xffffff,.8);panel(18,3,0,-8,0,0x6a5320,1.2);panel(8,8,0,3,-12,0xcfd8e6,1.1);
+ var pm=new THREE.PMREMGenerator(renderer);scene.environment=pm.fromScene(es,.02).texture;pm.dispose();
+})();
+scene.add(new THREE.AmbientLight(0xffffff,.15));
+var key=new THREE.PointLight(0xffe2a0,1.6,60);scene.add(key);
+var rim=new THREE.PointLight(0x7aa2ff,.6,60);scene.add(rim);
+var gold=new THREE.MeshStandardMaterial({color:0xC99A2E,metalness:1,roughness:.3});
+var goldDeep=new THREE.MeshStandardMaterial({color:0xA77C1E,metalness:1,roughness:.38});
+var steel=new THREE.MeshStandardMaterial({color:0xB9BEC6,metalness:1,roughness:.3});
+var dark=new THREE.MeshStandardMaterial({color:0x1a1c20,metalness:.9,roughness:.35});
+var lineMat=new THREE.LineBasicMaterial({color:0xE3C468,transparent:true,opacity:.55});
+var scenes=[];
+function holder(i){var g=new THREE.Group();g.position.set(0,0,-i*GAP);scene.add(g);scenes[i]=g;return g}
+var spin=[];
+// 0 hero: gear + ring
+(function(){
+ var g=holder(0),n=16,ro=2.5,rr=2.05,pts=[];
+ var sh=new THREE.Shape();
+ for(var i=0;i<n;i++){var a=i/n*Math.PI*2,w=Math.PI*2/n;
+  var p=[[rr,a],[ro*.97,a+w*.18],[ro*.97,a+w*.42],[rr,a+w*.6]];
+  p.forEach(function(q,k){var x=Math.cos(q[1])*q[0],y=Math.sin(q[1])*q[0];(i===0&&k===0)?sh.moveTo(x,y):sh.lineTo(x,y)})}
+ sh.closePath();
+ var hole=new THREE.Path();hole.absarc(0,0,.8,0,Math.PI*2,true);sh.holes.push(hole);
+ var ex=new THREE.ExtrudeGeometry(sh,{depth:.7,bevelEnabled:true,bevelThickness:.08,bevelSize:.07,bevelSegments:3,curveSegments:24});
+ ex.translate(0,0,-.35);
+ var gear=new THREE.Mesh(ex,gold);g.add(gear);
+ var ring=new THREE.Mesh(new THREE.TorusGeometry(3.3,.03,12,160),goldDeep);g.add(ring);
+ var ring2=new THREE.Mesh(new THREE.TorusGeometry(3.9,.015,8,160),steel);ring2.rotation.x=1.1;g.add(ring2);
+ var disc=new THREE.Mesh(new THREE.CylinderGeometry(1.5,1.5,.9,48,1,true),dark);disc.rotation.x=Math.PI/2;g.add(disc);
+ g.position.x=4.6;g.userData.base=4.6;
+ spin.push(function(t){gear.rotation.z=t*.25;ring.rotation.z=-t*.1;ring2.rotation.z=t*.14;g.rotation.y=Math.sin(t*.3)*.35;g.rotation.x=Math.cos(t*.25)*.12});
+})();
+// 1 industry: bearing, piston, hub
+(function(){
+ var g=holder(1);g.position.x=5.2;g.userData.base=5.2;
+ var br=new THREE.Group();
+ br.add(new THREE.Mesh(new THREE.TorusGeometry(1.7,.38,24,80),steel));
+ br.add(new THREE.Mesh(new THREE.TorusGeometry(.95,.3,24,80),steel));
+ var balls=new THREE.Group();for(var i=0;i<11;i++){var b=new THREE.Mesh(new THREE.SphereGeometry(.26,24,24),gold);var a=i/11*Math.PI*2;b.position.set(Math.cos(a)*1.33,Math.sin(a)*1.33,0);balls.add(b)}
+ br.add(balls);br.position.set(0,1.8,0);g.add(br);
+ var pis=new THREE.Group();
+ var head=new THREE.Mesh(new THREE.CylinderGeometry(.75,.75,1.1,48),gold);pis.add(head);
+ for(var k=0;k<3;k++){var r=new THREE.Mesh(new THREE.TorusGeometry(.76,.05,10,48),dark);r.rotation.x=Math.PI/2;r.position.y=.3-k*.22;pis.add(r)}
+ var rod=new THREE.Mesh(new THREE.CylinderGeometry(.16,.2,1.9,24),steel);rod.position.y=-1.5;pis.add(rod);
+ var eye=new THREE.Mesh(new THREE.TorusGeometry(.3,.1,12,32),steel);eye.position.y=-2.5;pis.add(eye);
+ pis.position.set(-2.4,-1.3,.5);pis.rotation.z=.4;g.add(pis);
+ var prof=[];[[.5,-.7],[1.1,-.7],[1.1,-.45],[.7,-.35],[.7,.35],[1.1,.45],[1.1,.7],[.5,.7]].forEach(function(p){prof.push(new THREE.Vector2(p[0],p[1]))});
+ var hub=new THREE.Mesh(new THREE.LatheGeometry(prof,56),goldDeep);hub.position.set(1.7,-1.6,.4);g.add(hub);
+ var hw=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.LatheGeometry(prof,28)),lineMat);hub.add(hw);
+ spin.push(function(t){br.rotation.y=t*.4;br.rotation.x=.9+Math.sin(t*.3)*.15;balls.rotation.z=-t*.8;pis.rotation.y=t*.5;hub.rotation.y=-t*.6;hub.rotation.x=.5})
+})();
+// 2 advisory: staged panels
+(function(){
+ var g=holder(2);g.position.x=5.2;g.userData.base=5.2;var ps=[];
+ for(var i=0;i<6;i++){
+  var m=new THREE.Mesh(new THREE.BoxGeometry(3.4-i*.22,2.1-i*.12,.05),new THREE.MeshPhysicalMaterial({color:0xE3C468,metalness:.3,roughness:.15,transparent:true,opacity:.14+i*.02,clearcoat:1}));
+  m.position.set(-1.4+i*.55,-2+i*.8,-i*.9);
+  m.add(new THREE.LineSegments(new THREE.EdgesGeometry(m.geometry),lineMat));g.add(m);ps.push(m)}
+ var orb=new THREE.Mesh(new THREE.SphereGeometry(.48,48,48),gold);orb.position.set(2.2,3.2,-5);g.add(orb);
+ var halo=new THREE.Mesh(new THREE.TorusGeometry(.85,.015,8,80),steel);halo.position.copy(orb.position);g.add(halo);
+ spin.push(function(t){g.rotation.y=-.5+Math.sin(t*.25)*.2;ps.forEach(function(p,i){p.position.y=-2+i*.8+Math.sin(t*.8+i)*.08});orb.position.y=3.2+Math.sin(t*.9)*.15;halo.position.y=orb.position.y;halo.rotation.x=t*.5;halo.rotation.y=t*.3})
+})();
+// 3 commerce: container grid
+(function(){
+ var g=holder(3);g.position.x=5.2;g.userData.base=5.2;var bx=[];
+ var cols=[0xD6AE45,0x2a2d33,0xA77C1E,0x3b3f47,0xB9BEC6,0x1d1f23];
+ var geo=new THREE.BoxGeometry(1.5,.8,.8);
+ for(var r=0;r<4;r++)for(var c=0;c<4;c++)for(var h=0;h<2;h++){
+  if(Math.random()<.18)continue;
+  var m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:cols[(r+c*2+h)%cols.length],metalness:.85,roughness:.38}));
+  m.position.set((c-1.5)*1.7,h*.88-.4,(r-1.5)*1.1);m.userData.p=Math.random()*6;g.add(m);bx.push(m);
+  var e=new THREE.LineSegments(new THREE.EdgesGeometry(geo),lineMat);m.add(e)}
+ var floor=new THREE.GridHelper(9,12,0xB8912A,0x4a3d14);floor.position.y=-.9;floor.material.transparent=true;floor.material.opacity=.4;g.add(floor);
+ var cart=new THREE.Mesh(new THREE.TorusKnotGeometry(.5,.14,120,16),gold);cart.position.set(0,3,0);g.add(cart);
+ spin.push(function(t){g.rotation.y=.5+Math.sin(t*.2)*.25;g.rotation.x=.25;bx.forEach(function(m){m.position.y+=Math.sin(t*1.2+m.userData.p)*.0016});cart.rotation.x=t*.5;cart.rotation.y=t*.7})
+})();
+// 4 digital: network sphere
+(function(){
+ var g=holder(4);g.position.x=5.2;g.userData.base=5.2;
+ var n=90,P=[],R=2.8;
+ for(var i=0;i<n;i++){var y=1-i/(n-1)*2,r=Math.sqrt(1-y*y),a=i*2.399963;P.push(new THREE.Vector3(Math.cos(a)*r*R,y*R,Math.sin(a)*r*R))}
+ var pg=new THREE.BufferGeometry().setFromPoints(P);
+ var pts=new THREE.Points(pg,new THREE.PointsMaterial({color:0xF4E1A8,size:.14,sizeAttenuation:true}));g.add(pts);
+ var L=[];for(var i=0;i<n;i++)for(var j=i+1;j<n;j++)if(P[i].distanceTo(P[j])<1.15){L.push(P[i],P[j])}
+ g.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(L),new THREE.LineBasicMaterial({color:0xB8912A,transparent:true,opacity:.5})));
+ var core=new THREE.Mesh(new THREE.IcosahedronGeometry(1.2,1),new THREE.MeshStandardMaterial({color:0xD6AE45,metalness:1,roughness:.22,flatShading:true}));g.add(core);
+ var cw=new THREE.Mesh(new THREE.IcosahedronGeometry(1.45,1),new THREE.MeshBasicMaterial({color:0xE3C468,wireframe:true,transparent:true,opacity:.35}));g.add(cw);
+ var ps=[];for(var k=0;k<14;k++){var s=new THREE.Mesh(new THREE.SphereGeometry(.07,10,10),new THREE.MeshBasicMaterial({color:0xffffff}));g.add(s);ps.push({m:s,a:P[(k*6)%n],b:P[(k*11+5)%n],o:Math.random()})}
+ spin.push(function(t){g.rotation.y=t*.12;core.rotation.y=-t*.4;core.rotation.x=t*.2;cw.rotation.y=t*.25;ps.forEach(function(p){var u=(t*.35+p.o)%1;p.m.position.lerpVectors(p.a,p.b,u)})})
+})();
+// 5 contact: logo + rings
+(function(){
+ var g=holder(5);g.position.x=5;g.userData.base=5;g.scale.setScalar(.8);
+ var tex=new THREE.TextureLoader().load('../aureon-logo-light.png',function(t){t.anisotropy=8});tex.encoding=THREE.sRGBEncoding;
+ var logo=new THREE.Mesh(new THREE.PlaneGeometry(5.6,5.6*197/823),new THREE.MeshBasicMaterial({map:tex,transparent:true,depthWrite:false}));logo.position.set(-.4,2.4,0);g.add(logo);
+ var rs=[];for(var i=0;i<4;i++){var r=new THREE.Mesh(new THREE.TorusGeometry(2.6+i*.9,.02+(i%2)*.015,8,160),i%2?steel:gold);r.rotation.x=Math.PI/2.4;r.position.y=-1;g.add(r);rs.push(r)}
+ spin.push(function(t){rs.forEach(function(r,i){r.rotation.z=t*(.12+i*.05)*(i%2?-1:1);r.rotation.y=Math.sin(t*.3+i)*.2});logo.position.y=2.4+Math.sin(t*.7)*.08})
+})();
+// dust
+var dg=new THREE.BufferGeometry(),dn=1600,da_=new Float32Array(dn*3);
+for(var i=0;i<dn;i++){da_[i*3]=(Math.random()-.5)*40;da_[i*3+1]=(Math.random()-.5)*24;da_[i*3+2]=12-Math.random()*(N*GAP+30)}
+dg.setAttribute('position',new THREE.BufferAttribute(da_,3));
+var dust=new THREE.Points(dg,new THREE.PointsMaterial({color:0xE3C468,size:.045,transparent:true,opacity:.7,sizeAttenuation:true,depthWrite:false}));scene.add(dust);
+// layout
+var mobile=false;
+function resize(){var w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();mobile=w<860;
+ scenes.forEach(function(g){var b=g.userData.base||0;g.userData.mx=mobile?0:b;g.scale.setScalar(mobile?.72:1)})}
+addEventListener('resize',resize);resize();
+var mx=0,my=0,tmx=0,tmy=0;
+addEventListener('pointermove',function(e){tmx=e.clientX/innerWidth-.5;tmy=e.clientY/innerHeight-.5},{passive:true});
+var prog=0,tprog=0,last=-1;
+function readScroll(){var m=document.documentElement.scrollHeight-innerHeight;tprog=m>0?Math.min(1,Math.max(0,scrollY/m)):0}
+addEventListener('scroll',readScroll,{passive:true});readScroll();prog=tprog;
+var clock=new THREE.Clock();
+function frame(){
+ requestAnimationFrame(frame);
+ var t=reduce?0:clock.getElapsedTime();
+ prog+=(tprog-prog)*.07;mx+=(tmx-mx)*.05;my+=(tmy-my)*.05;
+ var f=prog*(N-1);
+ var z=-f*GAP+13;
+ cam.position.set(mx*1.6+Math.sin(f*1.7)*.8,-my*1.0+Math.cos(f*1.3)*.4,z);
+ cam.lookAt(mx*.8+0,-my*.5,z-14);
+ cam.rotation.z+=Math.sin(f*2.1)*.015;
+ key.position.set(cam.position.x+5,cam.position.y+6,z-6);rim.position.set(cam.position.x-8,cam.position.y-3,z-14);
+ spin.forEach(function(fn){fn(t)});
+ scenes.forEach(function(g,i){
+  var d=Math.abs(f-i);var sd=f-i;g.visible=sd>-1.05&&sd<.3;
+  var s=(mobile?.72:1)*(i===0?1:i===5?.8:1.45),k=Math.max(0,1-d*.5);g.scale.setScalar(s*(.82+.18*Math.min(1,k*1.6)));
+  g.position.x=g.userData.mx;
+ });
+ dust.rotation.y=t*.01;
+ var idx=Math.round(f);if(idx!==last){last=idx;setDot(idx)}
+ hint.style.opacity=prog<.03?1:0;
+ renderer.render(scene,cam)}
+frame();
+})();
+</script>
+</body>
+</html>
