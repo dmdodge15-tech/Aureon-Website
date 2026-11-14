@@ -952,11 +952,26 @@ body.on-light .brandmark .bm-light{display:block;}
 .book-alt{color:var(--fg);font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--gold-2);padding-bottom:3px;}
 .book-note{font-size:12px!important;opacity:.75;margin:0!important;max-width:34ch!important;}
 .book-note a{color:inherit;}
-.book-embed{margin-top:clamp(22px,3vw,40px);min-width:320px;height:760px;position:relative;z-index:1;background:rgba(255,255,255,.02);}
-.book-embed .book-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:0;}
-.book-embed[hidden]{display:none;}
+.book-embed{margin-top:clamp(22px,3vw,40px);min-width:0;height:auto;position:relative;z-index:1;background:rgba(255,255,255,.02);border:1px solid rgba(227,196,104,.22);transition:height .4s ease;}
+.book-embed.is-live{height:760px;}
+.book-embed{scroll-margin-top:clamp(110px,14vw,140px);}
+.book-embed iframe{position:absolute;inset:0;}
+.book-embed .book-loading{position:absolute;inset:0;display:flex;flex-direction:column;gap:18px;align-items:center;justify-content:center;padding:0;z-index:2;background:var(--bg);transition:opacity .4s;}
+.book-embed .book-loading.is-done{opacity:0;pointer-events:none;}
+.book-spin{width:34px;height:34px;border-radius:50%;border:2px solid rgba(227,196,104,.18);border-top-color:var(--gold-3);animation:bookspin .9s linear infinite;}
+@keyframes bookspin{to{transform:rotate(360deg);}}
 .book-loading{margin:0;padding:40px 0;text-align:center;color:var(--mute);font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;}
-@media (max-width:760px){.book-row{grid-template-columns:1fr;}.book-embed{height:820px;}}
+.book-ph{appearance:none;border:0;background:none;color:inherit;font:inherit;width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(22px,4vw,64px);align-items:center;padding:clamp(22px,3.5vw,48px);cursor:pointer;text-align:left;}
+.book-ph-cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:clamp(4px,.7vw,9px);}
+.book-ph-cal span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);text-align:center;padding-bottom:6px;}
+.book-ph-cal i{aspect-ratio:1;border-radius:50%;background:rgba(230,232,234,.05);transition:background .3s,transform .3s;}
+.book-ph-cal i.on{background:rgba(227,196,104,.22);box-shadow:inset 0 0 0 1px rgba(227,196,104,.45);}
+.book-ph:hover .book-ph-cal i.on{background:rgba(227,196,104,.4);transform:scale(1.06);}
+.book-ph-txt strong{display:block;font-family:var(--disp);font-weight:200;font-size:clamp(26px,3vw,44px);line-height:1.08;letter-spacing:-.02em;color:var(--fg);}
+.book-ph-txt em{display:block;font-style:normal;color:var(--mute);font-size:clamp(14px,1.1vw,17px);line-height:1.55;margin:12px 0 22px;max-width:40ch;}
+.book-ph-txt b{display:inline-block;padding:15px 26px;background:var(--brand-grad);color:#08090A;font-family:var(--mono);font-weight:400;font-size:11px;letter-spacing:.16em;text-transform:uppercase;}
+.book-ph:focus-visible{outline:2px solid var(--gold-3);outline-offset:-2px;}
+@media (max-width:760px){.book-row{grid-template-columns:1fr;}.book-embed.is-live{height:820px;}.book-ph{grid-template-columns:1fr;}.book-ph-cal{max-width:340px;}}
 </style>
 </head>
 <body>
@@ -1481,7 +1496,7 @@ body.on-light .brandmark .bm-light{display:block;}
           <p class="book-note">Clicking loads the scheduling tool of Calendly. See our <a href="/en/privacy.html">privacy policy</a>.</p>
         </div>
       </div>
-      <div class="book-embed" id="bookEmbed" hidden></div>
+      <div class="book-embed" id="bookEmbed"><button class="book-ph" id="bookPh" type="button" aria-label="Show calendar"><span class="book-ph-cal" aria-hidden="true"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="book-ph-txt"><strong>Available times</strong><em>Choose a day and time right here. The Calendly calendar opens in this panel.</em><b>Show calendar &nbsp;→</b></span></button></div>
     </div>
 
     <div class="contact-close">
@@ -1874,22 +1889,27 @@ body.on-light .brandmark .bm-light{display:block;}
   var btn=document.getElementById("bookBtn"),box=document.getElementById("bookEmbed");
   if(!btn||!box)return;
   var BASE="https://calendly.com/d-meier-aureon-trading/30min";
-  btn.addEventListener("click",function(){
-    box.hidden=false;btn.setAttribute("aria-expanded","true");
-    if(box.getAttribute("data-ready"))return;
+  function load(){
+    btn.setAttribute("aria-expanded","true");
+    if(box.getAttribute("data-ready")){box.scrollIntoView({behavior:"smooth",block:"start"});return;}
     box.setAttribute("data-ready","1");
     var host=location.hostname||"aureon-trading.com";
     var src=BASE+"?embed_domain="+encodeURIComponent(host)+"&embed_type=Inline&hide_gdpr_banner=1&background_color=0b0c0e&text_color=e6e8ea&primary_color=e3c468";
-    box.innerHTML='<p class="book-loading">'+btn.getAttribute("data-loading")+'</p>';
+    box.innerHTML='<div class="book-loading" role="status"><span class="book-spin"></span>'+btn.getAttribute("data-loading")+'</div>';
+    box.classList.add("is-live");
     var f=document.createElement("iframe");
     f.src=src;f.title="Calendly";f.setAttribute("loading","eager");
-    f.style.cssText="width:100%;height:100%;border:0;display:block;opacity:0;transition:opacity .3s";
+    f.style.cssText="width:100%;height:100%;border:0;display:block";
     var done=false;
-    f.onload=function(){done=true;var l=box.querySelector(".book-loading");if(l)l.remove();f.style.opacity=1;};
+    function ready(){if(done)return;done=true;var l=box.querySelector(".book-loading");if(l){l.classList.add("is-done");setTimeout(function(){l.remove();},450);}}
+    window.addEventListener("message",function(e){if(e.origin==="https://calendly.com"&&e.data&&typeof e.data.event==="string"&&(e.data.event==="calendly.event_type_viewed"||e.data.event==="calendly.profile_page_viewed"))setTimeout(ready,400);});
+    f.onload=function(){setTimeout(ready,7000);};
     box.appendChild(f);
-    setTimeout(function(){if(!done){var l=box.querySelector(".book-loading");if(l)l.innerHTML='<a href="'+BASE+'" target="_blank" rel="noopener" style="color:inherit">'+btn.getAttribute("data-fallback")+'</a>';}},6000);
-    box.scrollIntoView({behavior:"smooth",block:"center"});
-  });
+    setTimeout(function(){if(!done){var l=box.querySelector(".book-loading");if(l)l.innerHTML='<a href="'+BASE+'" target="_blank" rel="noopener" style="color:inherit">'+btn.getAttribute("data-fallback")+'</a>';}},12000);
+    box.scrollIntoView({behavior:"smooth",block:"start"});
+  }
+  btn.addEventListener("click",load);
+  var ph=document.getElementById("bookPh");if(ph)ph.addEventListener("click",load);
   if(location.hash==="#book"){setTimeout(function(){var b=document.getElementById("book");b&&b.scrollIntoView();},50);}
 })();
 </script>
