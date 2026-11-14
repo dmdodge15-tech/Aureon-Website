@@ -955,9 +955,8 @@ body.on-light .brandmark .bm-light{display:block;}
 .book-embed{margin-top:clamp(22px,3vw,40px);min-width:0;height:auto;position:relative;z-index:1;background:rgba(255,255,255,.02);border:1px solid rgba(227,196,104,.22);transition:height .4s ease;}
 .book-embed.is-live{height:760px;}
 .book-embed{scroll-margin-top:clamp(110px,14vw,140px);}
-.book-embed iframe{position:absolute;inset:0;}
-.book-embed .book-loading{position:absolute;inset:0;display:flex;flex-direction:column;gap:18px;align-items:center;justify-content:center;padding:0;z-index:2;background:var(--bg);transition:opacity .4s;}
-.book-embed .book-loading.is-done{opacity:0;pointer-events:none;}
+.book-embed iframe{position:absolute;inset:0;z-index:1;background:transparent;}
+.book-embed .book-loading{position:absolute;inset:0;display:flex;flex-direction:column;gap:18px;align-items:center;justify-content:center;padding:0;z-index:0;}
 .book-spin{width:34px;height:34px;border-radius:50%;border:2px solid rgba(227,196,104,.18);border-top-color:var(--gold-3);animation:bookspin .9s linear infinite;}
 @keyframes bookspin{to{transform:rotate(360deg);}}
 .book-loading{margin:0;padding:40px 0;text-align:center;color:var(--mute);font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;}
@@ -1899,13 +1898,8 @@ body.on-light .brandmark .bm-light{display:block;}
     box.classList.add("is-live");
     var f=document.createElement("iframe");
     f.src=src;f.title="Calendly";f.setAttribute("loading","eager");
-    f.style.cssText="width:100%;height:100%;border:0;display:block";
-    var done=false;
-    function ready(){if(done)return;done=true;var l=box.querySelector(".book-loading");if(l){l.classList.add("is-done");setTimeout(function(){l.remove();},450);}}
-    window.addEventListener("message",function(e){if(e.origin==="https://calendly.com"&&e.data&&typeof e.data.event==="string"&&(e.data.event==="calendly.event_type_viewed"||e.data.event==="calendly.profile_page_viewed"))setTimeout(ready,400);});
-    f.onload=function(){setTimeout(ready,7000);};
+    f.style.cssText="width:100%;height:100%;border:0;display:block";f.setAttribute("allowtransparency","true");
     box.appendChild(f);
-    setTimeout(function(){if(!done){var l=box.querySelector(".book-loading");if(l)l.innerHTML='<a href="'+BASE+'" target="_blank" rel="noopener" style="color:inherit">'+btn.getAttribute("data-fallback")+'</a>';}},12000);
     box.scrollIntoView({behavior:"smooth",block:"start"});
   }
   btn.addEventListener("click",load);
