@@ -223,7 +223,7 @@ body.on-light .brandmark .bm-light{display:block;}
 /* ==========================================================================
    Hero
    ========================================================================== */
-.hero{padding:clamp(120px,17vh,190px) 0 0;overflow:hidden;}
+.hero{padding:clamp(120px,12vw,190px) 0 0;overflow:hidden;}
 .hero-spec{
   display:flex;flex-wrap:wrap;gap:8px 30px;
   color:var(--mute);
@@ -1040,10 +1040,6 @@ body.on-light .brandmark .bm-light{display:block;}
 @media (prefers-reduced-motion:reduce){.pil-tick-in,.pil-ico i,.pil-ico--x b,.hx-btn::after{animation:none;}.hx-sub p,.hx-cta{opacity:1;animation:none;}}
 
 /* ================= ENTWURF 2: interaktiv ================= */
-.rot{display:inline-block;position:relative;vertical-align:bottom;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em;}
-.rot-w{display:inline-block;background:var(--brand-grad);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.04em;transition:transform .55s cubic-bezier(.16,1,.3,1),opacity .45s;}
-.rot-w.out{transform:translateY(-100%);opacity:0;}
-.rot-w.pre{transform:translateY(100%);opacity:0;transition:none;}
 
 .fnd{padding:clamp(80px,10vw,150px) 0 0;}
 .fnd-head{margin-bottom:clamp(30px,4vw,56px);}
@@ -1195,6 +1191,50 @@ body.on-light .brandmark .bm-light{display:block;}
 .cc-card:hover .cc-go{background:var(--brand-grad);color:#08090A;border-color:transparent;transform:rotate(-45deg);}
 .cc-card:focus-visible{outline:2px solid var(--gold-3);outline-offset:4px;}
 @media (max-width:760px){.cc{grid-template-columns:1fr;}.cc-card+.cc-card{border-left:0;border-top:1px solid var(--edge);padding-left:0;}.cc-go{width:44px;height:44px;}}
+
+/* ================= Hero: festes Wortfeld + mobiles Netzwerk ================= */
+.rot{display:inline-grid;vertical-align:bottom;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em;}
+.rot-w{grid-area:1/1;justify-self:center;background:var(--brand-grad);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.04em;opacity:0;transform:translateY(55%);transition:opacity .45s ease,transform .6s cubic-bezier(.16,1,.3,1);will-change:opacity,transform;}
+.rot-w.on{opacity:1;transform:none;transition-delay:.28s;}
+.rot-w.off{opacity:0;transform:translateY(-40%);transition-duration:.35s,.4s;}
+.mnet{display:none;}
+@media (max-width:700px){
+  .mast{gap:8px;padding-top:8px;flex-wrap:wrap;}
+  .brandmark img{height:24px;}
+  .mast-end{gap:6px;flex:none;}
+  .lang{gap:2px;}
+  .lang a{display:inline-flex;align-items:center;min-height:44px;padding:0 5px;}
+  .mast-cta{display:inline-flex;align-items:center;min-height:44px;padding:0 11px;letter-spacing:.12em;white-space:nowrap;}
+  .mast-spec{margin-top:4px;padding:0;}
+  .mast-spec a{display:inline-flex;align-items:center;min-height:44px;}
+  .hero{padding-top:128px;}
+  .hero h1{margin-top:8px;}
+  .hero-foot{display:none;}
+  .film{display:none;}
+  .mnet{display:block;margin:20px 0 0;border:1px solid var(--edge);background:#000;padding:8px 4px 2px;}
+  .mnet svg{display:block;width:100%;height:auto;}
+  .hx-sub{flex-direction:column;align-items:stretch;gap:18px;margin:20px 0 48px;}
+  .hx-cta{order:-1;justify-content:space-between;}
+  .hx-btn{display:inline-flex;align-items:center;min-height:48px;padding:0 22px;}
+  .hx-alt{display:inline-flex;align-items:center;min-height:44px;padding-bottom:0;}
+}
+.mn-bg circle{fill:rgba(134,141,150,.22);}
+.mn-arc{fill:none;stroke:rgba(227,196,104,.32);stroke-width:1.1;}
+.mn-pulse{fill:#F4E1A8;}
+.mn-dot{fill:#E3C468;}
+.mn-ring{fill:none;stroke:#E3C468;stroke-width:1;transform-box:fill-box;transform-origin:center;animation:mnring 2.8s ease-out infinite;}
+.mn-node:nth-child(2n) .mn-ring{animation-delay:1.1s;}
+@keyframes mnring{0%{transform:scale(1);opacity:.7;}100%{transform:scale(4.2);opacity:0;}}
+.mn-name{font-family:var(--mono);font-size:13.5px;letter-spacing:.14em;fill:#F0F0EC;}
+.mn-role{font-family:var(--grot);font-size:12.5px;fill:#9AA1AA;}
+.mnet.paused .mn-ring{animation-play-state:paused;}
+@media (prefers-reduced-motion:reduce){
+  .rot-w{transition:none;}
+  .rot-w:not(:first-child){display:none;}
+  .rot-w:first-child{opacity:1;transform:none;}
+  .mn-ring{animation:none;opacity:0;}
+  .mn-pulse{display:none;}
+}
 </style>
 </head>
 <body>
@@ -1231,10 +1271,12 @@ body.on-light .brandmark .bm-light{display:block;}
       <span><b>Einkauf &amp; Qualität</b></span>
     </div>
 
-    <h1 class="stmt">
+    <h1 class="stmt" aria-label="Wir bauen, was Ihr Geschäft bewegt.">
       <span class="hero-line"><span>Wir bauen, was</span></span>
-      <span class="hero-line"><span>Ihr <span class="rot" id="rot" aria-live="polite"><span class="rot-w">Geschäft</span></span> <i>bewegt</i>.</span></span>
+      <span class="hero-line"><span>Ihr <span class="rot" id="rot" aria-hidden="true"><span class="rot-w on">Geschäft</span><span class="rot-w">Einkauf</span><span class="rot-w">Vertrieb</span><span class="rot-w">Service</span><span class="rot-w">Betrieb</span></span> <i>bewegt</i>.</span></span>
     </h1>
+    <figure class="mnet" id="mnet" role="img" aria-label="Aureon Netzwerk: Kunden in DACH und den USA, Lieferanten in der EU und Asien, Standort Dubai."><svg viewBox="0 0 340 214" aria-hidden="true"><defs><pattern id="mn-grid" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r=".9"/></pattern><radialGradient id="mn-glow" cx="55%" cy="55%" r="60%"><stop offset="0" stop-color="#E3C468" stop-opacity=".16"/><stop offset="1" stop-color="#E3C468" stop-opacity="0"/></radialGradient></defs><rect class="mn-bg" width="340" height="214" fill="url(#mn-grid)"/><rect width="340" height="214" fill="url(#mn-glow)"/><path id="mn-p0" class="mn-arc" d="M46 92 Q98.9 44.0 168 62"/><path id="mn-p1" class="mn-arc" d="M168 62 Q237.6 56.1 292 100"/><path id="mn-p2" class="mn-arc" d="M168 62 Q203.3 94.3 206 142"/><path id="mn-p3" class="mn-arc" d="M206 142 Q242.0 106.6 292 100"/><path id="mn-p4" class="mn-arc" d="M46 92 Q117.1 145.6 206 142"/><circle class="mn-pulse" r="2.6" opacity="0"><set attributeName="opacity" to="1" begin="0.0s"/><animateMotion dur="3.20s" begin="0.0s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#mn-p0"/></animateMotion></circle><circle class="mn-pulse" r="2.6" opacity="0"><set attributeName="opacity" to="1" begin="0.6s"/><animateMotion dur="3.55s" begin="0.6s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#mn-p1"/></animateMotion></circle><circle class="mn-pulse" r="2.6" opacity="0"><set attributeName="opacity" to="1" begin="1.2s"/><animateMotion dur="3.90s" begin="1.2s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#mn-p2"/></animateMotion></circle><circle class="mn-pulse" r="2.6" opacity="0"><set attributeName="opacity" to="1" begin="1.8s"/><animateMotion dur="4.25s" begin="1.8s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#mn-p3"/></animateMotion></circle><circle class="mn-pulse" r="2.6" opacity="0"><set attributeName="opacity" to="1" begin="2.4s"/><animateMotion dur="4.60s" begin="2.4s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#mn-p4"/></animateMotion></circle><g class="mn-node"><circle class="mn-ring" cx="46" cy="92" r="5"/><circle class="mn-dot" cx="46" cy="92" r="4.6"/><text class="mn-name" x="46" y="122" text-anchor="middle">USA</text><text class="mn-role" x="46" y="138" text-anchor="middle">Kunden</text></g><g class="mn-node"><circle class="mn-ring" cx="168" cy="62" r="5"/><circle class="mn-dot" cx="168" cy="62" r="4.6"/><text class="mn-name" x="168" y="24" text-anchor="middle">DACH · EU</text><text class="mn-role" x="168" y="40" text-anchor="middle">Kunden · Lieferanten</text></g><g class="mn-node"><circle class="mn-ring" cx="206" cy="142" r="5"/><circle class="mn-dot" cx="206" cy="142" r="4.6"/><text class="mn-name" x="206" y="172" text-anchor="middle">DUBAI</text><text class="mn-role" x="206" y="188" text-anchor="middle">Standort</text></g><g class="mn-node"><circle class="mn-ring" cx="292" cy="100" r="5"/><circle class="mn-dot" cx="292" cy="100" r="4.6"/><text class="mn-name" x="292" y="130" text-anchor="middle">ASIEN</text><text class="mn-role" x="292" y="146" text-anchor="middle">Lieferanten</text></g></svg></figure>
+
 
     <div class="hx-sub">
       <p>KI-Lösungen in Tagen statt Quartalen, gemeinsam mit The Cabinet™. Einkauf und Qualität mit 17 Jahren Automotive. Ein Ansprechpartner, von Dubai aus für DACH, die USA und die Golfregion.</p>
@@ -2227,11 +2269,6 @@ body.on-light .brandmark .bm-light{display:block;}
 </script>
 <script>
 (function(){
-  /* wechselndes Wort im Hero */
-  var words=["Geschäft","Einkauf","Vertrieb","Service","Betrieb"],rot=document.getElementById("rot"),k=0;
-  if(rot&&!matchMedia("(prefers-reduced-motion: reduce)").matches){
-    setInterval(function(){var w=rot.querySelector(".rot-w");w.classList.add("out");setTimeout(function(){k=(k+1)%words.length;w.classList.remove("out");w.classList.add("pre");w.textContent=words[k];void w.offsetWidth;w.classList.remove("pre");},450);},2600);
-  }
   /* Problem-Finder */
   var data=JSON.parse(document.getElementById("fnd-data").textContent),tabs=[].slice.call(document.querySelectorAll(".fnd-tab")),body=document.querySelector(".fnd-body");
   function $(id){return document.getElementById(id);}
@@ -2279,6 +2316,28 @@ body.on-light .brandmark .bm-light{display:block;}
   var box=document.querySelector(".chain");
   if("IntersectionObserver" in window){new IntersectionObserver(function(en){seen=en[0].isIntersecting;if(seen)t0=performance.now();},{threshold:.3}).observe(box);}else seen=true;
   (function tick(now){if(auto&&seen){var f=(now-t0)/T;bar.style.width=Math.min(100,f*100)+"%";if(f>=1)show((cur+1)%4,true);}requestAnimationFrame(tick);})(performance.now());
+})();
+</script>
+<script>
+(function(){
+  var RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* Wortwechsel: nur Opacity und Transform, feste Breite durch gestapelte Woerter */
+  var rot=document.getElementById("rot");
+  if(rot&&!RM){
+    var w=[].slice.call(rot.querySelectorAll(".rot-w")),k=0,timer=0,inView=true;
+    function next(){var a=w[k];k=(k+1)%w.length;var b=w[k];a.classList.remove("on");a.classList.add("off");b.classList.remove("off");b.classList.add("on");setTimeout(function(){a.classList.remove("off");},800);}
+    function run(){if(!timer&&inView&&!document.hidden)timer=setInterval(next,2800);}
+    function stop(){clearInterval(timer);timer=0;}
+    document.addEventListener("visibilitychange",function(){document.hidden?stop():run();});
+    if("IntersectionObserver" in window)new IntersectionObserver(function(e){inView=e[0].isIntersecting;inView?run():stop();}).observe(rot);
+    run();
+  }
+  /* Mobiles Netzwerk: nur animieren, wenn sichtbar */
+  var mn=document.getElementById("mnet");
+  if(mn){var svg=mn.querySelector("svg");
+    if(RM){svg.pauseAnimations&&svg.pauseAnimations();}
+    else if("IntersectionObserver" in window){new IntersectionObserver(function(e){var v=e[0].isIntersecting;mn.classList.toggle("paused",!v);if(svg.pauseAnimations){v?svg.unpauseAnimations():svg.pauseAnimations();}}).observe(mn);}
+  }
 })();
 </script>
 </body>
