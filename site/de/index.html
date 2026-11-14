@@ -1235,6 +1235,41 @@ body.on-light .brandmark .bm-light{display:block;}
   .mn-ring{animation:none;opacity:0;}
   .mn-pulse{display:none;}
 }
+
+/* Kartenausschnitt mobil */
+.mn-land{fill:none;stroke:rgba(134,141,150,.42);stroke-linecap:butt;}
+.mn-land--sweep{stroke:url(#mn-sweep);opacity:.75;}
+@media (prefers-reduced-motion:reduce){.mn-land--sweep{display:none;}}
+/* Ende Kartenausschnitt */
+.mn-small{fill:rgba(227,196,104,.75);}
+.mn-arc--in{stroke-dasharray:3 3;}
+.mn-in{fill:none;stroke:#E3C468;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;}
+.mn-name,.mn-role{paint-order:stroke;stroke:#000;stroke-width:4px;stroke-linejoin:round;}
+
+/* ================= Bereiche: vier Karten mit Details ================= */
+.pil-grid--4{grid-template-columns:repeat(4,minmax(0,1fr));}
+.pil-grid--4 .pil-card{min-height:0;gap:14px;}
+.pil-grid--4 .pil-card h3{margin:6px 0 0;font-size:clamp(24px,2vw,32px);}
+.pil-list{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:0;}
+.pil-list li{position:relative;padding:10px 0 10px 20px;border-top:1px solid rgba(230,232,234,.07);color:var(--chalk);font-size:14px;line-height:1.45;opacity:0;transform:translateX(-8px);transition:opacity .6s,transform .6s cubic-bezier(.16,1,.3,1);}
+.pil-list li::before{content:"";position:absolute;left:0;top:17px;width:8px;height:1px;background:var(--gold-3);transition:width .4s;}
+.pil-card.in .pil-list li{opacity:1;transform:none;}
+.pil-card.in .pil-list li:nth-child(2){transition-delay:.08s}.pil-card.in .pil-list li:nth-child(3){transition-delay:.16s}.pil-card.in .pil-list li:nth-child(4){transition-delay:.24s}
+.pil-card:hover .pil-list li::before{width:12px;}
+.pil-grid--4 .pil-go{margin-top:auto;}
+.pil-ico--dia{display:flex;align-items:center;height:44px;position:relative;}
+.pil-ico--dia b{position:absolute;left:4px;width:26px;height:26px;border:1px solid var(--gold-3);transform:rotate(45deg);animation:pildia 6s linear infinite;}
+.pil-ico--dia b+b{left:16px;background:rgba(227,196,104,.15);animation-direction:reverse;}
+@keyframes pildia{to{transform:rotate(405deg);}}
+.pil-ico--grid{display:grid;grid-template-columns:repeat(2,16px);gap:6px;height:44px;align-content:start;}
+.pil-ico--grid i{width:16px;height:16px;border:1px solid rgba(227,196,104,.6);animation:pilgrid 2.8s ease-in-out infinite;}
+.pil-ico--grid i:nth-child(2){animation-delay:.35s}.pil-ico--grid i:nth-child(4){animation-delay:.7s}.pil-ico--grid i:nth-child(3){animation-delay:1.05s}
+@keyframes pilgrid{0%,100%{background:transparent;}50%{background:rgba(227,196,104,.55);}}
+.fnd-p{display:none;}
+.fnd-foot{justify-content:flex-end;}
+@media (max-width:1100px){.pil-grid--4{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media (max-width:640px){.pil-grid--4{grid-template-columns:1fr;}}
+@media (prefers-reduced-motion:reduce){.pil-list li{opacity:1;transform:none;transition:none;}.pil-ico--dia b,.pil-ico--grid i{animation:none;}}
 </style>
 </head>
 <body>
@@ -1247,7 +1282,6 @@ body.on-light .brandmark .bm-light{display:block;}
   </a>
   <nav class="mast-spec spec" aria-label="Bereiche">
     <a href="#digital" data-rail="digital">Digital &amp; KI</a>
-    <a href="#koop">Kooperation</a>
     <a href="#advisory" data-rail="advisory">Strategie</a>
     <a href="#quality" data-rail="quality">Qualität</a>
     <a href="#mandates">Mandate</a>
@@ -1267,19 +1301,20 @@ body.on-light .brandmark .bm-light{display:block;}
   <div class="wrap">
     <div class="hero-spec spec">
       <span><b>Digital &amp; KI</b></span>
-      <span><b>Kooperation</b></span>
+      <span><b>Strategie</b></span>
       <span><b>Einkauf &amp; Qualität</b></span>
+      <span><b>Industrie</b></span>
     </div>
 
     <h1 class="stmt" aria-label="Wir bauen, was Ihr Geschäft bewegt.">
       <span class="hero-line"><span>Wir bauen, was</span></span>
       <span class="hero-line"><span>Ihr <span class="rot" id="rot" aria-hidden="true"><span class="rot-w on">Geschäft</span><span class="rot-w">Einkauf</span><span class="rot-w">Vertrieb</span><span class="rot-w">Service</span><span class="rot-w">Betrieb</span></span> <i>bewegt</i>.</span></span>
     </h1>
-    <figure class="mnet" id="mnet" role="img" aria-label="Aureon Netzwerk: Kunden in DACH und den USA, Lieferanten in der EU und Asien, Standort Dubai."><svg viewBox="0 0 340 214" aria-hidden="true"><defs><pattern id="mn-grid" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r=".9"/></pattern><radialGradient id="mn-glow" cx="55%" cy="55%" r="60%"><stop offset="0" stop-color="#E3C468" stop-opacity=".16"/><stop offset="1" stop-color="#E3C468" stop-opacity="0"/></radialGradient></defs><rect class="mn-bg" width="340" height="214" fill="url(#mn-grid)"/><rect width="340" height="214" fill="url(#mn-glow)"/><path id="mn-p0" class="mn-arc" d="M46 92 Q98.9 44.0 168 62"/><path id="mn-p1" class="mn-arc" d="M168 62 Q237.6 56.1 292 100"/><path id="mn-p2" class="mn-arc" d="M168 62 Q203.3 94.3 206 142"/><path id="mn-p3" class="mn-arc" d="M206 142 Q242.0 106.6 292 100"/><path id="mn-p4" class="mn-arc" d="M46 92 Q117.1 145.6 206 142"/><circle class="mn-pulse" r="2.6" opacity="0"><set attributeName="opacity" to="1" begin="0.0s"/><animateMotion dur="3.20s" begin="0.0s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#mn-p0"/></animateMotion></circle><circle class="mn-pulse" r="2.6" opacity="0"><set attributeName="opacity" to="1" begin="0.6s"/><animateMotion dur="3.55s" begin="0.6s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#mn-p1"/></animateMotion></circle><circle class="mn-pulse" r="2.6" opacity="0"><set attributeName="opacity" to="1" begin="1.2s"/><animateMotion dur="3.90s" begin="1.2s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#mn-p2"/></animateMotion></circle><circle class="mn-pulse" r="2.6" opacity="0"><set attributeName="opacity" to="1" begin="1.8s"/><animateMotion dur="4.25s" begin="1.8s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#mn-p3"/></animateMotion></circle><circle class="mn-pulse" r="2.6" opacity="0"><set attributeName="opacity" to="1" begin="2.4s"/><animateMotion dur="4.60s" begin="2.4s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#mn-p4"/></animateMotion></circle><g class="mn-node"><circle class="mn-ring" cx="46" cy="92" r="5"/><circle class="mn-dot" cx="46" cy="92" r="4.6"/><text class="mn-name" x="46" y="122" text-anchor="middle">USA</text><text class="mn-role" x="46" y="138" text-anchor="middle">Kunden</text></g><g class="mn-node"><circle class="mn-ring" cx="168" cy="62" r="5"/><circle class="mn-dot" cx="168" cy="62" r="4.6"/><text class="mn-name" x="168" y="24" text-anchor="middle">DACH · EU</text><text class="mn-role" x="168" y="40" text-anchor="middle">Kunden · Lieferanten</text></g><g class="mn-node"><circle class="mn-ring" cx="206" cy="142" r="5"/><circle class="mn-dot" cx="206" cy="142" r="4.6"/><text class="mn-name" x="206" y="172" text-anchor="middle">DUBAI</text><text class="mn-role" x="206" y="188" text-anchor="middle">Standort</text></g><g class="mn-node"><circle class="mn-ring" cx="292" cy="100" r="5"/><circle class="mn-dot" cx="292" cy="100" r="4.6"/><text class="mn-name" x="292" y="130" text-anchor="middle">ASIEN</text><text class="mn-role" x="292" y="146" text-anchor="middle">Lieferanten</text></g></svg></figure>
+    <figure class="mnet" id="mnet" role="img" aria-label="Kartenausschnitt Europa bis Asien: Kunden in DACH und den USA, Lieferanten in der EU und Asien."><svg viewBox="0 0 340 185" aria-hidden="true"><defs><radialGradient id="mn-glow" cx="45%" cy="45%" r="65%"><stop offset="0" stop-color="#E3C468" stop-opacity=".14"/><stop offset="1" stop-color="#E3C468" stop-opacity="0"/></radialGradient></defs><linearGradient id="mn-sweep" gradientUnits="userSpaceOnUse" x1="-140" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#E3C468" stop-opacity="0"/><stop offset=".5" stop-color="#F4E1A8" stop-opacity=".95"/><stop offset="1" stop-color="#E3C468" stop-opacity="0"/><animateTransform attributeName="gradientTransform" type="translate" from="0 0" to="480 0" dur="7s" repeatCount="indefinite"/></linearGradient><path class="mn-land" d="M64.4 7.0h56.0M137.8 7.0h202.8M60.5 10.8h25.1M95.3 10.8h25.1M126.2 10.8h214.4M52.8 14.7h25.1M87.6 14.7h253.1M45.1 18.6h29.0M87.6 18.6h253.1M45.1 22.4h32.8M91.4 22.4h1.9M106.9 22.4h233.7M18.0 26.3h5.8M48.9 26.3h5.8M60.5 26.3h13.5M95.3 26.3h245.3M18.0 30.1h5.8M52.8 30.1h5.8M64.4 30.1h9.7M87.6 30.1h253.1M21.9 34.0h5.8M52.8 34.0h1.9M60.5 34.0h5.8M87.6 34.0h253.1M10.3 37.9h5.8M25.8 37.9h5.8M56.7 37.9h9.7M72.1 37.9h268.5M10.3 41.7h1.9M21.9 41.7h13.5M45.1 41.7h295.6M21.9 45.6h9.7M37.3 45.6h303.3M29.6 49.5h311.0M21.9 53.3h318.7M29.6 57.2h79.2M114.6 57.2h5.8M130.1 57.2h29.0M168.7 57.2h171.9M29.6 61.1h32.8M72.1 61.1h36.7M118.5 61.1h5.8M130.1 61.1h21.2M164.8 61.1h175.8M10.3 64.9h9.7M29.6 64.9h21.2M60.5 64.9h5.8M76.0 64.9h29.0M133.9 64.9h21.2M164.8 64.9h175.8M10.3 68.8h29.0M64.4 68.8h5.8M83.7 68.8h17.4M118.5 68.8h1.9M141.7 68.8h13.5M172.6 68.8h168.1M10.3 72.6h21.2M52.8 72.6h1.9M72.1 72.6h5.8M83.7 72.6h9.7M99.2 72.6h1.9M106.9 72.6h52.2M168.7 72.6h171.9M10.3 76.5h21.2M87.6 76.5h1.9M103.0 76.5h56.0M172.6 76.5h160.3M10.3 80.4h17.4M64.4 80.4h5.8M87.6 80.4h1.9M103.0 80.4h56.0M172.6 80.4h164.2M33.5 84.2h25.1M126.2 84.2h214.4M14.2 88.1h44.4M126.2 88.1h214.4M10.3 92.0h52.2M122.3 92.0h218.3M6.4 95.8h63.7M83.7 95.8h17.4M110.8 95.8h1.9M122.3 95.8h218.3M6.4 99.7h148.7M161.0 99.7h179.7M2.6 103.6h152.6M164.8 103.6h175.8M2.6 107.4h114.0M126.2 107.4h32.8M168.7 107.4h5.8M180.3 107.4h160.3M2.6 111.3h117.8M126.2 111.3h32.8M184.2 111.3h152.6M2.6 115.1h121.7M130.1 115.1h48.3M207.3 115.1h125.6M2.6 119.0h121.7M133.9 119.0h52.2M211.2 119.0h52.2M269.2 119.0h56.0M2.6 122.9h125.6M133.9 122.9h48.3M215.1 122.9h40.6M269.2 122.9h36.7M315.5 122.9h1.9M2.6 126.7h125.6M137.8 126.7h40.6M218.9 126.7h32.8M273.0 126.7h29.0M311.7 126.7h5.8M2.6 130.6h125.6M141.7 130.6h32.8M222.8 130.6h25.1M276.9 130.6h29.0M2.6 134.5h129.4M141.7 134.5h25.1M222.8 134.5h21.2M276.9 134.5h1.9M284.6 134.5h25.1M2.6 138.3h133.3M141.7 138.3h21.2M222.8 138.3h13.5M284.6 138.3h25.1M2.6 142.2h137.2M145.5 142.2h5.8M226.7 142.2h9.7M284.6 142.2h29.0M2.6 146.1h141.0M226.7 146.1h9.7M284.6 146.1h1.9M296.2 146.1h17.4M2.6 149.9h141.0M149.4 149.9h13.5M230.5 149.9h5.8M284.6 149.9h1.9M300.1 149.9h5.8M338.7 149.9h1.9M2.6 153.8h156.5M230.5 153.8h1.9M238.3 153.8h1.9M284.6 153.8h1.9M334.8 153.8h1.9M2.6 157.6h156.5M238.3 157.6h1.9M288.5 157.6h1.9M6.4 161.5h29.0M45.1 161.5h110.1M292.3 161.5h1.9M331.0 161.5h1.9M10.3 165.4h1.9M48.9 165.4h106.2M280.8 165.4h1.9M292.3 165.4h5.8M327.1 165.4h9.7M56.7 169.2h94.7M284.6 169.2h1.9M292.3 169.2h5.8M323.3 169.2h9.7M56.7 173.1h90.8M288.5 173.1h5.8M315.5 173.1h21.2M56.7 177.0h83.1M288.5 177.0h9.7M315.5 177.0h17.4M56.7 180.8h83.1M292.3 180.8h5.8M315.5 180.8h17.4M338.7 180.8h1.9" stroke-width="1.93" stroke-dasharray="1.93 1.93"/><path class="mn-land mn-land--sweep" d="M64.4 7.0h56.0M137.8 7.0h202.8M60.5 10.8h25.1M95.3 10.8h25.1M126.2 10.8h214.4M52.8 14.7h25.1M87.6 14.7h253.1M45.1 18.6h29.0M87.6 18.6h253.1M45.1 22.4h32.8M91.4 22.4h1.9M106.9 22.4h233.7M18.0 26.3h5.8M48.9 26.3h5.8M60.5 26.3h13.5M95.3 26.3h245.3M18.0 30.1h5.8M52.8 30.1h5.8M64.4 30.1h9.7M87.6 30.1h253.1M21.9 34.0h5.8M52.8 34.0h1.9M60.5 34.0h5.8M87.6 34.0h253.1M10.3 37.9h5.8M25.8 37.9h5.8M56.7 37.9h9.7M72.1 37.9h268.5M10.3 41.7h1.9M21.9 41.7h13.5M45.1 41.7h295.6M21.9 45.6h9.7M37.3 45.6h303.3M29.6 49.5h311.0M21.9 53.3h318.7M29.6 57.2h79.2M114.6 57.2h5.8M130.1 57.2h29.0M168.7 57.2h171.9M29.6 61.1h32.8M72.1 61.1h36.7M118.5 61.1h5.8M130.1 61.1h21.2M164.8 61.1h175.8M10.3 64.9h9.7M29.6 64.9h21.2M60.5 64.9h5.8M76.0 64.9h29.0M133.9 64.9h21.2M164.8 64.9h175.8M10.3 68.8h29.0M64.4 68.8h5.8M83.7 68.8h17.4M118.5 68.8h1.9M141.7 68.8h13.5M172.6 68.8h168.1M10.3 72.6h21.2M52.8 72.6h1.9M72.1 72.6h5.8M83.7 72.6h9.7M99.2 72.6h1.9M106.9 72.6h52.2M168.7 72.6h171.9M10.3 76.5h21.2M87.6 76.5h1.9M103.0 76.5h56.0M172.6 76.5h160.3M10.3 80.4h17.4M64.4 80.4h5.8M87.6 80.4h1.9M103.0 80.4h56.0M172.6 80.4h164.2M33.5 84.2h25.1M126.2 84.2h214.4M14.2 88.1h44.4M126.2 88.1h214.4M10.3 92.0h52.2M122.3 92.0h218.3M6.4 95.8h63.7M83.7 95.8h17.4M110.8 95.8h1.9M122.3 95.8h218.3M6.4 99.7h148.7M161.0 99.7h179.7M2.6 103.6h152.6M164.8 103.6h175.8M2.6 107.4h114.0M126.2 107.4h32.8M168.7 107.4h5.8M180.3 107.4h160.3M2.6 111.3h117.8M126.2 111.3h32.8M184.2 111.3h152.6M2.6 115.1h121.7M130.1 115.1h48.3M207.3 115.1h125.6M2.6 119.0h121.7M133.9 119.0h52.2M211.2 119.0h52.2M269.2 119.0h56.0M2.6 122.9h125.6M133.9 122.9h48.3M215.1 122.9h40.6M269.2 122.9h36.7M315.5 122.9h1.9M2.6 126.7h125.6M137.8 126.7h40.6M218.9 126.7h32.8M273.0 126.7h29.0M311.7 126.7h5.8M2.6 130.6h125.6M141.7 130.6h32.8M222.8 130.6h25.1M276.9 130.6h29.0M2.6 134.5h129.4M141.7 134.5h25.1M222.8 134.5h21.2M276.9 134.5h1.9M284.6 134.5h25.1M2.6 138.3h133.3M141.7 138.3h21.2M222.8 138.3h13.5M284.6 138.3h25.1M2.6 142.2h137.2M145.5 142.2h5.8M226.7 142.2h9.7M284.6 142.2h29.0M2.6 146.1h141.0M226.7 146.1h9.7M284.6 146.1h1.9M296.2 146.1h17.4M2.6 149.9h141.0M149.4 149.9h13.5M230.5 149.9h5.8M284.6 149.9h1.9M300.1 149.9h5.8M338.7 149.9h1.9M2.6 153.8h156.5M230.5 153.8h1.9M238.3 153.8h1.9M284.6 153.8h1.9M334.8 153.8h1.9M2.6 157.6h156.5M238.3 157.6h1.9M288.5 157.6h1.9M6.4 161.5h29.0M45.1 161.5h110.1M292.3 161.5h1.9M331.0 161.5h1.9M10.3 165.4h1.9M48.9 165.4h106.2M280.8 165.4h1.9M292.3 165.4h5.8M327.1 165.4h9.7M56.7 169.2h94.7M284.6 169.2h1.9M292.3 169.2h5.8M323.3 169.2h9.7M56.7 173.1h90.8M288.5 173.1h5.8M315.5 173.1h21.2M56.7 177.0h83.1M288.5 177.0h9.7M315.5 177.0h17.4M56.7 180.8h83.1M292.3 180.8h5.8M315.5 180.8h17.4M338.7 180.8h1.9" stroke-width="1.93" stroke-dasharray="1.93 1.93" stroke="url(#mn-sweep)"/><rect width="340" height="185" fill="url(#mn-glow)"/><path id="mn-p0" class="mn-arc mn-arc--in" d="M0.0 67.8 Q18.7 36.9 53.3 47.0"/><path id="mn-p1" class="mn-arc" d="M53.3 47.0 Q119.9 66.7 173.3 111.1"/><path id="mn-p2" class="mn-arc" d="M173.3 111.1 Q249.8 98.6 324.8 118.0"/><path id="mn-p3" class="mn-arc" d="M53.3 47.0 Q200.7 38.0 324.8 118.0"/><path id="mn-p4" class="mn-arc" d="M53.3 47.0 Q81.9 53.2 105.6 70.4"/><path id="mn-p5" class="mn-arc" d="M173.3 111.1 Q198.0 113.3 218.7 126.8"/><circle class="mn-pulse" r="2.4" opacity="0"><set attributeName="opacity" to="1" begin="0.00s"/><animateMotion dur="2.80s" begin="0.00s" repeatCount="indefinite"><mpath href="#mn-p0"/></animateMotion></circle><circle class="mn-pulse" r="2.4" opacity="0"><set attributeName="opacity" to="1" begin="0.55s"/><animateMotion dur="3.10s" begin="0.55s" repeatCount="indefinite"><mpath href="#mn-p1"/></animateMotion></circle><circle class="mn-pulse" r="2.4" opacity="0"><set attributeName="opacity" to="1" begin="1.10s"/><animateMotion dur="3.40s" begin="1.10s" repeatCount="indefinite"><mpath href="#mn-p2"/></animateMotion></circle><circle class="mn-pulse" r="2.4" opacity="0"><set attributeName="opacity" to="1" begin="1.65s"/><animateMotion dur="3.70s" begin="1.65s" repeatCount="indefinite"><mpath href="#mn-p3"/></animateMotion></circle><circle class="mn-small" cx="105.6" cy="70.4" r="1.9"/><circle class="mn-small" cx="218.7" cy="126.8" r="1.9"/><circle class="mn-small" cx="68.0" cy="47.0" r="1.9"/><circle class="mn-small" cx="54.6" cy="58.8" r="1.9"/><circle class="mn-small" cx="173.3" cy="111.1" r="2.4"/><circle class="mn-ring" cx="53.3" cy="47.0" r="5"/><circle class="mn-dot" cx="53.3" cy="47.0" r="4.4"/><circle class="mn-ring" cx="324.8" cy="118.0" r="5"/><circle class="mn-dot" cx="324.8" cy="118.0" r="4.4"/><path class="mn-in" d="M0 63.8 L6 67.8 L0 71.8"/><text class="mn-name" x="62.3" y="35.0" text-anchor="start">DACH · EU</text><text class="mn-role" x="62.3" y="50.0" text-anchor="start">Kunden · Lieferanten</text><text class="mn-name" x="338" y="88.0" text-anchor="end">ASIEN</text><text class="mn-role" x="338" y="103.0" text-anchor="end">Lieferanten</text><text class="mn-name" x="4" y="93.8" text-anchor="start">USA</text><text class="mn-role" x="4" y="108.8" text-anchor="start">Kunden</text></svg></figure>
 
 
     <div class="hx-sub">
-      <p>KI-Lösungen in Tagen statt Quartalen, gemeinsam mit The Cabinet™. Einkauf und Qualität mit 17 Jahren Automotive. Ein Ansprechpartner, von Dubai aus für DACH, die USA und die Golfregion.</p>
+      <p>KI-Lösungen in Tagen statt Quartalen. Strategie, Einkauf und Qualität aus 17 Jahren Automotive. Ein Ansprechpartner für DACH, die USA und die Golfregion.</p>
       <div class="hx-cta">
         <a class="hx-btn" href="#digital">Problem nennen &nbsp;→</a>
         <a class="hx-alt" href="#book">Termin buchen</a>
@@ -1300,7 +1335,7 @@ body.on-light .brandmark .bm-light{display:block;}
         <div class="vig"></div>
         <figcaption class="film-hud"><span class="cap">Aureon Netzwerk · drei Kontinente</span><span>Lieferanten EU · ASIEN &nbsp;·&nbsp; Kunden DACH · USA</span></figcaption>
       </div>
-      <div class="film-cap spec"><span>Beschaffung, Qualität und Lieferung, verbunden über drei Kontinente</span><span>Standort: DUBAI</span></div>
+      <div class="film-cap spec"><span>Beschaffung, Qualität und Lieferung, verbunden über drei Kontinente</span></div>
     </figure>
   </div>
 </section>
@@ -1311,29 +1346,40 @@ body.on-light .brandmark .bm-light{display:block;}
   <div class="wrap">
     <div class="pil-head rv">
       <span class="spec">Was wir tun</span>
-      <h2 class="stmt">Digital denken. <i>Gemeinsam bauen.</i> Industriell liefern.</h2>
+      <h2 class="stmt">Vier Bereiche. <i>Ein Ansprechpartner.</i></h2>
     </div>
-    <div class="pil-grid">
+    <div class="pil-grid pil-grid--4">
       <a class="pil-card rv" href="#digital">
         <span class="pil-no">01 · Digital &amp; KI</span>
         <span class="pil-ico" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
         <h3>KI, die Arbeit übernimmt.</h3>
-        <p>Vom ersten Gespräch zum funktionierenden Prototyp in Tagen. Webanwendungen, Shopify und B2B-Handel, Schnittstellen zu ERP und CRM, Automatisierung.</p>
+        <p>Ein funktionierender Prototyp in Tagen statt Quartalen.</p>
+        <ul class="pil-list"><li>Automatisierung von Rechnungen, Aufträgen und Dokumenten</li><li>Anfragen per Telefon und E-Mail rund um die Uhr</li><li>Webanwendungen, Shopify und B2B-Handel</li><li>Schnittstellen zu ERP, CRM und Zahlung</li></ul>
         <span class="pil-go">Zu Digital &amp; KI →</span>
       </a>
-      <a class="pil-card pil-card--hi rv d1" href="#koop">
-        <span class="pil-no">02 · Kooperation</span>
-        <span class="pil-ico pil-ico--x" aria-hidden="true"><b></b><b></b><em>×</em></span>
-        <h3>Starke Partner. Ein Ansprechpartner.</h3>
-        <p>AUREON × The Cabinet™ für KI in inhabergeführten Unternehmen. AUREON × SQPS für Qualität und Prozesse in der Lieferkette.</p>
-        <span class="pil-go">Zur Kooperation →</span>
+      <a class="pil-card rv d1" href="#advisory">
+        <span class="pil-no">02 · Strategie &amp; Beratung</span>
+        <span class="pil-ico pil-ico--dia" aria-hidden="true"><b></b><b></b></span>
+        <h3>Beratung, die umsetzt.</h3>
+        <p>Ein Mandat mit definiertem Umfang und festem Übergabetermin.</p>
+        <ul class="pil-list"><li>Strategieberatung und Markteintritt</li><li>Kommerzielle Strategie und Preise</li><li>Geschäftsentwicklung</li><li>Digitale Transformation</li></ul>
+        <span class="pil-go">Zur Beratung →</span>
       </a>
       <a class="pil-card rv d2" href="#quality">
         <span class="pil-no">03 · Einkauf &amp; Qualität</span>
         <span class="pil-ico pil-ico--bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-        <h3>17 Jahre Automotive im Rücken.</h3>
-        <p>Strategischer Einkauf, Lieferantenqualität und Industrialisierung. Methoden aus dem Konzern, im Tempo des Mittelstands.</p>
+        <h3>Lieferketten, die halten.</h3>
+        <p>Siebzehn Jahre Einkauf in der Automobilindustrie.</p>
+        <ul class="pil-list"><li>Prozess- und Systemaudits nach VDA 6.3 und IATF 16949</li><li>Lieferantenentwicklung und Quality Governance</li><li>Kostenaufschlüsselung, Preisverhandlung, Verträge</li><li>Feldausfallanalyse, 8D und Ursachenanalyse</li></ul>
         <span class="pil-go">Zu Einkauf &amp; Qualität →</span>
+      </a>
+      <a class="pil-card rv d3" href="#industry">
+        <span class="pil-no">04 · Industrie</span>
+        <span class="pil-ico pil-ico--grid" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <h3>Vom Rohstoff zum Bauteil.</h3>
+        <p>Auditierte Partner für Polymere, Metalle und fertige Bauteile.</p>
+        <ul class="pil-list"><li>Rohmaterial: Polymere und Metalle</li><li>Teile und Komponenten</li><li>Sourcing und Beschaffung</li><li>Import und Export</li></ul>
+        <span class="pil-go">Zur Industrie →</span>
       </a>
     </div>
   </div>
@@ -1375,46 +1421,6 @@ body.on-light .brandmark .bm-light{display:block;}
   <script type="application/json" id="fnd-data">[{"k": "Manuelle Arbeit", "ico": "doc", "flow": ["Dokument", "KI liest und prüft", "Ihr System"], "h": "Schluss mit Abtippen.", "t": "Rechnungen, Aufträge, Dokumente und Dateneingabe, automatisch und fehlerfrei. Ihr Team gewinnt die Stunden zurück, die heute im Kopieren von Daten verschwinden.", "p": "AUREON × The Cabinet™", "m": "KI-Lösung: Manuelle Arbeit"}, {"k": "Kommunikation", "ico": "chat", "flow": ["Anruf · E-Mail", "KI antwortet", "Richtige Person"], "h": "Rund um die Uhr erreichbar.", "t": "Anrufe, E-Mails und Kundenanfragen rund um die Uhr beantwortet und weitergeleitet, auf Deutsch und Englisch.", "p": "AUREON × The Cabinet™", "m": "KI-Lösung: Kommunikation"}, {"k": "Zahlen und Reports", "ico": "chart", "flow": ["Ihre Daten", "KI fasst zusammen", "Report beim Inhaber"], "h": "Kennzahlen, die man versteht.", "t": "Ihre Kennzahlen in verständlicher Sprache, mit wöchentlichem Report auf dem Tisch des Inhabers.", "p": "AUREON × The Cabinet™", "m": "KI-Lösung: Zahlen und Reports"}, {"k": "Vertrieb und Marketing", "ico": "spark", "flow": ["Zielgruppe", "KI erstellt Inhalte", "Pipeline"], "h": "Immer aktiv, im richtigen Ton.", "t": "Content, Kampagnen und Pipeline, immer aktiv und im richtigen Ton.", "p": "AUREON × The Cabinet™", "m": "KI-Lösung: Vertrieb und Marketing"}, {"k": "Shop und B2B-Handel", "ico": "cart", "flow": ["Katalog", "Warenkorb · Zahlung", "ERP · Versand"], "h": "Ein Shop, der B2B kann.", "t": "Katalogstruktur, Staffelpreise, kundenindividuelle Konditionen, Zahlung und eine saubere Übergabe in die Systeme, die Ihre Buchhaltung ohnehin führt. Wir schreiben die Software selbst.", "p": "Aureon Digital", "m": "Anfrage: Shop und B2B-Handel"}, {"k": "Einkauf und Lieferkette", "ico": "chain", "flow": ["Anfrage", "Lieferantenvergleich", "Vergabe"], "h": "Konzerneinkauf im Maßstab des Mittelstands.", "t": "Anfragen, Lieferantenkommunikation, Qualitätsdokumente und Preisbeobachtung. Dazu siebzehn Jahre Erfahrung im automobilen Einkauf.", "p": "AUREON", "m": "Anfrage: Einkauf und Lieferkette"}, {"k": "Lieferantenqualität", "ico": "shield", "flow": ["Lieferant", "Audit · Entwicklung", "Stabile Serie"], "h": "Qualität entlang der ganzen Lieferkette.", "t": "Qualität wird nicht am Ende geprüft. Sie wird entlang der gesamten Lieferkette gesichert, mit Quality & Process Solutions aus 19 Jahren Automotive.", "p": "AUREON × SQPS", "m": "Anfrage Lieferantenqualität"}]</script>
 </section>
 
-<!-- ================= KOOPERATION (Entwurf) ================= -->
-<section class="koop t-graph" id="koop" data-theme="dark">
-  <div class="wrap">
-    <div class="koop-head rv">
-      <span class="spec">Kooperation</span>
-      <h2 class="stmt">Kooperation statt <i>Einzelkämpfer</i>.</h2>
-      <p>Wir holen die Spezialisten an den Tisch, die Ihr Problem am besten lösen, und bleiben Ihr Ansprechpartner von der ersten Frage bis zum laufenden Betrieb.</p>
-    </div>
-    <div class="kx rv">
-      <div class="kx-sw" role="tablist" aria-label="Kooperation wählen">
-        <button class="kx-b" role="tab" type="button" aria-selected="true" data-k="0">AUREON × The Cabinet™</button>
-        <button class="kx-b" role="tab" type="button" aria-selected="false" data-k="1">AUREON × SQPS</button>
-        <span class="kx-ind" aria-hidden="true"></span>
-      </div>
-      <div class="kx-stage">
-        <svg class="kx-svg" viewBox="0 0 520 300" aria-hidden="true">
-          <defs><linearGradient id="kxg" x1="0" x2="1"><stop offset="0" stop-color="#B8912A"/><stop offset="1" stop-color="#F4E1A8"/></linearGradient></defs>
-          <path id="kxp" d="M120 150 C 210 60, 310 60, 400 150" fill="none" stroke="rgba(227,196,104,.25)" stroke-width="1"/>
-          <path d="M120 150 C 210 240, 310 240, 400 150" fill="none" stroke="rgba(227,196,104,.25)" stroke-width="1"/>
-          <circle r="3.5" fill="#F4E1A8"><animateMotion dur="3s" repeatCount="indefinite" path="M120 150 C 210 60, 310 60, 400 150"/></circle>
-          <circle r="3.5" fill="#E3C468"><animateMotion dur="3s" begin="1.5s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear" path="M120 150 C 210 240, 310 240, 400 150"/></circle>
-          <circle cx="120" cy="150" r="62" fill="#0b0c0e" stroke="url(#kxg)" stroke-width="1.2"/>
-          <circle cx="400" cy="150" r="62" fill="#0b0c0e" stroke="url(#kxg)" stroke-width="1.2" class="kx-pulse"/>
-          <text x="120" y="155" text-anchor="middle" class="kx-t">AUREON</text>
-          <text x="400" y="155" text-anchor="middle" class="kx-t" id="kx-partner">The Cabinet™</text>
-          <text x="260" y="40" text-anchor="middle" class="kx-s" id="kx-top">Branche · Region · Umsetzung</text>
-          <text x="260" y="272" text-anchor="middle" class="kx-s" id="kx-bot">KI-Know-how · Plattform</text>
-        </svg>
-        <div class="kx-info">
-          <span class="koop-tag" id="kx-tag"></span>
-          <p class="koop-lead" id="kx-lead"></p>
-          <ul id="kx-list"></ul>
-          <a class="koop-go" id="kx-go" href="#digital"></a>
-        </div>
-      </div>
-    </div>
-    <script type="application/json" id="kx-data">[{"partner": "The Cabinet™", "top": "Branche · Region · Umsetzung", "bot": "KI-Know-how · Plattform", "tag": "Digital · Künstliche Intelligenz", "lead": "US-Spezialisten für maßgeschneiderte KI-Führungskräfte in inhabergeführten Unternehmen, umgesetzt durch Aureon auf Deutsch und Englisch für DACH und die Golfregion.", "items": [["Tage statt Quartale", "Ein funktionierender Prototyp, getestet an Ihrem eigenen Geschäft."], ["Privat von Grund auf", "Eigener Cloud-Account pro Kunde, kein Pooling, kein Training mit Kundendaten."], ["Ein Ansprechpartner", "Rollout, Betrieb und Support mit Aureon in der Region."]], "go": "Wie das abläuft →", "href": "#digital"}, {"partner": "SQPS", "top": "Einkauf · Business Development", "bot": "Qualität · Prozesse", "tag": "Einkauf · Qualität · Prozesse", "lead": "Strategic Procurement & Business Development trifft Quality & Process Solutions. Einkauf und Qualität aus einer Hand, entlang der gesamten Lieferkette.", "items": [["17 Jahre", "AUREON: Strategic Procurement & Business Development."], ["19 Jahre", "SQPS, Patrick Siebel: Quality & Process Solutions im Automotive."], ["Eine Lieferkette", "Von der Lieferantenauswahl bis zur Kundeneskalation."]], "go": "Zur Qualität →", "href": "#quality"}]</script>
-    <p class="koop-note rv">The Cabinet ist eine Marke ihrer Inhaber. Aureon und The Cabinet sind unabhängige Unternehmen, die zusammenarbeiten.</p>
-  </div>
-</section>
 
 <!-- ================= INTERSECTION ================= -->
 <section class="intersect t-void" data-theme="dark">
@@ -2282,7 +2288,7 @@ body.on-light .brandmark .bm-light{display:block;}
     t.addEventListener("keydown",function(e){var n=e.key==="ArrowDown"||e.key==="ArrowRight"?1:e.key==="ArrowUp"||e.key==="ArrowLeft"?-1:0;if(!n)return;e.preventDefault();var j=(i+n+tabs.length)%tabs.length;tabs[j].focus();show(j,true);});});
   show(0,false);
   /* Kooperation */
-  var kd=JSON.parse(document.getElementById("kx-data").textContent),sw=document.querySelector(".kx-sw"),info=document.querySelector(".kx-info"),kb=[].slice.call(document.querySelectorAll(".kx-b"));
+  var kxe=document.getElementById("kx-data");if(!kxe)return;var kd=JSON.parse(kxe.textContent),sw=document.querySelector(".kx-sw"),info=document.querySelector(".kx-info"),kb=[].slice.call(document.querySelectorAll(".kx-b"));
   function esc(x){return x.replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c];});}
   function kshow(i,anim){var d=kd[i];sw.setAttribute("data-k",i);kb.forEach(function(b,j){b.setAttribute("aria-selected",j===i?"true":"false");});
     var fill=function(){$("kx-partner").textContent=d.partner;$("kx-top").textContent=d.top;$("kx-bot").textContent=d.bot;$("kx-tag").textContent=d.tag;$("kx-lead").textContent=d.lead;
