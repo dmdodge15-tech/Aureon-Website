@@ -390,6 +390,10 @@ html[data-theme="light"] .bookdlg::backdrop{background:rgba(40,34,20,.45)}
 html[data-theme="light"] .no-gl body{background:radial-gradient(60% 50% at 70% 40%,rgba(227,196,104,.25),transparent 70%),var(--void)}
 @media (max-width:700px){.thm{width:36px}.mast-end{gap:8px}.mast .btn-ghost{white-space:nowrap;padding:0 12px}.lang a{padding:14px 3px}}
 @media (max-width:400px){.mast a img{height:22px}.mast{gap:10px}}
+/* Buchungsdialog: normaler Mauszeiger, eigener Cursor ausgeblendet */
+body.has-cursor .bookdlg,body.has-cursor .bookdlg *{cursor:auto}
+body.has-cursor .bookdlg a,body.has-cursor .bookdlg button{cursor:pointer}
+html:has(.bookdlg[open]) .cur,html:has(.bookdlg[open]) .cur-ring{opacity:0}
 /* Abschnittsueberschriften etwas kraeftiger */
 .big{font-weight:340}
 .sub-h{font-weight:280}
