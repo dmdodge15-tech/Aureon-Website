@@ -466,7 +466,7 @@ html:has(.bookdlg[open]) .cur,html:has(.bookdlg[open]) .cur-ring{opacity:0}
 </main>
 <footer><span>© 2026 Aureon Trading and Consulting</span><span><a href="legal-notice.html">Legal Notice</a> · <a href="privacy.html">Privacy</a></span></footer>
 <dialog class="bookdlg" id="bookDlg" aria-label="Book a call">
-  <div class="bk-head"><span class="kick">Book a call</span><div class="bk-act"><a class="btn-line" href="https://calendly.com/d-meier-aureon-trading/30min" target="_blank" rel="noopener">Open in a new tab ↗</a><button class="bk-x" type="button" data-close aria-label="Close"></button></div></div>
+  <div class="bk-head"><span class="kick">Book a call</span><div class="bk-act"><a class="btn-line" href="https://calendly.com/d-meier-aureon-trading/aureon-introduction" target="_blank" rel="noopener">Open in a new tab ↗</a><button class="bk-x" type="button" data-close aria-label="Close"></button></div></div>
   <div class="bk-body" id="bookBody"><div class="bk-load"><span class="bk-spin"></span>Loading calendar</div></div>
   <p class="bk-note">Opening this loads the scheduling tool of Calendly. See our <a href="privacy.html" target="_blank" rel="noopener">privacy policy</a>.</p>
 </dialog>
@@ -692,7 +692,7 @@ requestAnimationFrame(loop);
   document.querySelectorAll(".cnt").forEach(function(el){co.observe(el);});
   document.querySelectorAll("details.acc").forEach(function(d){d.addEventListener("toggle",function(){if(!d.open)return;var n=d.getAttribute("name");document.querySelectorAll('details.acc[name="'+n+'"]').forEach(function(o){if(o!==d)o.open=false;});});});
   /* Termin-Dialog: Calendly erst nach Klick */
-  var dlg=document.getElementById("bookDlg"),body=document.getElementById("bookBody"),BASE="https://calendly.com/d-meier-aureon-trading/30min";
+  var dlg=document.getElementById("bookDlg"),body=document.getElementById("bookBody"),BASE="https://calendly.com/d-meier-aureon-trading/aureon-introduction";
   function open(){if(!dlg)return;if(dlg.showModal)dlg.showModal();else dlg.setAttribute("open","");
     if(!body.querySelector("iframe")){var f=document.createElement("iframe");f.title="Calendly";f.setAttribute("allowtransparency","true");
       f.src=BASE+"?embed_domain="+encodeURIComponent(location.hostname||"aureon-trading.com")+"&embed_type=Inline&hide_gdpr_banner=1&"+(document.documentElement.getAttribute("data-theme")==="light"?"background_color=fbf9f4&text_color=17181b&primary_color=9c7a1e":"background_color=08090a&text_color=ecedee&primary_color=e3c468");body.appendChild(f);}}

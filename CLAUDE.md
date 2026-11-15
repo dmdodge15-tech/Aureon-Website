@@ -29,11 +29,10 @@ Hero (Netzwerkkarte mit Dubai im Zentrum, Canvas `#form`) → Intersection → E
 ## Inhalte, die stimmen müssen
 - AUREON: Strategic Procurement & Business Development, 17 Jahre. SQPS (Patrick Siebel): Quality & Process Solutions, 19 Jahre Automotive.
 - Network: Lieferanten EU · ASIA, Kunden DACH · USA, Base DUBAI.
-- Kontakt: info@aureon-trading.com. Calendly: https://calendly.com/d-meier-aureon-trading/30min (wird erst per Klick als iframe geladen, aus Datenschutzgründen).
+- Kontakt: info@aureon-trading.com. Calendly: https://calendly.com/d-meier-aureon-trading/aureon-introduction (wird erst per Klick als iframe geladen, aus Datenschutzgründen).
 - The Cabinet (thecabinet.biz) ist ein unabhängiger Kooperationspartner, Marke nennen mit ™, kein Link auf der Seite.
 
 ## Offene Punkte
-- Calendly Eventname dort ist "60 Minute Meeting", Link endet auf 30min: Dauer klären, dann ggf. im Text nennen.
 - Impressum: USt-ID und Registerdaten fehlen. Rechtstexte juristisch prüfen lassen (inkl. Calendly Abschnitt, EU-Vertreter nach Art. 27 DSGVO).
 - Google Fonts lokal hosten, um die Datenschutzerklärung zu vereinfachen.
 - Deutsche Version des KOPL Vertrags liegt nicht vor (separates Projekt).
