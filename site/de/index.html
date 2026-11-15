@@ -18,7 +18,38 @@
 <link rel="icon" href="../aureon-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;1,6..72,200;1,6..72,300&family=Martian+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,200..400;1,6..72,200..400&family=Martian+Mono:wght@300;400&display=swap" rel="stylesheet">
+<script>
+/* Tag/Nacht: hell zwischen Sonnenaufgang und Sonnenuntergang am Ort des Besuchers.
+   Ort grob aus der Zeitzone des Geraets, keine Standortabfrage. Manuelle Wahl gilt fuer den Besuch. */
+(function(){
+  var D=document.documentElement,K="aureon-theme";
+  var Z={"Europe/Berlin":[52.5,13.4],"Europe/Vienna":[48.2,16.4],"Europe/Zurich":[47.4,8.5],"Europe/Vaduz":[47.1,9.5],
+    "Asia/Dubai":[25.2,55.3],"Europe/London":[51.5,-0.1],"America/New_York":[40.7,-74],"America/Chicago":[41.9,-87.6],
+    "America/Denver":[39.7,-105],"America/Los_Angeles":[34.1,-118.2],"Asia/Shanghai":[31.2,121.5],"Asia/Kolkata":[19,72.8]};
+  function where(){var tz="";try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||"";}catch(e){}
+    if(Z[tz])return Z[tz];var r=tz.split("/")[0],lat={Europe:50,America:38,Asia:28,Africa:8,Australia:-30}[r];
+    return[lat==null?45:lat,-new Date().getTimezoneOffset()/4];}
+  function isDay(now){var p=where(),la=p[0]*Math.PI/180,R=Math.PI/180;
+    var jd=now/864e5+2440587.5,n=Math.round(jd-2451545-.0009-p[1]/360),J=n+.0009-p[1]/360;
+    var M=(357.5291+.98560028*J)%360,C=1.9148*Math.sin(M*R)+.02*Math.sin(2*M*R)+.0003*Math.sin(3*M*R);
+    var lam=(M+C+180+102.9372)%360,Jt=2451545+J+.0053*Math.sin(M*R)-.0069*Math.sin(2*lam*R);
+    var sd=Math.sin(lam*R)*Math.sin(23.4397*R),cd=Math.cos(Math.asin(sd));
+    var cw=(Math.sin(-.833*R)-Math.sin(la)*sd)/(Math.cos(la)*cd);
+    if(cw>1)return false;if(cw<-1)return true;
+    var w=Math.acos(cw)/R/360,rise=(Jt-w-2440587.5)*864e5,set=(Jt+w-2440587.5)*864e5;
+    return now>=rise&&now<set;}
+  function pick(){var m=null;try{m=sessionStorage.getItem(K);}catch(e){}
+    if(m==="light"||m==="dark")return m;return isDay(Date.now())?"light":"dark";}
+  function set(t){if(D.getAttribute("data-theme")===t)return;D.setAttribute("data-theme",t);
+    var mc=document.querySelector('meta[name="theme-color"]');if(mc)mc.setAttribute("content",t==="light"?"#E9E4D8":"#050506");
+    try{document.dispatchEvent(new Event("aureon:theme"));}catch(e){}}
+  window.AureonTheme={toggle:function(){var t=D.getAttribute("data-theme")==="light"?"dark":"light";
+    try{sessionStorage.setItem(K,t);}catch(e){}D.classList.add("thm-anim");set(t);setTimeout(function(){D.classList.remove("thm-anim");},700);},
+    auto:function(){set(pick());}};
+  set(pick());setInterval(window.AureonTheme.auto,300000);
+})();
+</script>
 <style>
 :root{
   --void:#050506;--ink:#0B0C0E;--chalk:#ECEDEE;--steel:#8A9099;--edge:rgba(236,237,238,.12);
@@ -307,7 +338,7 @@ button.btn-gold{font-size:11px;letter-spacing:.18em;text-transform:uppercase}
 button.btn-line{background:none;border:0;border-bottom:1px solid var(--g2);color:inherit;cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:0}
 .exp{width:100%;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:28px 56px}
 .exp-l p{margin:0;color:var(--steel);font-size:15px;line-height:1.65;max-width:46ch}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--edge);border-left:1px solid var(--edge)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--edge);border-left:1px solid var(--edge)}
 .stat{padding:22px 20px;border-right:1px solid var(--edge);border-bottom:1px solid var(--edge);display:flex;flex-direction:column;gap:8px}
 .stat-v{display:flex;align-items:baseline;gap:10px}
 .stat-v .cnt{font-family:var(--disp);font-weight:200;font-size:clamp(48px,5vw,80px);line-height:1;letter-spacing:-.03em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;padding:.06em .06em .06em 0}
@@ -317,6 +348,51 @@ button.btn-line{background:none;border:0;border-bottom:1px solid var(--g2);color
 @media (max-width:900px){.try,.exp{grid-template-columns:1fr}}
 @media (max-width:520px){.stats{grid-template-columns:1fr}.try-pts li{grid-template-columns:1fr;gap:4px}}
 @media (prefers-reduced-motion:reduce){.acc p,.bookdlg[open]{animation:none}.bk-spin{animation:none}.steps li::before{width:100%;transition:none}}
+
+/* ================= Helles Design (Tag) ================= */
+.mast .lg-l{display:none}
+.mast a img{height:26px;width:auto}
+.thm{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;background:none;border:0;color:inherit;cursor:pointer;opacity:.75;transition:opacity .3s}
+.thm:hover{opacity:1}
+.thm svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round}
+.thm .thm-moon{display:none}
+html[data-theme="light"] .thm .thm-moon{display:block}
+html[data-theme="light"] .thm .thm-sun{display:none}
+html.thm-anim body,html.thm-anim .mast,html.thm-anim .glass,html.thm-anim footer,html.thm-anim .marq{transition:background-color .6s,color .6s,background .6s}
+:root{--steel:#9CA2AA}
+html[data-theme="light"]{
+  --void:#E9E4D8;--ink:#FFFFFF;--chalk:#17181B;--steel:#50565E;--edge:rgba(23,24,27,.14);
+  --g1:#5C4508;--g2:#8A6A14;--g3:#7A5E12;--g4:#5C4508;
+  --grad:linear-gradient(100deg,#5C4508 0%,#8A6A14 45%,#A9862A 100%);
+  color-scheme:light}
+html[data-theme="light"] .mast .lg-d{display:none}
+html[data-theme="light"] .mast .lg-l{display:block}
+html[data-theme="light"] ::selection{background:#E3C468;color:#17181B}
+html[data-theme="light"] .vignette{background:radial-gradient(120% 90% at 50% 45%,transparent 60%,rgba(140,115,60,.10) 100%)}
+html[data-theme="light"] .grain{opacity:.035}
+html[data-theme="light"] .nav a{opacity:.72}html[data-theme="light"] .nav a:hover,html[data-theme="light"] .nav a.on{opacity:1}html[data-theme="light"] .lang a{opacity:.6}html[data-theme="light"] .lang a.on{opacity:1}
+html[data-theme="light"] .mast{background:linear-gradient(180deg,rgba(233,228,216,.94),rgba(233,228,216,.6) 70%,rgba(233,228,216,0))}
+html[data-theme="light"] .btn-ghost,html[data-theme="light"] button.btn-ghost{border-color:rgba(23,24,27,.45)}
+html[data-theme="light"] .btn-ghost:hover{background:#17181B;color:#E9E4D8;border-color:#17181B}
+html[data-theme="light"] .btn-gold{background:linear-gradient(100deg,#B8912A 0%,#D9B654 50%,#EBCF7C 100%);color:#17140A}
+html[data-theme="light"] .chips span,html[data-theme="light"] .promise span,html[data-theme="light"] .techmin-row span{background:rgba(250,248,242,.6);border-color:rgba(142,110,23,.35)}
+html[data-theme="light"] .glass{background:linear-gradient(180deg,rgba(250,248,242,.66),rgba(250,248,242,.5));border-color:rgba(23,24,27,.1);box-shadow:0 20px 60px -30px rgba(60,45,10,.25)}
+html[data-theme="light"] .marq{background:rgba(250,248,242,.5)}
+html[data-theme="light"] .road--hi{border-color:rgba(142,110,23,.55);background:linear-gradient(180deg,rgba(227,196,104,.18),rgba(250,248,242,.6))}
+html[data-theme="light"] .try{border-color:rgba(142,110,23,.45);background:radial-gradient(80% 120% at 0% 0%,rgba(227,196,104,.22),transparent 60%),linear-gradient(180deg,rgba(250,248,242,.72),rgba(250,248,242,.54))}
+html[data-theme="light"] .big i .w>span,html[data-theme="light"] .hero h1 .gold .w>span,html[data-theme="light"] .sub-h i .w>span{background:linear-gradient(100deg,#6E540D 0%,#957218 55%,#B08A26 100%);-webkit-background-clip:text;background-clip:text}
+html[data-theme="light"] .geo::before{box-shadow:0 0 0 5px rgba(142,110,23,.18)}
+html[data-theme="light"] .cur{background:#8E6E17}
+html[data-theme="light"] .cur-ring{border-color:rgba(142,110,23,.55)}
+html[data-theme="light"] .cur-ring.hot{background:rgba(142,110,23,.1);border-color:#8E6E17}
+html[data-theme="light"] .bookdlg{background:#FBF9F4;border-color:rgba(142,110,23,.35)}
+html[data-theme="light"] .bookdlg::backdrop{background:rgba(40,34,20,.45)}
+html[data-theme="light"] .no-gl body{background:radial-gradient(60% 50% at 70% 40%,rgba(227,196,104,.25),transparent 70%),var(--void)}
+@media (max-width:700px){.thm{width:36px}.mast-end{gap:8px}.mast .btn-ghost{white-space:nowrap;padding:0 12px}.lang a{padding:14px 3px}}
+@media (max-width:400px){.mast a img{height:22px}.mast{gap:10px}}
+/* Abschnittsueberschriften etwas kraeftiger */
+.big{font-weight:340}
+.sub-h{font-weight:280}
 </style>
 </head>
 <body>
@@ -330,9 +406,10 @@ button.btn-line{background:none;border:0;border-bottom:1px solid var(--g2);color
 <div class="grain" aria-hidden="true"></div>
 <div class="cur" aria-hidden="true"></div><div class="cur-ring" aria-hidden="true"></div>
 <header class="mast">
-  <a href="#top" aria-label="Aureon Trading · Startseite"><img src="../aureon-logo-light.png" alt="Aureon Trading" width="823" height="197"></a>
+  <a href="#top" aria-label="Aureon Trading · Startseite"><img class="lg-d" src="../aureon-logo-light.png" alt="Aureon Trading" width="823" height="197"><img class="lg-l" src="../aureon-logo.png" alt="" aria-hidden="true" width="823" height="197"></a>
   <nav class="nav" aria-label="Bereiche"><a href="#digital" data-sec="digital">Digital &amp; KI</a><a href="#qualitaet" data-sec="qualitaet">Einkauf &amp; Qualität</a><a href="#strategie" data-sec="strategie">Strategie</a><a href="#industrie" data-sec="industrie">Industrie</a><a href="#netzwerk" data-sec="netzwerk">Netzwerk</a></nav>
   <div class="mast-end">
+    <button class="thm" type="button" data-theme-toggle aria-label="Hell oder dunkel" title="Hell oder dunkel"><svg class="thm-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg><svg class="thm-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.6A8.2 8.2 0 0 1 9.4 4a8.2 8.2 0 1 0 10.6 10.6z"/></svg></button>
     <span class="lang"><a class="on" href="../de/">DE</a>/<a href="../en/">EN</a></span>
     <button class="btn-ghost magnet" type="button" data-book>Termin buchen</button>
   </div>
@@ -357,7 +434,7 @@ button.btn-line{background:none;border:0;border-bottom:1px solid var(--g2);color
   </section>
   <section class="ch" id="qualitaet" data-shape="3" data-name="Einkauf &amp; Qualität" data-side="left">
     <div class="panel"><div class="panel-in glass"><span class="kick rv">02 · Einkauf &amp; Qualität</span><h2 class="big split">Lieferketten, die <i>halten.</i></h2><p class="lead rv d1">Siebzehn Jahre Einkauf und neunzehn Jahre Qualität in der Automobilindustrie, an einem Tisch: der Qualitätsingenieur, der den Prozess auditiert, und der Einkäufer, der den Vertrag verhandelt. Qualität wird nicht am Ende geprüft. Sie wird entlang der gesamten Lieferkette gesichert.</p><div class="accs rv d2"><details class="acc" name="qualitaet" open><summary><span class="acc-n">01</span><span class="acc-t">Qualitätsmanagement und Lieferantenentwicklung</span><span class="acc-x" aria-hidden="true"></span></summary><p>Gap-Analyse gegen IATF 16949 und Kundenanforderungen, VDA-6.3-Audits, Maßnahmenpläne, die tragen.</p></details><details class="acc" name="qualitaet"><summary><span class="acc-n">02</span><span class="acc-t">VDA-Standards und Kundenanforderungen</span><span class="acc-x" aria-hidden="true"></span></summary><p>Strukturierte Gap-Analyse und dauerhafte Umsetzung der VDA-Standards, die für Ihre Kunden zählen.</p></details><details class="acc" name="qualitaet"><summary><span class="acc-n">03</span><span class="acc-t">Feldausfälle und Gewährleistung</span><span class="acc-x" aria-hidden="true"></span></summary><p>Feldausfallanalyse, NTF, 8D und Ursachenanalyse. Garantiefälle, technischer Faktor und Kostenverhandlung.</p></details><details class="acc" name="qualitaet"><summary><span class="acc-n">04</span><span class="acc-t">Quality Governance</span><span class="acc-x" aria-hidden="true"></span></summary><p>Unabhängige Qualitätsentscheidungen unter Lieferdruck: Verantwortung, Eskalation, Freigabebefugnis.</p></details><details class="acc" name="qualitaet"><summary><span class="acc-n">05</span><span class="acc-t">Qualität in der Lieferkette</span><span class="acc-x" aria-hidden="true"></span></summary><p>Absicherung langer Lieferketten, zum Beispiel Asien nach Europa: Prüfung vor Verschiffung, Rückverfolgbarkeit, Notfallpläne.</p></details><details class="acc" name="qualitaet"><summary><span class="acc-n">06</span><span class="acc-t">Industrialisierung und Montage</span><span class="acc-x" aria-hidden="true"></span></summary><p>Vom Komponenten- zum Modullieferanten: Poka-Yoke, End-of-Line-Tests, Rückverfolgbarkeit, Hochlauf.</p></details><details class="acc" name="qualitaet"><summary><span class="acc-n">07</span><span class="acc-t">Kundeneskalation</span><span class="acc-x" aria-hidden="true"></span></summary><p>Unterstützung vor Ort in OEM- und Tier-1-Task-Forces: Sortierung, Nacharbeit, schnelle Analyse, nachhaltige Maßnahmen.</p></details></div><div class="chips rv d3"><span>IATF 16949</span><span>VDA 6.3</span><span>VDA 2</span><span>VDA 5</span><span>VDA 8D</span><span>APQP</span><span>PPAP / PPF</span><span>FMEA</span><span>Control Plan</span><span>MSA / Prüfmittelfähigkeit</span><span>Kundenspezifische Anforderungen</span><span>8D · 5 Why · Ishikawa</span></div><p class="note rv d3">Qualität gemeinsam mit SQPS (Patrick Siebel), Quality &amp; Process Solutions, 19 Jahre Automotive.</p></div></div>
-    <div class="xrow"><div class="exp glass rv"><div class="exp-l"><span class="kick">Erfahrung, die man nachrechnen kann</span><h3 class="sub-h split">Wir kennen beide Seiten <i>des Tisches.</i></h3><p>Die Anforderungen deutscher OEMs und Tier-1-Kunden kennen wir aus eigener Praxis: als Einkäufer, der Lieferanten bewertet, und als Qualitätsingenieur, der Prozesse auditiert.</p></div><div class="stats"><div class="stat"><div class="stat-v"><span class="cnt" data-to="17">17</span><small>Jahre</small></div><p>Einkauf in der Automobilindustrie</p><em>AUREON</em></div><div class="stat"><div class="stat-v"><span class="cnt" data-to="19">19</span><small>Jahre</small></div><p>Qualität und Prozesse im Automotive</p><em>SQPS</em></div><div class="stat"><div class="stat-v"><span class="cnt" data-to="1,2">1,2</span><small>Mrd. USD</small></div><p>Einkaufsvolumen in einem einzigen Mandat</p><em>Automotive Safety</em></div><div class="stat"><div class="stat-v"><span class="cnt" data-to="30">30</span><small>Einkäufer</small></div><p>durch den Aufbau einer globalen Commodity-Organisation geführt</p><em>Mandat 01</em></div></div></div></div><div class="xrow"><div class="steps glass rv"><span class="kick">So arbeiten wir</span><ol><li><b>01</b><h3>Erstbewertung</h3><p>Ein strukturierter erster Blick vor Ort: Qualitätsorganisation, Auditergebnisse, Prozesse und Prioritäten.</p></li><li><b>02</b><h3>Monatliche Unterstützung</h3><p>Ein festes monatliches Tagesvolumen für Qualität, Kundenbetreuung und Geschäftsentwicklung, mit monatlichem Reporting.</p></li><li><b>03</b><h3>Projekte</h3><p>Definierte Projekte mit klarem Umfang und Übergabe: Audits, Feldausfälle, Absicherung der Lieferkette, Industrialisierung.</p></li></ol><a class="btn-line" href="../downloads/Aureon_Lieferantenqualitaet_DE.pdf" target="_blank" rel="noopener">Leistungsübersicht herunterladen (PDF) ↗</a></div></div><div class="xrow"><div class="duo-w"><span class="kick rv">Zwei Disziplinen an einem Tisch</span><div class="duo"><article class="duo-c glass rv d0"><span class="road-n">SQPS · Qualität</span><h4>Lieferantenqualität und Qualitätssicherung</h4><ul><li>Prozess- und Systemaudits nach VDA 6.3 und IATF 16949</li><li>Lieferantenentwicklung und Quality Governance</li><li>APQP, PPAP, FMEA, Control Plan und Prüfmittelfähigkeit</li><li>Feldausfallanalyse, 8D und Ursachenanalyse</li><li>Anforderungen deutscher OEMs und Tier-1-Kunden (CSR) aus eigener Praxis</li></ul></article><article class="duo-c glass rv d1"><span class="road-n">AUREON · Einkauf</span><h4>Einkauf und Commercial</h4><ul><li>Siebzehn Jahre Einkauf in der Automobilindustrie</li><li>Kostenaufschlüsselung, Preisverhandlung, Vertragskonditionen</li><li>RFQ-Antworten und Lieferantenbewertungen aus Sicht des Einkäufers</li><li>Lieferketten- und Logistikrisiken über große Distanzen</li><li>Gewährleistungskosten und langfristige Lieferverpflichtungen</li></ul></article></div></div></div><div class="xrow"><div class="pair"><article class="pair-c glass rv d0"><span class="kick">Die Einkäufersicht</span><h4>Was OEM- und Tier-1-Einkäufer Sie fragen werden.</h4><p>Mit der Erfahrung eines Einkäufers kennen wir die Fragen, bevor sie gestellt werden, und bereiten Sie mit Fragenkatalog, RFQ-Readiness-Check und einer Probe von Einkäufergesprächen vor.</p><ul class="ticks"><li>Kostenaufschlüsselung und Preismechanik</li><li>Incoterms, Zahlungsbedingungen, Werkzeuge und IP</li><li>Liefersicherheit und Sicherheitsbestände</li><li>Nachweise: IATF, PPAP, VDA 6.3, 8D</li><li>Kapazität und Hochlauf</li><li>Finanzielle Stabilität, Lieferketten-Sorgfalt, CO2</li></ul></article><article class="pair-c glass rv d1"><span class="kick">Fit for Future</span><h4>Liefer- und Gewährleistungspflichten enden nicht mit dem Produktionsende.</h4><p>Viele Lieferanten planen bis EOP. OEMs nicht. Ersatzteilversorgung wird in der Regel für rund 15 Jahre nach Produktionsende verlangt, und Gewährleistungsbedingungen werden verhandelt, lange bevor das erste Teil geliefert wird.</p><ul class="ticks"><li>Ersatzteil- und Langzeitversorgung</li><li>Last-Time-Buy und End-of-Life-Regeln</li><li>Gewährleistungsbedingungen und technischer Faktor</li><li>Gewährleistungs- und Ersatzteilkosten im Angebot</li></ul></article></div></div>
+    <div class="xrow"><div class="exp glass rv"><div class="exp-l"><span class="kick">Erfahrung, die man nachrechnen kann</span><h3 class="sub-h split">Wir kennen beide Seiten <i>des Tisches.</i></h3><p>Die Anforderungen deutscher OEMs und Tier-1-Kunden kennen wir aus eigener Praxis: als Einkäufer, der Lieferanten bewertet, und als Qualitätsingenieur, der Prozesse auditiert.</p></div><div class="stats"><div class="stat"><div class="stat-v"><span class="cnt" data-to="17">17</span><small>Jahre</small></div><p>Einkauf in der Automobilindustrie</p><em>AUREON</em></div><div class="stat"><div class="stat-v"><span class="cnt" data-to="19">19</span><small>Jahre</small></div><p>Qualität und Prozesse im Automotive</p><em>SQPS</em></div><div class="stat"><div class="stat-v"><span class="cnt" data-to="1,2">1,2</span><small>Mrd. USD</small></div><p>Einkaufsvolumen in einem einzigen Mandat</p><em>Automotive Safety</em></div></div></div></div><div class="xrow"><div class="steps glass rv"><span class="kick">So arbeiten wir</span><ol><li><b>01</b><h3>Erstbewertung</h3><p>Ein strukturierter erster Blick vor Ort: Qualitätsorganisation, Auditergebnisse, Prozesse und Prioritäten.</p></li><li><b>02</b><h3>Monatliche Unterstützung</h3><p>Ein festes monatliches Tagesvolumen für Qualität, Kundenbetreuung und Geschäftsentwicklung, mit monatlichem Reporting.</p></li><li><b>03</b><h3>Projekte</h3><p>Definierte Projekte mit klarem Umfang und Übergabe: Audits, Feldausfälle, Absicherung der Lieferkette, Industrialisierung.</p></li></ol><a class="btn-line" href="../downloads/Aureon_Lieferantenqualitaet_DE.pdf" target="_blank" rel="noopener">Leistungsübersicht herunterladen (PDF) ↗</a></div></div><div class="xrow"><div class="duo-w"><span class="kick rv">Zwei Disziplinen an einem Tisch</span><div class="duo"><article class="duo-c glass rv d0"><span class="road-n">SQPS · Qualität</span><h4>Lieferantenqualität und Qualitätssicherung</h4><ul><li>Prozess- und Systemaudits nach VDA 6.3 und IATF 16949</li><li>Lieferantenentwicklung und Quality Governance</li><li>APQP, PPAP, FMEA, Control Plan und Prüfmittelfähigkeit</li><li>Feldausfallanalyse, 8D und Ursachenanalyse</li><li>Anforderungen deutscher OEMs und Tier-1-Kunden (CSR) aus eigener Praxis</li></ul></article><article class="duo-c glass rv d1"><span class="road-n">AUREON · Einkauf</span><h4>Einkauf und Commercial</h4><ul><li>Siebzehn Jahre Einkauf in der Automobilindustrie</li><li>Kostenaufschlüsselung, Preisverhandlung, Vertragskonditionen</li><li>RFQ-Antworten und Lieferantenbewertungen aus Sicht des Einkäufers</li><li>Lieferketten- und Logistikrisiken über große Distanzen</li><li>Gewährleistungskosten und langfristige Lieferverpflichtungen</li></ul></article></div></div></div><div class="xrow"><div class="pair"><article class="pair-c glass rv d0"><span class="kick">Die Einkäufersicht</span><h4>Was OEM- und Tier-1-Einkäufer Sie fragen werden.</h4><p>Mit der Erfahrung eines Einkäufers kennen wir die Fragen, bevor sie gestellt werden, und bereiten Sie mit Fragenkatalog, RFQ-Readiness-Check und einer Probe von Einkäufergesprächen vor.</p><ul class="ticks"><li>Kostenaufschlüsselung und Preismechanik</li><li>Incoterms, Zahlungsbedingungen, Werkzeuge und IP</li><li>Liefersicherheit und Sicherheitsbestände</li><li>Nachweise: IATF, PPAP, VDA 6.3, 8D</li><li>Kapazität und Hochlauf</li><li>Finanzielle Stabilität, Lieferketten-Sorgfalt, CO2</li></ul></article><article class="pair-c glass rv d1"><span class="kick">Fit for Future</span><h4>Liefer- und Gewährleistungspflichten enden nicht mit dem Produktionsende.</h4><p>Viele Lieferanten planen bis EOP. OEMs nicht. Ersatzteilversorgung wird in der Regel für rund 15 Jahre nach Produktionsende verlangt, und Gewährleistungsbedingungen werden verhandelt, lange bevor das erste Teil geliefert wird.</p><ul class="ticks"><li>Ersatzteil- und Langzeitversorgung</li><li>Last-Time-Buy und End-of-Life-Regeln</li><li>Gewährleistungsbedingungen und technischer Faktor</li><li>Gewährleistungs- und Ersatzteilkosten im Angebot</li></ul></article></div></div>
   </section>
   <section class="ch right" id="strategie" data-shape="2" data-name="Strategie" data-side="right">
     <div class="panel"><div class="panel-in glass"><span class="kick rv">03 · Strategie &amp; Beratung</span><h2 class="big split">Beratung, die <i>umsetzt.</i></h2><p class="lead rv d1">Beratung bei Aureon ist keine Präsentation. Sie ist ein Mandat mit definiertem Umfang, einem verantwortlichen Kopf und einem Übergabetermin. Wir beziehen Position und bleiben, bis es umgesetzt ist.</p><div class="accs rv d2"><details class="acc" name="strategie" open><summary><span class="acc-n">01</span><span class="acc-t">Kosten, die Sie begründen können</span><span class="acc-x" aria-hidden="true"></span></summary><p>Kostenstrukturen und TCO-Modelle. Ein Preis wird aus der Struktur argumentiert, nicht aus einer Prozentvorgabe aus dem Controlling.</p></details><details class="acc" name="strategie"><summary><span class="acc-n">02</span><span class="acc-t">Versorgung, die hält</span><span class="acc-x" aria-hidden="true"></span></summary><p>Risikobewertung, Zweitquellen und Lokalisierung werden entschieden, bevor ein Engpass die Entscheidung erzwingt.</p></details><details class="acc" name="strategie"><summary><span class="acc-n">03</span><span class="acc-t">Strukturen, die uns überdauern</span><span class="acc-x" aria-hidden="true"></span></summary><p>Vergaberegeln, Vertragsstandards und Reporting, die weiterlaufen, wenn das Mandat endet und Ihr Team allein arbeitet.</p></details><details class="acc" name="strategie"><summary><span class="acc-n">04</span><span class="acc-t">Tempo, wo es zählt</span><span class="acc-x" aria-hidden="true"></span></summary><p>Eine Vakanz in Tagen überbrückt. Eine Warengruppenstrategie in Wochen.</p></details></div><div class="tags rv d3"><span>Strategieberatung</span><span>Markteintritt</span><span>Kommerzielle Strategie</span><span>Sourcing</span><span>Geschäftsentwicklung</span><span>Digitale Transformation</span></div></div></div>
@@ -463,7 +540,7 @@ if(!window.THREE||!gl){document.documentElement.classList.add("no-gl");return;}
 var N=MOBILE?7000:18000;
 var renderer=new THREE.WebGLRenderer({canvas:canvas,context:gl,antialias:false});
 var DPR=Math.min(devicePixelRatio||1,MOBILE?1.5:1.75);
-renderer.setPixelRatio(DPR);renderer.setClearColor(0x050506,1);
+renderer.setPixelRatio(DPR);
 var scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(34,1,.1,50);camera.position.set(0,0,7);
 
 function rnd(a,b){return a+Math.random()*(b-a);}
@@ -512,11 +589,11 @@ geo.setAttribute("position",new THREE.BufferAttribute(s0.slice(),3));
 for(k=0;k<shapes.length;k++)geo.setAttribute("s"+k,new THREE.BufferAttribute(shapes[k],3));
 var rr2=new Float32Array(N);for(i=0;i<N;i++)rr2[i]=Math.random();geo.setAttribute("rnd",new THREE.BufferAttribute(rr2,1));
 
-var U={uT:{value:0},uW:{value:[1,0,0,0,0,0,0]},uM:{value:new THREE.Vector3(9,9,0)},uMo:{value:0},uPx:{value:DPR},uSz:{value:MOBILE?26:22},uIn:{value:0}};
+var U={uT:{value:0},uW:{value:[1,0,0,0,0,0,0]},uM:{value:new THREE.Vector3(9,9,0)},uMo:{value:0},uPx:{value:DPR},uSz:{value:MOBILE?26:22},uIn:{value:0},uL:{value:0}};
 var mat=new THREE.ShaderMaterial({uniforms:U,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,
 vertexShader:[
 "attribute vec3 s0;attribute vec3 s1;attribute vec3 s2;attribute vec3 s3;attribute vec3 s4;attribute vec3 s5;attribute vec3 s6;attribute float rnd;",
-"uniform float uT;uniform float uW[7];uniform vec3 uM;uniform float uMo;uniform float uPx;uniform float uSz;uniform float uIn;",
+"uniform float uT;uniform float uW[7];uniform vec3 uM;uniform float uMo;uniform float uPx;uniform float uSz;uniform float uIn;uniform float uL;",
 "varying float vA;varying float vR;",
 "void main(){",
 " vec3 p=s0*uW[0]+s1*uW[1]+s2*uW[2]+s3*uW[3]+s4*uW[4]+s5*uW[5]+s6*uW[6];",
@@ -529,16 +606,21 @@ vertexShader:[
 " vec4 w=modelMatrix*vec4(p,1.);",
 " vec3 d=w.xyz-uM;float L=length(d.xy);float f=smoothstep(1.1,0.,L)*uMo;w.xyz+=normalize(d+vec3(0.,0.,.001))*f*.45;",
 " vec4 mv=viewMatrix*w;gl_Position=projectionMatrix*mv;",
-" gl_PointSize=uSz*uPx*(.45+rnd*.75)/(-mv.z);",
+" gl_PointSize=uSz*uPx*(.45+rnd*.75)/(-mv.z)*(1.+.3*uL);",
 " vA=.55+.45*sin(t*1.7);vR=rnd;",
 "}"].join("\n"),
 fragmentShader:[
-"varying float vA;varying float vR;",
+"uniform float uL;varying float vA;varying float vR;",
 "void main(){vec2 c=gl_PointCoord-.5;float d=length(c);if(d>.5)discard;float a=smoothstep(.5,.0,d);",
 " vec3 g1=vec3(.43,.33,.05),g3=vec3(.89,.77,.41),g4=vec3(.96,.88,.66);",
 " vec3 col=mix(g1,g3,smoothstep(.0,.6,vR));col=mix(col,g4,smoothstep(.75,1.,vR));",
-" gl_FragColor=vec4(col,a*vA*.85);}"].join("\n")});
-var pts=new THREE.Points(geo,mat);var grp=new THREE.Group();grp.add(pts);scene.add(grp);
+" col=mix(col,mix(vec3(.40,.28,.03),vec3(.64,.48,.12),vR),uL);",
+" gl_FragColor=vec4(col,a*vA*mix(.85,1.,uL));}"].join("\n")});
+var pts=new THREE.Points(geo,mat);
+function applyTheme(){var L=document.documentElement.getAttribute("data-theme")==="light";
+  renderer.setClearColor(L?0xE9E4D8:0x050506,1);U.uL.value=L?1:0;
+  mat.blending=L?THREE.NormalBlending:THREE.AdditiveBlending;mat.needsUpdate=true;}
+applyTheme();document.addEventListener("aureon:theme",applyTheme);var grp=new THREE.Group();grp.add(pts);scene.add(grp);
 
 function resize(){var w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.position.z=w<700?8.6:(w<1100?7.6:7);camera.updateProjectionMatrix();}
 addEventListener("resize",resize);resize();
@@ -609,7 +691,8 @@ requestAnimationFrame(loop);
   var dlg=document.getElementById("bookDlg"),body=document.getElementById("bookBody"),BASE="https://calendly.com/d-meier-aureon-trading/30min";
   function open(){if(!dlg)return;if(dlg.showModal)dlg.showModal();else dlg.setAttribute("open","");
     if(!body.querySelector("iframe")){var f=document.createElement("iframe");f.title="Calendly";f.setAttribute("allowtransparency","true");
-      f.src=BASE+"?embed_domain="+encodeURIComponent(location.hostname||"aureon-trading.com")+"&embed_type=Inline&hide_gdpr_banner=1&background_color=08090a&text_color=ecedee&primary_color=e3c468";body.appendChild(f);}}
+      f.src=BASE+"?embed_domain="+encodeURIComponent(location.hostname||"aureon-trading.com")+"&embed_type=Inline&hide_gdpr_banner=1&"+(document.documentElement.getAttribute("data-theme")==="light"?"background_color=fbf9f4&text_color=17181b&primary_color=9c7a1e":"background_color=08090a&text_color=ecedee&primary_color=e3c468");body.appendChild(f);}}
+  document.querySelectorAll("[data-theme-toggle]").forEach(function(b){b.addEventListener("click",function(){window.AureonTheme&&window.AureonTheme.toggle();});});
   document.querySelectorAll("[data-book]").forEach(function(b){b.addEventListener("click",open);});
   dlg&&dlg.addEventListener("click",function(e){if(e.target===dlg||e.target.closest("[data-close]"))dlg.close();});
 })();
