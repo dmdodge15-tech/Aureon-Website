@@ -75,10 +75,23 @@ a{color:inherit}
 /* ---------- Ladeanimation ---------- */
 #loader{position:fixed;inset:0;z-index:100;background:var(--void);display:flex;flex-direction:column;justify-content:flex-end;padding:var(--pad);transition:clip-path 1.1s cubic-bezier(.77,0,.18,1);clip-path:inset(0 0 0 0)}
 #loader.out{clip-path:inset(0 0 100% 0)}
-.ld-num{font-family:var(--disp);font-weight:200;font-size:clamp(90px,20vw,280px);line-height:.85;letter-spacing:-.04em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.06em}
-.ld-row{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-top:18px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--steel)}
-.ld-bar{height:1px;background:var(--edge);margin-top:22px;overflow:hidden}
-.ld-bar i{display:block;height:100%;width:0;background:var(--grad)}
+#loader{justify-content:center;align-items:center;text-align:center}
+#loader::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 50% 40% at 50% 50%,rgba(184,145,42,.16),transparent 70%);opacity:0;animation:ldGlow 1.8s ease .1s forwards;pointer-events:none}
+.ld-mark{position:relative;display:flex;font-family:var(--disp);font-weight:200;font-size:clamp(44px,9vw,124px);line-height:1.2;letter-spacing:.22em;padding:.1em 0 .1em .22em}
+.ld-w{display:inline-block;padding:0 .02em;background:linear-gradient(100deg,#6E540D 0%,#B8912A 35%,#FFF4D2 50%,#E3C468 62%,#B8912A 80%,#6E540D 100%);background-size:320% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0;filter:blur(12px);transform:translateY(.22em)}
+#loader.go .ld-w{animation:ldIn .9s cubic-bezier(.2,.7,.2,1) forwards,ldShine 1.5s cubic-bezier(.45,0,.2,1) forwards;animation-delay:calc(var(--i)*75ms),calc(420ms + var(--i)*55ms)}
+.ld-line{position:relative;width:min(440px,62vw);height:1px;background:var(--edge);margin-top:20px;overflow:hidden}
+.ld-line i{display:block;height:100%;background:var(--grad);transform:scaleX(0)}
+#loader.go .ld-line i{animation:ldLine 1.3s cubic-bezier(.65,0,.35,1) .15s forwards}
+.ld-tag{position:relative;margin-top:18px;font-family:var(--mono);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--steel);opacity:0}
+#loader.go .ld-tag{animation:ldFade .9s ease .75s forwards}
+[data-theme="light"] .ld-w{background-image:linear-gradient(100deg,#4A3808 0%,#8A6A16 35%,#D9B24A 50%,#8A6A16 65%,#5A440A 100%)}
+[data-theme="light"] #loader::before{background:radial-gradient(ellipse 50% 40% at 50% 50%,rgba(184,145,42,.12),transparent 70%)}
+@keyframes ldIn{to{opacity:1;filter:blur(0);transform:none}}
+@keyframes ldShine{to{background-position:0 0}}
+@keyframes ldLine{to{transform:scaleX(1)}}
+@keyframes ldFade{to{opacity:1}}
+@keyframes ldGlow{50%{opacity:1}to{opacity:.6}}
 
 /* ---------- Cursor ---------- */
 .cur,.cur-ring{position:fixed;left:0;top:0;z-index:90;pointer-events:none;border-radius:50%;transform:translate3d(-100px,-100px,0)}
@@ -412,9 +425,10 @@ html:has(.bookdlg[open]) .cur,html:has(.bookdlg[open]) .cur-ring{opacity:0}
 </head>
 <body>
 <div id="loader" aria-hidden="true">
-  <div class="ld-num" id="ldNum">0</div>
-  <div class="ld-bar"><i id="ldBar"></i></div>
-  <div class="ld-row"><span>Aureon</span><span>Business, built differently.</span></div>
+  <div class="ld-mark"><span class="ld-w" style="--i:0">A</span><span class="ld-w" style="--i:1">U</span><span class="ld-w" style="--i:2">R</span><span class="ld-w" style="--i:3">E</span><span class="ld-w" style="--i:4">O</span><span class="ld-w" style="--i:5">N</span></div>
+  <div class="ld-line"><i></i></div>
+  <div class="ld-tag">Business, built differently.</div>
+</div>
 </div>
 <canvas id="gl" aria-hidden="true"></canvas>
 <div class="vignette" aria-hidden="true"></div>
@@ -522,8 +536,9 @@ var loader=document.getElementById("loader");
 function done(){ if(loader){loader.classList.add("out");setTimeout(function(){loader.remove();},1200);} arm(); }
 if(RM||!loader){ done(); }
 else{
-  var n=document.getElementById("ldNum"),bar=document.getElementById("ldBar"),t0=performance.now(),D=1500;
-  (function step(now){var p=Math.min(1,(now-t0)/D),e=1-Math.pow(1-p,3);n.textContent=Math.round(e*100);bar.style.width=(e*100)+"%";if(p<1)requestAnimationFrame(step);else setTimeout(done,180);})(t0);
+  // Start once the display font is ready (max. 600 ms), so the wordmark never flashes in a fallback font
+  var started=false;function go(){if(started)return;started=true;loader.classList.add("go");setTimeout(done,1900);}
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(go);}setTimeout(go,600);
 }
 
 /* ---------- Cursor + Magnet ---------- */
