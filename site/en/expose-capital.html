@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Capital &amp; Financing Exposé · Aureon</title>
+<meta name="description" content="Aureon exposé on capital and financing: senior debt, bridge, mezzanine, preferred equity, equity and project finance.">
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#050506"><link rel="icon" href="/aureon-logo.png">
+<style>body{margin:0}img{max-width:100%}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600&family=Martian+Mono:wght@300;400&family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;1,6..72,200;1,6..72,300;1,6..72,400&display=swap">
+<style>
+/* Layout: a bound exposé of twelve A4-landscape sheets, alternating "void" (black/gold) and "paper" (warm stone) folios.
+   All sizes inside a sheet use --u = 1/1000 of the sheet width, so screen and print render identically. */
+:root{
+  --void:#050506; --ink:#0C0D0F; --ink-2:#141518; --chalk:#ECEDEE; --steel:#9CA2AA; --edge-d:rgba(236,237,238,.13);
+  --paper:#E9E4D8; --paper-2:#F3EFE6; --text:#17181B; --muted:#5F5A50; --edge-l:rgba(23,24,27,.14);
+  --g1:#6E540D; --g2:#B8912A; --g3:#E3C468; --g4:#F4E1A8; --g-ink:#8A6A16;
+  --grad:linear-gradient(100deg,#6E540D 0%,#B8912A 40%,#E3C468 70%,#F4E1A8 100%);
+  --disp:"Newsreader",Georgia,"Times New Roman",serif;
+  --grot:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --mono:"Martian Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --desk:#0A0A0B;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--desk)}
+body{background:var(--desk);color:var(--chalk);font-family:var(--grot);-webkit-font-smoothing:antialiased;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 64px}
+.book{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+
+/* ---------- sheet ---------- */
+.sheet{container-type:inline-size;position:relative;width:100%;aspect-ratio:297/210;overflow:hidden;
+  --u:0.1cqw; font-size:calc(var(--u)*13.5); line-height:1.55;
+  padding:calc(var(--u)*58) calc(var(--u)*68) calc(var(--u)*30);
+  display:flex;flex-direction:column;box-shadow:0 30px 80px -30px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.04)}
+.dark{background:var(--void);color:var(--chalk)}
+.light{background:var(--paper);color:var(--text)}
+.sheet-body{flex:1;min-height:0;display:flex;flex-direction:column;position:relative;z-index:1}
+.folio{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;gap:calc(var(--u)*20);
+  font-family:var(--mono);font-size:calc(var(--u)*7.6);letter-spacing:.16em;text-transform:uppercase;padding-top:calc(var(--u)*14)}
+.dark .folio{color:var(--steel);border-top:1px solid var(--edge-d)}
+.light .folio{color:var(--muted);border-top:1px solid var(--edge-l)}
+.folio b{font-weight:400}
+.dark .folio b{color:var(--g3)} .light .folio b{color:var(--g-ink)}
+
+/* ---------- type ---------- */
+.eyebrow{display:flex;align-items:center;gap:calc(var(--u)*12);font-family:var(--mono);font-size:calc(var(--u)*8.4);letter-spacing:.2em;text-transform:uppercase}
+.eyebrow::before{content:"";width:calc(var(--u)*30);height:1px;background:currentColor;opacity:.7}
+.dark .eyebrow{color:var(--g3)} .light .eyebrow{color:var(--g-ink)}
+h1,h2,h3{font-family:var(--disp);font-weight:200;margin:0;text-wrap:balance;letter-spacing:-.015em}
+h2{font-size:calc(var(--u)*50);line-height:1.02;margin-top:calc(var(--u)*18)}
+h3{font-size:calc(var(--u)*21);font-weight:300;line-height:1.15}
+em.g{font-style:italic;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;padding:.06em .1em .06em 0;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.light em.g{background:linear-gradient(100deg,#5A440A 0%,#8A6A16 45%,#B8912A 100%);-webkit-background-clip:text;background-clip:text}
+p{margin:0}
+.lede{font-size:calc(var(--u)*15.5);line-height:1.6;max-width:62ch}
+.dark .lede{color:#C9CCD0} .light .lede{color:#3A3934}
+.small{font-size:calc(var(--u)*11.6);line-height:1.55}
+.dark .small{color:var(--steel)} .light .small{color:var(--muted)}
+.mono{font-family:var(--mono);font-size:calc(var(--u)*8);letter-spacing:.16em;text-transform:uppercase}
+.num{font-variant-numeric:tabular-nums lining-nums}
+.rule-d{height:1px;background:var(--edge-d)} .rule-l{height:1px;background:var(--edge-l)}
+.gold-line{height:1px;background:var(--grad)}
+
+/* ---------- 01 cover ---------- */
+.cover{padding:calc(var(--u)*52) calc(var(--u)*68) calc(var(--u)*30);
+  background:radial-gradient(ellipse 60% 70% at 82% 40%,rgba(184,145,42,.16),transparent 60%),radial-gradient(ellipse 50% 50% at 10% 110%,rgba(110,84,13,.18),transparent 70%),var(--void)}
+.cover-art{position:absolute;inset:0;z-index:0;pointer-events:none}
+.cover-art svg{position:absolute;right:-8%;top:-14%;width:78%;height:auto;max-width:none}
+.wordmark{display:flex;flex-direction:column;gap:calc(var(--u)*3)}
+.wordmark .wm{font-family:var(--disp);font-weight:300;font-size:calc(var(--u)*32);letter-spacing:.16em;line-height:1.2;padding-block:.05em;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wordmark .sub{font-family:var(--mono);font-size:calc(var(--u)*6.6);letter-spacing:.42em;color:var(--steel);padding-left:.2em}
+.cover-top{display:flex;justify-content:space-between;align-items:flex-start}
+.cover-tag{text-align:right;font-family:var(--mono);font-size:calc(var(--u)*7.6);letter-spacing:.18em;text-transform:uppercase;color:var(--steel);line-height:2}
+.cover-tag b{color:var(--g3);font-weight:400}
+.cover-main{margin-top:auto;display:flex;flex-direction:column;gap:calc(var(--u)*22);max-width:calc(var(--u)*640)}
+.cover h1{font-size:calc(var(--u)*86);line-height:.96;letter-spacing:-.025em}
+.cover .lede{max-width:calc(var(--u)*520)}
+.cover-meta{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:calc(var(--u)*44);margin-top:calc(var(--u)*34);margin-bottom:calc(var(--u)*6)}
+.cover-meta div{display:flex;flex-direction:column;gap:calc(var(--u)*5)}
+.cover-meta span{font-family:var(--mono);font-size:calc(var(--u)*7);letter-spacing:.18em;text-transform:uppercase;color:var(--steel)}
+.cover-meta strong{font-family:var(--disp);font-weight:300;font-size:calc(var(--u)*17);color:var(--chalk)}
+
+/* ---------- 02 at a glance ---------- */
+.split{display:grid;grid-template-columns:1.05fr 1fr;gap:calc(var(--u)*64);flex:1;min-height:0}
+.split > *{min-width:0}
+.glance-left{display:flex;flex-direction:column;gap:calc(var(--u)*20)}
+.figs{display:grid;grid-template-columns:1fr 1fr;align-content:center;border-top:1px solid var(--edge-l)}
+.fig{padding:calc(var(--u)*22) 0 calc(var(--u)*20);border-bottom:1px solid var(--edge-l);display:flex;flex-direction:column;gap:calc(var(--u)*6)}
+.fig:nth-child(odd){padding-right:calc(var(--u)*24);border-right:1px solid var(--edge-l)}
+.fig:nth-child(even){padding-left:calc(var(--u)*28)}
+.fig .v{font-family:var(--disp);font-weight:200;font-size:calc(var(--u)*50);line-height:1;letter-spacing:-.02em;color:var(--text)}
+.fig .v small{font-size:.42em;letter-spacing:0;color:var(--g-ink);margin-left:.15em}
+.fig .k{font-size:calc(var(--u)*11.5);color:var(--muted);line-height:1.45;max-width:26ch}
+.checks{list-style:none;margin:calc(var(--u)*6) 0 0;padding:0;display:flex;flex-direction:column;gap:calc(var(--u)*9)}
+.checks li{display:grid;grid-template-columns:calc(var(--u)*22) 1fr;font-size:calc(var(--u)*13);line-height:1.45}
+.checks li::before{content:"";width:calc(var(--u)*9);height:calc(var(--u)*9);margin-top:calc(var(--u)*5);transform:rotate(45deg);background:var(--grad)}
+
+/* ---------- 03 situations ---------- */
+.sit-head{display:grid;grid-template-columns:1.25fr 1fr;gap:calc(var(--u)*60);align-items:end}
+.sit-grid{display:grid;grid-template-columns:repeat(4,1fr);margin-top:auto;border-top:1px solid var(--edge-d)}
+.sit{padding:calc(var(--u)*24) calc(var(--u)*24) 0 0;display:flex;flex-direction:column;gap:calc(var(--u)*10)}
+.sit + .sit{padding-left:calc(var(--u)*24);border-left:1px solid var(--edge-d)}
+.sit .ic{width:calc(var(--u)*30);height:calc(var(--u)*30);color:var(--g3)}
+.sit h3{font-size:calc(var(--u)*20)}
+.sit p{font-size:calc(var(--u)*11.8);color:#B3B7BD;line-height:1.55}
+.quote{font-family:var(--disp);font-style:italic;font-weight:200;font-size:calc(var(--u)*21);line-height:1.35;color:#D6D8DB;border-left:1px solid var(--g2);padding-left:calc(var(--u)*20)}
+
+/* ---------- 04 capital stack ---------- */
+.stack-wrap{display:grid;grid-template-columns:1fr 1.45fr;gap:calc(var(--u)*56);flex:1;min-height:0;margin-top:calc(var(--u)*24)}
+.stack-wrap > *{min-width:0}
+.stack-fig{display:grid;grid-template-columns:calc(var(--u)*40) 1fr calc(var(--u)*30);gap:calc(var(--u)*10);height:100%;min-height:0}
+.axis{position:relative;font-family:var(--mono);font-size:calc(var(--u)*7);color:var(--muted)}
+.axis span{position:absolute;right:0;transform:translateY(-50%)}
+.bars{display:flex;flex-direction:column;border:1px solid var(--edge-l)}
+.bar{position:relative;display:flex;align-items:center;justify-content:space-between;padding:0 calc(var(--u)*14);gap:calc(var(--u)*10);
+  font-size:calc(var(--u)*11.5);font-weight:500;border-top:1px solid rgba(23,24,27,.12)}
+.bar:first-child{border-top:0}
+.bar .pct{font-family:var(--mono);font-weight:400;font-size:calc(var(--u)*7.6);letter-spacing:.08em;opacity:.8}
+.b-eq{flex:10;background:#17181B;color:var(--g4)}
+.b-pe{flex:10;background:#3B3220;color:var(--g4)}
+.b-mz{flex:20;background:linear-gradient(90deg,#8A6A16,#B8912A);color:#FFF8E6}
+.b-sd{flex:60;background:var(--paper-2);color:var(--text)}
+.risk{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:calc(var(--u)*6.6);color:var(--g-ink);letter-spacing:.14em}
+.risk .line{flex:1;width:1px;background:linear-gradient(to bottom,var(--g-ink),rgba(138,106,22,.15));margin:calc(var(--u)*8) 0;position:relative}
+.risk .line::before{content:"";position:absolute;top:-2px;left:50%;width:calc(var(--u)*7);height:calc(var(--u)*7);border-left:1px solid var(--g-ink);border-top:1px solid var(--g-ink);transform:translateX(-50%) rotate(45deg)}
+.risk .vt{writing-mode:vertical-rl;transform:rotate(180deg);text-transform:uppercase}
+.layers{display:flex;flex-direction:column;justify-content:space-between;gap:calc(var(--u)*9)}
+.layer{display:grid;grid-template-columns:calc(var(--u)*150) 1fr;gap:calc(var(--u)*22);padding-bottom:calc(var(--u)*12);border-bottom:1px solid var(--edge-l)}
+.layer:last-child{border-bottom:0;padding-bottom:0}
+.layer h3{font-size:calc(var(--u)*19)}
+.layer .mono{color:var(--g-ink);margin-top:calc(var(--u)*5);display:block;font-size:calc(var(--u)*7)}
+.layer p{font-size:calc(var(--u)*11.8);color:#3D3C37;line-height:1.5}
+
+/* ---------- 05 instruments ---------- */
+.inst-grid{display:grid;grid-template-columns:repeat(3,1fr);margin-top:auto;border-top:1px solid var(--edge-d)}
+.inst{padding:calc(var(--u)*20) calc(var(--u)*26) calc(var(--u)*20) 0;display:flex;flex-direction:column;gap:calc(var(--u)*8);border-bottom:1px solid var(--edge-d)}
+.inst:nth-child(3n+2),.inst:nth-child(3n){padding-left:calc(var(--u)*26);border-left:1px solid var(--edge-d)}
+.inst:nth-child(n+4){border-bottom:0}
+.inst .top{display:flex;justify-content:space-between;align-items:baseline;gap:calc(var(--u)*10)}
+.inst h3{font-size:calc(var(--u)*22)}
+.inst .tag{font-family:var(--mono);font-size:calc(var(--u)*6.8);letter-spacing:.14em;text-transform:uppercase;color:var(--g3);white-space:nowrap}
+.inst p{font-size:calc(var(--u)*11.6);color:#B3B7BD;line-height:1.55}
+.inst ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:calc(var(--u)*5)}
+.inst li{font-family:var(--mono);font-size:calc(var(--u)*6.6);letter-spacing:.08em;color:#C9CCD0;border:1px solid var(--edge-d);padding:calc(var(--u)*3) calc(var(--u)*7)}
+
+/* ---------- 06 funders ---------- */
+.fund-head{display:grid;grid-template-columns:1fr auto;gap:calc(var(--u)*40);align-items:end}
+.big-850{text-align:right}
+.big-850 .v{font-family:var(--disp);font-weight:200;font-size:calc(var(--u)*104);line-height:1.12;padding-top:.04em;letter-spacing:-.03em;
+  background:linear-gradient(100deg,#5A440A 0%,#8A6A16 45%,#B8912A 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.big-850 .k{font-family:var(--mono);font-size:calc(var(--u)*7.6);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:calc(var(--u)*8)}
+.funders{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:auto;border-top:1px solid var(--text)}
+.funder{padding:calc(var(--u)*18) calc(var(--u)*18) 0 0;display:flex;flex-direction:column;gap:calc(var(--u)*9)}
+.funder + .funder{padding-left:calc(var(--u)*18);border-left:1px solid var(--edge-l)}
+.funder .mono{color:var(--g-ink);font-size:calc(var(--u)*7)}
+.funder h3{font-size:calc(var(--u)*20)}
+.funder p{font-size:calc(var(--u)*11.4);color:#3D3C37;line-height:1.5}
+.funder .for{margin-top:auto;padding-top:calc(var(--u)*10);border-top:1px dashed var(--edge-l);font-size:calc(var(--u)*10.4);color:var(--muted)}
+.funder .for b{display:block;font-family:var(--mono);font-weight:400;font-size:calc(var(--u)*6.6);letter-spacing:.14em;text-transform:uppercase;color:var(--text);margin-bottom:calc(var(--u)*3)}
+
+/* ---------- 07 transactions ---------- */
+.tx{display:grid;grid-template-columns:1.25fr 1fr;gap:calc(var(--u)*48);flex:1;min-height:0;margin-top:calc(var(--u)*26)}
+.tx > *{min-width:0}
+.tx-vol{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1.25fr 1fr 1fr;gap:1px;background:var(--edge-d);border:1px solid var(--edge-d)}
+.card{background:var(--ink);padding:calc(var(--u)*16) calc(var(--u)*18);display:flex;flex-direction:column;justify-content:space-between;gap:calc(var(--u)*8)}
+.card.hero{grid-column:1 / -1;background:linear-gradient(135deg,#15130D 0%,#0C0D0F 60%)}
+.card .v{font-family:var(--disp);font-weight:200;font-size:calc(var(--u)*40);line-height:1;letter-spacing:-.02em;color:var(--chalk)}
+.card.hero .v{line-height:1.12;padding-top:.04em;font-size:calc(var(--u)*68);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.card .v small{font-family:var(--mono);font-size:calc(var(--u)*8.5);letter-spacing:.12em;color:var(--steel);margin-left:calc(var(--u)*6)}
+.card.hero .v small{color:var(--g3);-webkit-text-fill-color:var(--g3)}
+.card .what{display:flex;justify-content:space-between;align-items:baseline;gap:calc(var(--u)*10);font-size:calc(var(--u)*12)}
+.card .what span{font-family:var(--mono);font-size:calc(var(--u)*6.8);letter-spacing:.14em;text-transform:uppercase;color:var(--steel)}
+.tx-list{display:flex;flex-direction:column}
+.tx-list .hd{display:grid;grid-template-columns:1fr auto;padding-bottom:calc(var(--u)*9);border-bottom:1px solid var(--g2);font-family:var(--mono);font-size:calc(var(--u)*6.8);letter-spacing:.16em;text-transform:uppercase;color:var(--g3)}
+.row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:calc(var(--u)*12);padding:calc(var(--u)*11.5) 0;border-bottom:1px solid var(--edge-d)}
+.row .n{font-size:calc(var(--u)*13);color:var(--chalk)}
+.row .r{display:block;font-family:var(--mono);font-size:calc(var(--u)*6.8);letter-spacing:.14em;text-transform:uppercase;color:var(--steel);margin-top:calc(var(--u)*3)}
+.chip{font-family:var(--mono);font-size:calc(var(--u)*7);letter-spacing:.1em;text-transform:uppercase;color:var(--g4);border:1px solid rgba(227,196,104,.4);padding:calc(var(--u)*4) calc(var(--u)*9);white-space:nowrap}
+.tx-note{margin-top:auto;padding-top:calc(var(--u)*12);font-size:calc(var(--u)*10);color:var(--steel);line-height:1.5}
+
+/* ---------- 08 sectors ---------- */
+.sec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:calc(var(--u)*1);margin-top:calc(var(--u)*26);background:var(--edge-l);border:1px solid var(--edge-l)}
+.sector{background:var(--paper-2);padding:calc(var(--u)*18) calc(var(--u)*20);display:grid;grid-template-columns:calc(var(--u)*38) 1fr;gap:calc(var(--u)*14);align-items:start}
+.sector svg{width:calc(var(--u)*34);height:calc(var(--u)*34);color:var(--g-ink)}
+.sector h3{font-size:calc(var(--u)*18.5)}
+.sector p{font-size:calc(var(--u)*11.2);color:#4A4842;line-height:1.5;margin-top:calc(var(--u)*5)}
+.regions{margin-top:auto;display:grid;grid-template-columns:auto 1fr;gap:calc(var(--u)*30);align-items:center;padding-top:calc(var(--u)*18)}
+.regions .mono{color:var(--g-ink)}
+.reg-list{display:flex;flex-wrap:wrap;gap:calc(var(--u)*7) calc(var(--u)*22);font-family:var(--disp);font-weight:300;font-size:calc(var(--u)*18);color:var(--text)}
+.reg-list span{display:inline-flex;align-items:center;gap:calc(var(--u)*22)}
+.reg-list span:not(:last-child)::after{content:"";width:calc(var(--u)*5);height:calc(var(--u)*5);transform:rotate(45deg);background:var(--g2)}
+
+/* ---------- 09 process ---------- */
+.proc{display:grid;grid-template-columns:repeat(6,1fr);margin-top:auto;position:relative}
+.proc::before{content:"";position:absolute;left:0;right:0;top:calc(var(--u)*30);height:1px;background:var(--grad);opacity:.8}
+.step{display:flex;flex-direction:column;gap:calc(var(--u)*10);padding-right:calc(var(--u)*18)}
+.step .no{font-family:var(--disp);font-weight:200;font-size:calc(var(--u)*40);line-height:1;color:var(--g3);font-variant-numeric:lining-nums;
+  background:var(--void);width:max-content;padding-right:calc(var(--u)*10);position:relative;z-index:1;height:calc(var(--u)*60);display:flex;align-items:center}
+.step h3{font-size:calc(var(--u)*17.5)}
+.step p{font-size:calc(var(--u)*11);color:#B3B7BD;line-height:1.55}
+.step .who{margin-top:auto;font-family:var(--mono);font-size:calc(var(--u)*6.4);letter-spacing:.14em;text-transform:uppercase;color:var(--steel);padding-top:calc(var(--u)*8);border-top:1px solid var(--edge-d)}
+.proc-foot{display:flex;gap:calc(var(--u)*40);margin-top:calc(var(--u)*26);padding:calc(var(--u)*14) calc(var(--u)*18);border:1px solid var(--edge-d);background:var(--ink)}
+.proc-foot div{display:flex;flex-direction:column;gap:calc(var(--u)*3)}
+.proc-foot span{font-family:var(--mono);font-size:calc(var(--u)*6.6);letter-spacing:.16em;text-transform:uppercase;color:var(--g3)}
+.proc-foot p{font-size:calc(var(--u)*11.2);color:#C9CCD0}
+
+/* ---------- 10 documents ---------- */
+.docs{display:grid;grid-template-columns:.9fr 1fr 1fr;gap:calc(var(--u)*44);flex:1;min-height:0}
+.docs > *{min-width:0}
+.doclist h3{font-size:calc(var(--u)*21);padding-bottom:calc(var(--u)*10);border-bottom:1px solid var(--text);display:flex;justify-content:space-between;align-items:baseline}
+.doclist h3 span{font-family:var(--mono);font-size:calc(var(--u)*7);letter-spacing:.14em;color:var(--g-ink);text-transform:uppercase}
+.doclist ul{list-style:none;margin:0;padding:0}
+.doclist li{display:grid;grid-template-columns:calc(var(--u)*24) 1fr;align-items:start;padding:calc(var(--u)*9) 0;border-bottom:1px solid var(--edge-l);font-size:calc(var(--u)*12.2);line-height:1.4}
+.box{width:calc(var(--u)*11);height:calc(var(--u)*11);border:1px solid var(--g-ink);margin-top:calc(var(--u)*3)}
+.doclist li small{display:block;font-size:calc(var(--u)*10);color:var(--muted);margin-top:calc(var(--u)*2)}
+
+/* ---------- 11 why ---------- */
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:auto;border-top:1px solid var(--edge-d)}
+.why-item{padding:calc(var(--u)*20) calc(var(--u)*28) calc(var(--u)*20) 0;border-bottom:1px solid var(--edge-d);display:flex;flex-direction:column;gap:calc(var(--u)*8)}
+.why-item:nth-child(3n+2),.why-item:nth-child(3n){padding-left:calc(var(--u)*28);border-left:1px solid var(--edge-d)}
+.why-item:nth-child(n+4){border-bottom:0}
+.why-item h3{font-size:calc(var(--u)*20)}
+.why-item p{font-size:calc(var(--u)*11.6);color:#B3B7BD;line-height:1.55}
+.why-item .k{font-family:var(--disp);font-style:italic;font-weight:200;font-size:calc(var(--u)*30);line-height:1;color:var(--g3)}
+
+/* ---------- 12 contact ---------- */
+.contact{background:radial-gradient(ellipse 70% 80% at 100% 0%,rgba(184,145,42,.22),transparent 60%),radial-gradient(ellipse 50% 60% at 0% 100%,rgba(110,84,13,.2),transparent 70%),var(--void)}
+.contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:calc(var(--u)*70);flex:1;min-height:0;align-items:end}
+.contact-grid > *{min-width:0}
+.contact h2{font-size:calc(var(--u)*72);line-height:.98}
+.cards{display:flex;flex-direction:column;border-top:1px solid var(--g2)}
+.ct{display:grid;grid-template-columns:calc(var(--u)*120) 1fr;gap:calc(var(--u)*16);align-items:baseline;padding:calc(var(--u)*15) 0;border-bottom:1px solid var(--edge-d)}
+.ct span{font-family:var(--mono);font-size:calc(var(--u)*7);letter-spacing:.16em;text-transform:uppercase;color:var(--steel)}
+.ct a,.ct strong{font-family:var(--disp);font-weight:300;font-size:calc(var(--u)*21);color:var(--chalk);text-decoration:none;word-break:break-word}
+.ct a:hover{color:var(--g4)}
+.ct a:focus-visible{outline:1px solid var(--g3);outline-offset:4px}
+.disclaimer{margin-top:calc(var(--u)*26);font-size:calc(var(--u)*8.8);line-height:1.55;color:#7D828A;max-width:none;columns:2;column-gap:calc(var(--u)*40)}
+
+/* ---------- scale-up pass ---------- */
+h2{font-size:calc(var(--u)*62)}
+.split h2,.docs h2{font-size:calc(var(--u)*50)}
+.head-lede{margin-top:calc(var(--u)*20)}
+.sit{padding-top:calc(var(--u)*30)} .sit h3{font-size:calc(var(--u)*23)} .sit p{font-size:calc(var(--u)*13)} .sit .ic{width:calc(var(--u)*36);height:calc(var(--u)*36)}
+.inst{padding-block:calc(var(--u)*28)} .inst h3{font-size:calc(var(--u)*26)} .inst p{font-size:calc(var(--u)*12.8)}
+.big-850 .v{font-size:calc(var(--u)*150)}
+.funder{padding-top:calc(var(--u)*24)} .funder h3{font-size:calc(var(--u)*23)} .funder p{font-size:calc(var(--u)*12.6)} .funder .for{font-size:calc(var(--u)*11.4)}
+.sec-grid{flex:1;min-height:0;grid-auto-rows:1fr;margin-top:calc(var(--u)*30)}
+.sector{padding:calc(var(--u)*24) calc(var(--u)*26);align-content:center;grid-template-columns:calc(var(--u)*46) 1fr}
+.sector svg{width:calc(var(--u)*40);height:calc(var(--u)*40)} .sector h3{font-size:calc(var(--u)*22)} .sector p{font-size:calc(var(--u)*12.4)}
+.step h3{font-size:calc(var(--u)*20)} .step p{font-size:calc(var(--u)*12)} .step .no{font-size:calc(var(--u)*46)}
+.why-item{padding-block:calc(var(--u)*26)} .why-item h3{font-size:calc(var(--u)*23)} .why-item p{font-size:calc(var(--u)*12.6)} .why-item .k{font-size:calc(var(--u)*38)}
+.doclist li{padding:calc(var(--u)*11.5) 0;font-size:calc(var(--u)*13)}
+.stack-wrap{margin-top:calc(var(--u)*10)} .h2-tight{font-size:calc(var(--u)*54)} .layer{padding-bottom:calc(var(--u)*9)}
+
+.sit-grid{margin-bottom:calc(var(--u)*10)} .funders{margin-bottom:calc(var(--u)*14)}
+.disclaimer{border-top:1px solid var(--edge-d);padding-top:calc(var(--u)*14);margin-bottom:calc(var(--u)*6)}
+.docs{flex:none}
+.doc-band{margin-top:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:calc(var(--u)*36);padding:calc(var(--u)*18) calc(var(--u)*22);background:var(--paper-2);border:1px solid var(--edge-l);margin-bottom:calc(var(--u)*10)}
+.doc-band div{display:flex;flex-direction:column;gap:calc(var(--u)*4);min-width:0}
+.doc-band span{font-family:var(--mono);font-size:calc(var(--u)*7);letter-spacing:.16em;text-transform:uppercase;color:var(--g-ink)}
+.doc-band p{font-size:calc(var(--u)*12.2);color:#3D3C37;line-height:1.5}
+
+/* ---------- small screens: sheets become free-flowing panels ---------- */
+@media screen and (max-width:760px){
+  h2,.split h2,.docs h2,.h2-tight{font-size:36px}
+  .sheet.cover,.sheet.contact{overflow:hidden}
+  .cover-art{overflow:hidden}
+  .cover-top{flex-direction:column;gap:18px}
+  .cover-tag{text-align:left}
+  .cover-main{margin-top:44px}
+  .card{min-width:0;padding:14px}
+  .card .v{font-size:30px}
+  .card.hero .v{font-size:50px}
+  .card .what{flex-direction:column;gap:2px}
+  .big-850 .v{font-size:84px}
+  .sec-grid{grid-auto-rows:auto}
+  body{padding-block:16px 40px}
+  .book{gap:16px}
+  .sheet{aspect-ratio:auto;--u:1.12px;padding:40px 22px 18px;overflow:visible}
+  .cover{min-height:88vh}
+  .cover-art svg{width:150%;right:-55%;top:-6%;opacity:.7}
+  .cover h1{font-size:46px}
+  h2{font-size:36px}
+  .contact h2{font-size:40px}
+  .cover-meta{grid-template-columns:1fr 1fr;gap:18px 24px}
+  .split,.sit-head,.stack-wrap,.tx,.docs,.contact-grid,.fund-head{grid-template-columns:1fr;gap:28px}
+  .big-850{text-align:left}
+  .sit-grid,.inst-grid,.why,.funders,.sec-grid,.proc{grid-template-columns:1fr;margin-top:28px}
+  .sit + .sit,.funder + .funder{padding-left:0;border-left:0;border-top:1px solid var(--edge-d)}
+  .funder + .funder{border-top-color:var(--edge-l)}
+  .sit,.funder{padding:18px 0}
+  .inst,.why-item{padding:18px 0!important;border-left:0!important;border-bottom:1px solid var(--edge-d)!important}
+  .figs{grid-template-columns:1fr}
+  .fig:nth-child(odd),.fig:nth-child(even){padding:16px 0;border-right:0}
+  .stack-fig{height:420px}
+  .layer{grid-template-columns:1fr;gap:6px}
+  .tx-vol{grid-template-rows:auto}
+  .proc::before{display:none}
+  .step{padding:0 0 20px}
+  .step .no{height:auto}
+  .proc-foot{flex-direction:column;gap:14px}
+  .regions{grid-template-columns:1fr;gap:10px}
+  .ct{grid-template-columns:1fr;gap:4px}
+  .disclaimer{columns:1}
+  .doc-band{grid-template-columns:1fr;gap:16px;margin-top:28px}
+  .contact-grid{margin-top:40px}
+  .folio{flex-wrap:wrap;margin-top:28px}
+  .folio .mid{display:none}
+}
+
+/* ---------- print / PDF ---------- */
+@page{size:297mm 210mm;margin:0}
+@media print{
+  html,body{background:none!important;padding:0!important;width:297mm;margin:0}
+  .book{max-width:none;width:297mm;margin:0;gap:0;display:block}
+  .sheet{overflow:hidden}
+  .sheet{width:297mm;height:210mm;aspect-ratio:auto;--u:0.297mm;box-shadow:none;break-after:page;page-break-after:always;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .sheet:last-child{break-after:auto;page-break-after:auto}
+  /* Chrome draws hairlines around background-clipped text in PDFs: use solid gold in print */
+  em.g,.wordmark .wm,.card.hero .v{background:none!important;-webkit-text-fill-color:#DDBA5E;color:#DDBA5E}
+  .light em.g,.big-850 .v{background:none!important;-webkit-text-fill-color:#8A6A16;color:#8A6A16}
+}
+@media (prefers-reduced-motion:no-preference){
+  .cover-art svg .ring{animation:drift 40s linear infinite;transform-origin:600px 600px}
+  @keyframes drift{to{transform:rotate(360deg)}}
+}
+</style>
+
+<style>
+/* Website toolbar (screen only) */
+.xbar{position:fixed;inset:0 0 auto;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));
+  background:rgba(10,10,11,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid rgba(236,237,238,.08);
+  font-family:"Martian Mono",ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.xbar a{color:#C9CCD0;text-decoration:none;white-space:nowrap}
+.xbar a:hover{color:#F4E1A8}
+.xbar a:focus-visible{outline:1px solid #E3C468;outline-offset:4px}
+.xbar .r{display:flex;align-items:center;gap:18px}
+.xbar .lang b{color:#E3C468;font-weight:400}
+.xbar .dl{color:#0A0A0B;background:linear-gradient(100deg,#B8912A 0%,#E3C468 60%,#F4E1A8 100%);padding:9px 14px}
+.xbar .dl:hover{color:#0A0A0B;filter:brightness(1.06)}
+body{padding-top:84px}
+@media screen and (max-width:760px){body{padding-top:70px}.xbar{font-size:10px;letter-spacing:.1em}.xbar .back span{display:none}.xbar .r{gap:12px}}
+@media print{.xbar{display:none!important}}
+</style>
+</head>
+<body>
+<nav class="xbar" aria-label="Exposé"><a class="back" href="./#kapital">← <span>Back to </span>website</a><div class="r"><a class="lang" href="../de/expose-kapital.html" hreflang="de">DE / <b>EN</b></a><a class="dl" href="../downloads/Aureon_Capital_Expose_EN.pdf" download>Download PDF</a></div></nav>
+<main class="book">
+
+<!-- 01 · COVER -->
+<section class="sheet cover dark" aria-label="Cover">
+  <div class="cover-art" aria-hidden="true">
+    <svg viewBox="0 0 1200 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="gl" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#6E540D"/><stop offset=".45" stop-color="#B8912A"/><stop offset=".75" stop-color="#E3C468"/><stop offset="1" stop-color="#F4E1A8"/>
+        </linearGradient>
+      </defs>
+      <g stroke="url(#gl)" fill="none">
+        <circle cx="600" cy="600" r="560" stroke-width=".6" opacity=".35"/>
+        <circle cx="600" cy="600" r="470" stroke-width=".6" opacity=".45"/>
+        <circle cx="600" cy="600" r="380" stroke-width=".8" opacity=".55"/>
+        <circle cx="600" cy="600" r="290" stroke-width="1" opacity=".7"/>
+        <circle cx="600" cy="600" r="200" stroke-width="1.2" opacity=".85"/>
+        <g class="ring"><circle cx="600" cy="600" r="425" stroke-width="1.4" stroke-dasharray="2 14" opacity=".8"/></g>
+        <line x1="40" y1="600" x2="1160" y2="600" stroke-width=".6" opacity=".35"/>
+        <line x1="600" y1="40" x2="600" y2="1160" stroke-width=".6" opacity=".35"/>
+      </g>
+      <g id="dust" fill="#E3C468"></g>
+    </svg>
+  </div>
+  <div class="sheet-body">
+    <div class="cover-top">
+      <div class="wordmark"><span class="wm">AUREON</span></div>
+      <div class="cover-tag">Exposé · <b>Capital &amp; Financing</b><br>Edition 2026 · Confidential</div>
+    </div>
+    <div class="cover-main">
+      <div class="eyebrow">Exposé for business owners &amp; developers</div>
+      <h1>Capital that grows with <em class="g">your venture.</em></h1>
+      <p class="lede">For growth, acquisitions and larger projects, the house bank is often not enough. We frame your capital need, prepare the venture and bring you to the table with funders that fit its size and sector.</p>
+    </div>
+    <div class="cover-meta">
+      <div><span>Instruments</span><strong>Senior debt to equity</strong></div>
+      <div><span>Capital partners</span><strong class="num">850+ in the network</strong></div>
+      <div><span>Regions</span><strong>DACH · USA · Gulf region</strong></div>
+      <div><span>Contact</span><strong>One. From day one.</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 · AUF EINEN BLICK -->
+<section class="sheet light" aria-label="At a glance">
+  <div class="sheet-body">
+    <div class="split">
+      <div class="glance-left">
+        <div class="eyebrow">At a glance</div>
+        <h2>The right financing starts with the right <em class="g">structure.</em></h2>
+        <p class="lede">Aureon is your single point of contact for debt, mezzanine and equity. We look at your venture the way a funder does: cash flow, collateral, cost structure and exit. Only then do we approach the partners that fit this specific venture.</p>
+        <ul class="checks">
+          <li>Structuring financings from single-digit millions up to the hundreds of millions</li>
+          <li>Discreet, targeted approach instead of mass mailing to dozens of addresses</li>
+          <li>One contact from the first analysis to closing</li>
+          <li>German and English, with access to capital from Europe, the USA and the Gulf region</li>
+        </ul>
+      </div>
+      <div class="figs">
+        <div class="fig"><div class="v num">850<small>+</small></div><div class="k">Capital partners in the network: banks, family offices, funds and private investors</div></div>
+        <div class="fig"><div class="v num">273<small>EUR m</small></div><div class="k">largest single transaction volume in the reference selection</div></div>
+        <div class="fig"><div class="v num">6</div><div class="k">financing instruments, from senior debt via bridge and mezzanine to equity</div></div>
+        <div class="fig"><div class="v num">1</div><div class="k">contact who is accountable for the process</div></div>
+        <div class="fig"><div class="v num">3</div><div class="k">core regions: DACH, USA and the Gulf region, mandates worldwide</div></div>
+        <div class="fig"><div class="v num">17<small>years</small></div><div class="k">of procurement experience: we read cost structures like an investor</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="folio"><span>Aureon · Capital &amp; Financing</span><span class="mid">Confidential</span><b class="num">02 / 12</b></div>
+</section>
+
+<!-- 03 · AUSGANGSLAGE -->
+<section class="sheet dark" aria-label="The situation">
+  <div class="sheet-body">
+    <div class="sit-head">
+      <div>
+        <div class="eyebrow">The situation</div>
+        <h2>When the house bank reaches <em class="g">its limits.</em></h2>
+        <p class="lede head-lede">Exhausted credit lines, tied-up collateral, an equity gap or simply too little time: we know the typical bottlenecks and the funders who solve them.</p>
+      </div>
+      <p class="quote">Good ventures rarely fail on the idea. They fail on a capital structure that does not fit the project, or on the wrong counterpart.</p>
+    </div>
+    <div class="sit-grid">
+      <div class="sit">
+        <svg class="ic" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 26 L12 17 L18 21 L28 8"/><path d="M21 8 H28 V15"/></svg>
+        <h3>Growth &amp; expansion</h3>
+        <p>New sites, capacity or markets whose volume exceeds the credit line of the house bank.</p>
+      </div>
+      <div class="sit">
+        <svg class="ic" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="4" y="10" width="11" height="16"/><rect x="17" y="6" width="11" height="20"/><path d="M10 6 V3 M22 3 V1"/><path d="M15 18 H17"/></svg>
+        <h3>Acquisition &amp; succession</h3>
+        <p>Company purchase, management buy-out or generational change with matching acquisition finance.</p>
+      </div>
+      <div class="sit">
+        <svg class="ic" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 28 H28"/><path d="M7 28 V12 L16 6 L25 12 V28"/><path d="M12 28 V19 H20 V28"/><path d="M11 14 H13 M19 14 H21"/></svg>
+        <h3>Projects &amp; real estate</h3>
+        <p>Hotels, residential, energy, infrastructure: financing based on the project and its cash flows.</p>
+      </div>
+      <div class="sit">
+        <svg class="ic" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 22 C9 10, 23 10, 29 22"/><path d="M3 22 H29"/><path d="M9 22 V16 M16 22 V13 M23 22 V16"/></svg>
+        <h3>Bridging &amp; refinancing</h3>
+        <p>Bridge financing for windows in which a fast decision matters more than the last basis point.</p>
+      </div>
+    </div>
+  </div>
+  <div class="folio"><span>Aureon · Capital &amp; Financing</span><span class="mid">Confidential</span><b class="num">03 / 12</b></div>
+</section>
+
+<!-- 04 · KAPITALSTRUKTUR -->
+<section class="sheet light" aria-label="Capital structure">
+  <div class="sheet-body">
+    <div class="eyebrow">The capital structure</div>
+    <h2 class="h2-tight">Every layer has its <em class="g">price</em> and its purpose.</h2>
+    <div class="stack-wrap">
+      <div class="stack-fig" role="img" aria-label="Illustrative capital stack: senior debt up to about 60 percent, mezzanine up to about 80 percent, preferred equity up to about 90 percent, equity above">
+        <div class="axis num"><span style="top:0;transform:none">100 %</span><span style="top:10%">90 %</span><span style="top:20%">80 %</span><span style="top:40%">60 %</span><span style="top:100%;transform:translateY(-100%)">0 %</span></div>
+        <div class="bars">
+          <div class="bar b-eq"><span>Equity</span><span class="pct">~10 %</span></div>
+          <div class="bar b-pe"><span>Preferred Equity</span><span class="pct">~10 %</span></div>
+          <div class="bar b-mz"><span>Mezzanine</span><span class="pct">~20 %</span></div>
+          <div class="bar b-sd"><span>Senior Debt</span><span class="pct">~60 %</span></div>
+        </div>
+        <div class="risk"><span class="vt">Risk · Return</span><span class="line"></span><span class="vt">Seniority · Security</span></div>
+      </div>
+      <div class="layers">
+        <div class="layer"><div><h3>Common equity</h3><span class="mono">Most junior</span></div><p>Minority and majority stakes. Carries the highest risk and in return gets a say and the largest share of the upside.</p></div>
+        <div class="layer"><div><h3>Preferred Equity</h3><span class="mono">Ahead of equity</span></div><p>Equity with a preferred return. Closes gaps without the shareholders giving up control.</p></div>
+        <div class="layer"><div><h3>Mezzanine</h3><span class="mono">Subordinated</span></div><p>Subordinated capital that strengthens the equity base. Improves bankability and raises the financing ceiling considerably.</p></div>
+        <div class="layer"><div><h3>Senior Debt</h3><span class="mono">First rank · secured</span></div><p>Conventional secured financing on the most favourable terms. Term and repayment matched to cash flow.</p></div>
+        <p class="small">Illustrative guide values as a percentage of total capital (loan to cost). The actual structure depends on the venture, collateral and funder.</p>
+      </div>
+    </div>
+  </div>
+  <div class="folio"><span>Aureon · Capital &amp; Financing</span><span class="mid">Confidential</span><b class="num">04 / 12</b></div>
+</section>
+
+<!-- 05 · FINANZIERUNGSFORMEN -->
+<section class="sheet dark" aria-label="Instruments">
+  <div class="sheet-body">
+    <div class="eyebrow">Financing instruments</div>
+    <div class="sit-head"><h2>Six instruments. <em class="g">One</em> solution that fits.</h2>
+    <p class="lede">We combine instruments so that cost, control and speed fit your venture. Often the answer is not a single instrument but the right layering.</p></div>
+    <div class="inst-grid">
+      <div class="inst">
+        <div class="top"><h3>Senior Debt</h3><span class="tag">Debt</span></div>
+        <p>Conventional secured financing, matched to term and cash flow.</p>
+        <ul><li>Acquisition</li><li>Capex</li><li>Refinancing</li></ul>
+      </div>
+      <div class="inst">
+        <div class="top"><h3>Bridge</h3><span class="tag">Short term</span></div>
+        <p>Fast capital for time windows: purchase, start of construction, follow-on financing or exit.</p>
+        <ul><li>Purchase</li><li>Interim financing</li><li>Exit bridge</li></ul>
+      </div>
+      <div class="inst">
+        <div class="top"><h3>Mezzanine</h3><span class="tag">Subordinated</span></div>
+        <p>Subordinated capital that strengthens the equity base without giving up control.</p>
+        <ul><li>Growth</li><li>Equity gap</li><li>Projects</li></ul>
+      </div>
+      <div class="inst">
+        <div class="top"><h3>Preferred Equity</h3><span class="tag">Hybrid</span></div>
+        <p>Senior equity with a preferred return, flexible between mezzanine and equity.</p>
+        <ul><li>Development</li><li>Portfolios</li></ul>
+      </div>
+      <div class="inst">
+        <div class="top"><h3>Equity &amp; M&amp;A</h3><span class="tag">Equity</span></div>
+        <p>Minority and majority stakes, succession, buying and selling companies.</p>
+        <ul><li>Succession</li><li>Acquisition</li><li>Stake</li></ul>
+      </div>
+      <div class="inst">
+        <div class="top"><h3>Project finance</h3><span class="tag">Project based</span></div>
+        <p>Industrial, real estate, hotel, energy and infrastructure projects, financed on the strength of the project itself.</p>
+        <ul><li>Hotel</li><li>Energy</li><li>Infrastructure</li></ul>
+      </div>
+    </div>
+  </div>
+  <div class="folio"><span>Aureon · Capital &amp; Financing</span><span class="mid">Confidential</span><b class="num">05 / 12</b></div>
+</section>
+
+<!-- 06 · KAPITALGEBER -->
+<section class="sheet light" aria-label="Funders">
+  <div class="sheet-body">
+    <div class="fund-head">
+      <div>
+        <div class="eyebrow">Funders</div>
+        <h2>The right partner <em class="g">at the table.</em></h2>
+        <p class="lede" style="margin-top:calc(var(--u)*16)">Relationships built over decades that no cold calling or advertising budget can buy. You get access to this network through a single contact.</p>
+      </div>
+      <div class="big-850"><div class="v num">850+</div><div class="k">Capital partners · one access</div></div>
+    </div>
+    <div class="funders">
+      <div class="funder"><span class="mono">01</span><h3>Banks</h3><p>Senior debt, acquisition and project finance with clear collateral.</p><div class="for"><b>Best for</b>Secured ventures, acquisitions</div></div>
+      <div class="funder"><span class="mono">02</span><h3>Family offices</h3><p>Private capital with a long horizon that decides quickly and discreetly.</p><div class="for"><b>Best for</b>Succession, stakes, special situations</div></div>
+      <div class="funder"><span class="mono">03</span><h3>Funds</h3><p>Private debt, mezzanine and private equity with institutional processes.</p><div class="for"><b>Best for</b>Growth, buy-outs, larger tickets</div></div>
+      <div class="funder"><span class="mono">04</span><h3>Private investors</h3><p>Entrepreneurs and investors who bring experience and a network.</p><div class="for"><b>Best for</b>Minority stakes, bridge, co-investments</div></div>
+      <div class="funder"><span class="mono">05</span><h3>Gulf region</h3><p>Family offices and private investors from the Gulf region, with access built over years.</p><div class="for"><b>Best for</b>Large projects, hotels, infrastructure</div></div>
+    </div>
+  </div>
+  <div class="folio"><span>Aureon · Capital &amp; Financing</span><span class="mid">Confidential</span><b class="num">06 / 12</b></div>
+</section>
+
+<!-- 07 · TRANSAKTIONEN -->
+<section class="sheet dark" aria-label="Selected transactions">
+  <div class="sheet-body">
+    <div class="eyebrow">Selected transactions</div>
+    <h2>Where deals <em class="g">get done.</em></h2>
+    <div class="tx">
+      <div class="tx-vol">
+        <div class="card hero"><div class="what"><span>Hotel project</span><span>Germany</span></div><div class="v num">273<small>EUR m</small></div></div>
+        <div class="card"><div class="what"><span>Infrastructure</span><span>Asia</span></div><div class="v num">78<small>USD m</small></div></div>
+        <div class="card"><div class="what"><span>Hotel resort</span><span>Caribbean</span></div><div class="v num">32<small>USD m</small></div></div>
+        <div class="card"><div class="what"><span>Renewable energy</span><span>Italy</span></div><div class="v num">22<small>EUR m</small></div></div>
+        <div class="card"><div class="what"><span>Bridge financing</span><span>Hamburg</span></div><div class="v num">11.5<small>EUR m</small></div></div>
+      </div>
+      <div class="tx-list">
+        <div class="hd"><span>Venture · Region</span><span>Structure</span></div>
+        <div class="row"><div><span class="n">Hotel portfolio</span><span class="r">Germany</span></div><span class="chip">Mezzanine</span></div>
+        <div class="row"><div><span class="n">Residential project</span><span class="r">Romania</span></div><span class="chip">Senior Debt</span></div>
+        <div class="row"><div><span class="n">Villa projects</span><span class="r">Indonesia</span></div><span class="chip">Project finance</span></div>
+        <div class="row"><div><span class="n">Developer acquisition</span><span class="r">Corporate transaction</span></div><span class="chip">M&amp;A</span></div>
+        <div class="row"><div><span class="n">Luxury property</span><span class="r">Dubai</span></div><span class="chip">Bridge</span></div>
+        <div class="row"><div><span class="n">Hotel</span><span class="r">Africa</span></div><span class="chip">Financing</span></div>
+        <p class="tx-note">A selection of anonymised mandates from our capital network. Names and details on request after signing a non-disclosure agreement, where the parties consent.</p>
+      </div>
+    </div>
+  </div>
+  <div class="folio"><span>Aureon · Capital &amp; Financing</span><span class="mid">Confidential</span><b class="num">07 / 12</b></div>
+</section>
+
+<!-- 08 · SEKTOREN -->
+<section class="sheet light" aria-label="Sectors and regions">
+  <div class="sheet-body">
+    <div class="eyebrow">Sectors &amp; regions</div>
+    <h2>Where we <em class="g">move capital.</em></h2>
+    <div class="sec-grid">
+      <div class="sector"><svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M5 30 H29"/><rect x="8" y="6" width="18" height="24"/><path d="M12 11 H15 M19 11 H22 M12 16 H15 M19 16 H22 M12 21 H15 M19 21 H22"/><path d="M15 30 V25 H19 V30"/></svg><div><h3>Hotel &amp; hospitality</h3><p>New builds, repositioning and portfolios, from city hotels to resorts.</p></div></div>
+      <div class="sector"><svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M4 30 H30"/><path d="M6 30 V15 L14 9 L22 15 V30"/><path d="M22 30 V19 H29 V30"/><path d="M11 30 V22 H17 V30"/></svg><div><h3>Residential &amp; development</h3><p>Residential and mixed-use projects, villas, developer finance.</p></div></div>
+      <div class="sector"><svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.1"><circle cx="17" cy="12" r="5"/><path d="M17 3 V5 M17 19 V21 M8 12 H10 M24 12 H26 M10.6 5.6 L12 7 M22 17 L23.4 18.4 M23.4 5.6 L22 7 M12 17 L10.6 18.4"/><path d="M6 30 L10 24 H24 L28 30 Z"/><path d="M15 24 L14 30 M19 24 L20 30 M8 27 H26"/></svg><div><h3>Renewable energy</h3><p>Solar, wind and storage, financed on long-term yields.</p></div></div>
+      <div class="sector"><svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M3 24 H31"/><path d="M6 24 C10 12, 24 12, 28 24"/><path d="M10 24 V17 M17 24 V14 M24 24 V17"/><path d="M3 29 H31"/></svg><div><h3>Infrastructure</h3><p>Large projects with long tenors and international funders.</p></div></div>
+      <div class="sector"><svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M4 30 V16 L11 20 V16 L18 20 V16 L25 20 V8 H30 V30 Z"/><path d="M9 25 H12 M16 25 H19 M23 25 H26"/></svg><div><h3>Industry &amp; mid-market</h3><p>Growth, succession and acquisitions. Backed by 17 years in automotive.</p></div></div>
+      <div class="sector"><svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M17 3 L19 13 L17 31 L15 13 Z"/><path d="M8 31 V20 H13 V31 M21 31 V17 H26 V31"/><path d="M4 31 H30"/></svg><div><h3>Prime &amp; commercial real estate</h3><p>Luxury property, office and retail, purchase and interim financing.</p></div></div>
+    </div>
+    <div class="regions">
+      <span class="mono">Mandates in</span>
+      <div class="reg-list"><span>Germany</span><span>Europe</span><span>USA</span><span>Gulf region</span><span>Asia</span><span>Africa</span><span>Caribbean</span></div>
+    </div>
+  </div>
+  <div class="folio"><span>Aureon · Capital &amp; Financing</span><span class="mid">Confidential</span><b class="num">08 / 12</b></div>
+</section>
+
+<!-- 09 · ABLAUF -->
+<section class="sheet dark" aria-label="Process">
+  <div class="sheet-body">
+    <div class="eyebrow">The process</div>
+    <h2>From first call to <em class="g">closing.</em></h2>
+    <p class="lede head-lede">A clear process with fixed milestones. You always know where your venture stands and who is working on it.</p>
+    <div class="proc">
+      <div class="step"><span class="no">01</span><h3>First call</h3><p>Venture, capital need and timeline. Under a non-disclosure agreement on request.</p><span class="who">Free · 60 min</span></div>
+      <div class="step"><span class="no">02</span><h3>Analysis</h3><p>We assess fundability, collateral and a sensible capital structure.</p><span class="who">Honest assessment</span></div>
+      <div class="step"><span class="no">03</span><h3>Preparation</h3><p>Teaser, financing memorandum and model, the way funders expect them.</p><span class="who">Investor ready</span></div>
+      <div class="step"><span class="no">04</span><h3>Approach</h3><p>Targeted, discreet introduction to selected funders. No mass mailing.</p><span class="who">Only fitting partners</span></div>
+      <div class="step"><span class="no">05</span><h3>Term sheet</h3><p>Compare offers, negotiate terms, lock in the structure.</p><span class="who">You decide</span></div>
+      <div class="step"><span class="no">06</span><h3>Closing</h3><p>Support through due diligence and contracts until the funds are paid out.</p><span class="who">To the finish</span></div>
+    </div>
+    <div class="proc-foot">
+      <div><span>Discretion</span><p>Your venture only goes to partners you have approved.</p></div>
+      <div><span>One contact</span><p>Aureon coordinates all parties, you keep the overview.</p></div>
+      <div><span>Clarity</span><p>If a venture does not fit, we tell you early and explain why.</p></div>
+    </div>
+  </div>
+  <div class="folio"><span>Aureon · Capital &amp; Financing</span><span class="mid">Confidential</span><b class="num">09 / 12</b></div>
+</section>
+
+<!-- 10 · UNTERLAGEN -->
+<section class="sheet light" aria-label="Documents">
+  <div class="sheet-body">
+    <div class="docs">
+      <div style="display:flex;flex-direction:column;gap:calc(var(--u)*18)">
+        <div class="eyebrow">Documents</div>
+        <h2>What we need for a first <em class="g">assessment.</em></h2>
+        <p class="lede">A short description is enough for the first call. Before approaching funders, we compile the following documents with you. Whatever is missing, we work out together.</p>
+      </div>
+      <div class="doclist">
+        <h3>Projects &amp; real estate <span>Project</span></h3>
+        <ul>
+          <li><span class="box"></span><span>Project description &amp; exposé<small>Location, use, concept</small></span></li>
+          <li><span class="box"></span><span>Capital need &amp; use of funds</span></li>
+          <li><span class="box"></span><span>Cost and investment plan<small>incl. timeline</small></span></li>
+          <li><span class="box"></span><span>Land register extract &amp; site plan</span></li>
+          <li><span class="box"></span><span>Building permit or planning status</span></li>
+          <li><span class="box"></span><span>Valuation, lease or operator concept</span></li>
+          <li><span class="box"></span><span>Proof of equity</span></li>
+        </ul>
+      </div>
+      <div class="doclist">
+        <h3>Companies &amp; M&amp;A <span>Company</span></h3>
+        <ul>
+          <li><span class="box"></span><span>Annual accounts for the last three years</span></li>
+          <li><span class="box"></span><span>Current management accounts and trial balance</span></li>
+          <li><span class="box"></span><span>Three to five year plan<small>P&amp;L, liquidity, capex</small></span></li>
+          <li><span class="box"></span><span>Shareholder and group structure</span></li>
+          <li><span class="box"></span><span>Bank overview &amp; existing financing</span></li>
+          <li><span class="box"></span><span>Purpose: growth, acquisition, succession</span></li>
+          <li><span class="box"></span><span>Management profile</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="doc-band">
+      <div><span>To start</span><p>Three facts are enough for the first call: venture, capital need and timeline.</p></div>
+      <div><span>Confidentiality</span><p>Documents only go to funders with your explicit consent.</p></div>
+      <div><span>Format</span><p>PDF, Excel or data room. We work with what you already have.</p></div>
+    </div>
+  </div>
+  <div class="folio"><span>Aureon · Capital &amp; Financing</span><span class="mid">Confidential</span><b class="num">10 / 12</b></div>
+</section>
+
+<!-- 11 · WARUM AUREON -->
+<section class="sheet dark" aria-label="Why Aureon">
+  <div class="sheet-body">
+    <div class="eyebrow">Why Aureon</div>
+    <h2>We know both sides of <em class="g">the table.</em></h2>
+    <p class="lede head-lede">As purchasers we spent years assessing quotations, cost structures and suppliers. We apply exactly that view to your venture before a funder does.</p>
+    <div class="why">
+      <div class="why-item"><span class="k">One.</span><h3>One contact</h3><p>You talk to one person who answers for the result. No hand-offs, no waiting loops.</p></div>
+      <div class="why-item"><span class="k">17 years.</span><h3>The buyer&#39;s view</h3><p>Seventeen years of industrial purchasing. We test cost structures and numbers the way a funder will, before the funder does.</p></div>
+      <div class="why-item"><span class="k">850+</span><h3>A network, not a database</h3><p>Personal relationships with banks, family offices, funds and investors, including in the Gulf region.</p></div>
+      <div class="why-item"><span class="k">Targeted.</span><h3>No mass mailing</h3><p>Your venture goes to a few fitting addresses. That protects your reputation in the market and your negotiating position.</p></div>
+      <div class="why-item"><span class="k">Three.</span><h3>Regions, one process</h3><p>DACH, USA and the Gulf region. German and English, with an understanding of what each market expects.</p></div>
+      <div class="why-item"><span class="k">To the end.</span><h3>With you to closing</h3><p>We stay until the capital flows, through due diligence, negotiations and contracts.</p></div>
+    </div>
+  </div>
+  <div class="folio"><span>Aureon · Capital &amp; Financing</span><span class="mid">Confidential</span><b class="num">11 / 12</b></div>
+</section>
+
+<!-- 12 · KONTAKT -->
+<section class="sheet contact dark" aria-label="Contact">
+  <div class="sheet-body">
+    <div class="cover-top">
+      <div class="wordmark"><span class="wm">AUREON</span></div>
+      <div class="cover-tag">Contact<br><b>Capital &amp; Financing</b></div>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <div class="eyebrow">Next step</div>
+        <h2 style="margin-top:calc(var(--u)*18)">Let&#39;s talk about <em class="g">your venture.</em></h2>
+        <p class="lede" style="margin-top:calc(var(--u)*20)">Describe your project in a short call. We tell you honestly whether and how we can help.</p>
+      </div>
+      <div class="cards">
+        <div class="ct"><span>Email</span><a href="mailto:info@aureon-trading.com">info@aureon-trading.com</a></div>
+        <div class="ct"><span>Web</span><a href="https://aureon-trading.com/en/#kapital" target="_blank" rel="noopener">aureon-trading.com</a></div>
+        <div class="ct"><span>Meeting</span><strong>First call, 60 min</strong></div>
+        <div class="ct"><span>Regions</span><strong>DACH · USA · Gulf region</strong></div>
+      </div>
+    </div>
+    <p class="disclaimer">Aureon makes introductions to funders and supports the preparation and structuring of financing ventures. Aureon is not a credit institution and does not provide legal, tax or investment advice. Financing decisions rest solely with the respective funders. The transactions shown are anonymised and come from the network Aureon works with. Capital structure figures are illustrative guide values. This document is for information only, is confidential and does not constitute an offer. As of November 2026.</p>
+  </div>
+  <div class="folio"><span>© 2026 Aureon Trading and Consulting</span><span class="mid">Confidential</span><b class="num">12 / 12</b></div>
+</section>
+
+</main>
+
+<script>
+// Deterministic gold dust on the cover (same on screen and in the PDF).
+(function(){
+  var g=document.getElementById('dust'); if(!g) return;
+  var s=7; function r(){ s=(s*16807)%2147483647; return (s-1)/2147483646; }
+  var ns='http://www.w3.org/2000/svg', frag=document.createDocumentFragment();
+  for(var i=0;i<260;i++){
+    var a=r()*Math.PI*2, d=180+Math.pow(r(),.6)*420;
+    var c=document.createElementNS(ns,'circle');
+    c.setAttribute('cx',(600+Math.cos(a)*d).toFixed(1));
+    c.setAttribute('cy',(600+Math.sin(a)*d).toFixed(1));
+    c.setAttribute('r',(0.6+r()*1.8).toFixed(2));
+    c.setAttribute('opacity',(0.15+r()*0.65).toFixed(2));
+    frag.appendChild(c);
+  }
+  g.appendChild(frag);
+})();
+</script>
+</body></html>

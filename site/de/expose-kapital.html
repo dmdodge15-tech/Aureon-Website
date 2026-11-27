@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Exposé Kapital &amp; Finanzierung · Aureon</title>
+<meta name="description" content="Exposé von Aureon zu Kapital und Finanzierung: Senior Debt, Bridge, Mezzanine, Preferred Equity, Equity und Projektfinanzierung.">
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#050506"><link rel="icon" href="/aureon-logo.png">
+<style>body{margin:0}img{max-width:100%}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600&family=Martian+Mono:wght@300;400&family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;1,6..72,200;1,6..72,300;1,6..72,400&display=swap">
+<style>
+/* Layout: a bound exposé of twelve A4-landscape sheets, alternating "void" (black/gold) and "paper" (warm stone) folios.
+   All sizes inside a sheet use --u = 1/1000 of the sheet width, so screen and print render identically. */
+:root{
+  --void:#050506; --ink:#0C0D0F; --ink-2:#141518; --chalk:#ECEDEE; --steel:#9CA2AA; --edge-d:rgba(236,237,238,.13);
+  --paper:#E9E4D8; --paper-2:#F3EFE6; --text:#17181B; --muted:#5F5A50; --edge-l:rgba(23,24,27,.14);
+  --g1:#6E540D; --g2:#B8912A; --g3:#E3C468; --g4:#F4E1A8; --g-ink:#8A6A16;
+  --grad:linear-gradient(100deg,#6E540D 0%,#B8912A 40%,#E3C468 70%,#F4E1A8 100%);
+  --disp:"Newsreader",Georgia,"Times New Roman",serif;
+  --grot:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --mono:"Martian Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --desk:#0A0A0B;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--desk)}
+body{background:var(--desk);color:var(--chalk);font-family:var(--grot);-webkit-font-smoothing:antialiased;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 64px}
+.book{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+
+/* ---------- sheet ---------- */
+.sheet{container-type:inline-size;position:relative;width:100%;aspect-ratio:297/210;overflow:hidden;
+  --u:0.1cqw; font-size:calc(var(--u)*13.5); line-height:1.55;
+  padding:calc(var(--u)*58) calc(var(--u)*68) calc(var(--u)*30);
+  display:flex;flex-direction:column;box-shadow:0 30px 80px -30px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.04)}
+.dark{background:var(--void);color:var(--chalk)}
+.light{background:var(--paper);color:var(--text)}
+.sheet-body{flex:1;min-height:0;display:flex;flex-direction:column;position:relative;z-index:1}
+.folio{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;gap:calc(var(--u)*20);
+  font-family:var(--mono);font-size:calc(var(--u)*7.6);letter-spacing:.16em;text-transform:uppercase;padding-top:calc(var(--u)*14)}
+.dark .folio{color:var(--steel);border-top:1px solid var(--edge-d)}
+.light .folio{color:var(--muted);border-top:1px solid var(--edge-l)}
+.folio b{font-weight:400}
+.dark .folio b{color:var(--g3)} .light .folio b{color:var(--g-ink)}
+
+/* ---------- type ---------- */
+.eyebrow{display:flex;align-items:center;gap:calc(var(--u)*12);font-family:var(--mono);font-size:calc(var(--u)*8.4);letter-spacing:.2em;text-transform:uppercase}
+.eyebrow::before{content:"";width:calc(var(--u)*30);height:1px;background:currentColor;opacity:.7}
+.dark .eyebrow{color:var(--g3)} .light .eyebrow{color:var(--g-ink)}
+h1,h2,h3{font-family:var(--disp);font-weight:200;margin:0;text-wrap:balance;letter-spacing:-.015em}
+h2{font-size:calc(var(--u)*50);line-height:1.02;margin-top:calc(var(--u)*18)}
+h3{font-size:calc(var(--u)*21);font-weight:300;line-height:1.15}
+em.g{font-style:italic;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;padding:.06em .1em .06em 0;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.light em.g{background:linear-gradient(100deg,#5A440A 0%,#8A6A16 45%,#B8912A 100%);-webkit-background-clip:text;background-clip:text}
+p{margin:0}
+.lede{font-size:calc(var(--u)*15.5);line-height:1.6;max-width:62ch}
+.dark .lede{color:#C9CCD0} .light .lede{color:#3A3934}
+.small{font-size:calc(var(--u)*11.6);line-height:1.55}
+.dark .small{color:var(--steel)} .light .small{color:var(--muted)}
+.mono{font-family:var(--mono);font-size:calc(var(--u)*8);letter-spacing:.16em;text-transform:uppercase}
+.num{font-variant-numeric:tabular-nums lining-nums}
+.rule-d{height:1px;background:var(--edge-d)} .rule-l{height:1px;background:var(--edge-l)}
+.gold-line{height:1px;background:var(--grad)}
+
+/* ---------- 01 cover ---------- */
+.cover{padding:calc(var(--u)*52) calc(var(--u)*68) calc(var(--u)*30);
+  background:radial-gradient(ellipse 60% 70% at 82% 40%,rgba(184,145,42,.16),transparent 60%),radial-gradient(ellipse 50% 50% at 10% 110%,rgba(110,84,13,.18),transparent 70%),var(--void)}
+.cover-art{position:absolute;inset:0;z-index:0;pointer-events:none}
+.cover-art svg{position:absolute;right:-8%;top:-14%;width:78%;height:auto;max-width:none}
+.wordmark{display:flex;flex-direction:column;gap:calc(var(--u)*3)}
+.wordmark .wm{font-family:var(--disp);font-weight:300;font-size:calc(var(--u)*32);letter-spacing:.16em;line-height:1.2;padding-block:.05em;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wordmark .sub{font-family:var(--mono);font-size:calc(var(--u)*6.6);letter-spacing:.42em;color:var(--steel);padding-left:.2em}
+.cover-top{display:flex;justify-content:space-between;align-items:flex-start}
+.cover-tag{text-align:right;font-family:var(--mono);font-size:calc(var(--u)*7.6);letter-spacing:.18em;text-transform:uppercase;color:var(--steel);line-height:2}
+.cover-tag b{color:var(--g3);font-weight:400}
+.cover-main{margin-top:auto;display:flex;flex-direction:column;gap:calc(var(--u)*22);max-width:calc(var(--u)*640)}
+.cover h1{font-size:calc(var(--u)*86);line-height:.96;letter-spacing:-.025em}
+.cover .lede{max-width:calc(var(--u)*520)}
+.cover-meta{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:calc(var(--u)*44);margin-top:calc(var(--u)*34);margin-bottom:calc(var(--u)*6)}
+.cover-meta div{display:flex;flex-direction:column;gap:calc(var(--u)*5)}
+.cover-meta span{font-family:var(--mono);font-size:calc(var(--u)*7);letter-spacing:.18em;text-transform:uppercase;color:var(--steel)}
+.cover-meta strong{font-family:var(--disp);font-weight:300;font-size:calc(var(--u)*17);color:var(--chalk)}
+
+/* ---------- 02 at a glance ---------- */
+.split{display:grid;grid-template-columns:1.05fr 1fr;gap:calc(var(--u)*64);flex:1;min-height:0}
+.split > *{min-width:0}
+.glance-left{display:flex;flex-direction:column;gap:calc(var(--u)*20)}
+.figs{display:grid;grid-template-columns:1fr 1fr;align-content:center;border-top:1px solid var(--edge-l)}
+.fig{padding:calc(var(--u)*22) 0 calc(var(--u)*20);border-bottom:1px solid var(--edge-l);display:flex;flex-direction:column;gap:calc(var(--u)*6)}
+.fig:nth-child(odd){padding-right:calc(var(--u)*24);border-right:1px solid var(--edge-l)}
+.fig:nth-child(even){padding-left:calc(var(--u)*28)}
+.fig .v{font-family:var(--disp);font-weight:200;font-size:calc(var(--u)*50);line-height:1;letter-spacing:-.02em;color:var(--text)}
+.fig .v small{font-size:.42em;letter-spacing:0;color:var(--g-ink);margin-left:.15em}
+.fig .k{font-size:calc(var(--u)*11.5);color:var(--muted);line-height:1.45;max-width:26ch}
+.checks{list-style:none;margin:calc(var(--u)*6) 0 0;padding:0;display:flex;flex-direction:column;gap:calc(var(--u)*9)}
+.checks li{display:grid;grid-template-columns:calc(var(--u)*22) 1fr;font-size:calc(var(--u)*13);line-height:1.45}
+.checks li::before{content:"";width:calc(var(--u)*9);height:calc(var(--u)*9);margin-top:calc(var(--u)*5);transform:rotate(45deg);background:var(--grad)}
+
+/* ---------- 03 situations ---------- */
+.sit-head{display:grid;grid-template-columns:1.25fr 1fr;gap:calc(var(--u)*60);align-items:end}
+.sit-grid{display:grid;grid-template-columns:repeat(4,1fr);margin-top:auto;border-top:1px solid var(--edge-d)}
+.sit{padding:calc(var(--u)*24) calc(var(--u)*24) 0 0;display:flex;flex-direction:column;gap:calc(var(--u)*10)}
+.sit + .sit{padding-left:calc(var(--u)*24);border-left:1px solid var(--edge-d)}
+.sit .ic{width:calc(var(--u)*30);height:calc(var(--u)*30);color:var(--g3)}
+.sit h3{font-size:calc(var(--u)*20)}
+.sit p{font-size:calc(var(--u)*11.8);color:#B3B7BD;line-height:1.55}
+.quote{font-family:var(--disp);font-style:italic;font-weight:200;font-size:calc(var(--u)*21);line-height:1.35;color:#D6D8DB;border-left:1px solid var(--g2);padding-left:calc(var(--u)*20)}
+
+/* ---------- 04 capital stack ---------- */
+.stack-wrap{display:grid;grid-template-columns:1fr 1.45fr;gap:calc(var(--u)*56);flex:1;min-height:0;margin-top:calc(var(--u)*24)}
+.stack-wrap > *{min-width:0}
+.stack-fig{display:grid;grid-template-columns:calc(var(--u)*40) 1fr calc(var(--u)*30);gap:calc(var(--u)*10);height:100%;min-height:0}
+.axis{position:relative;font-family:var(--mono);font-size:calc(var(--u)*7);color:var(--muted)}
+.axis span{position:absolute;right:0;transform:translateY(-50%)}
+.bars{display:flex;flex-direction:column;border:1px solid var(--edge-l)}
+.bar{position:relative;display:flex;align-items:center;justify-content:space-between;padding:0 calc(var(--u)*14);gap:calc(var(--u)*10);
+  font-size:calc(var(--u)*11.5);font-weight:500;border-top:1px solid rgba(23,24,27,.12)}
+.bar:first-child{border-top:0}
+.bar .pct{font-family:var(--mono);font-weight:400;font-size:calc(var(--u)*7.6);letter-spacing:.08em;opacity:.8}
+.b-eq{flex:10;background:#17181B;color:var(--g4)}
+.b-pe{flex:10;background:#3B3220;color:var(--g4)}
+.b-mz{flex:20;background:linear-gradient(90deg,#8A6A16,#B8912A);color:#FFF8E6}
+.b-sd{flex:60;background:var(--paper-2);color:var(--text)}
+.risk{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:calc(var(--u)*6.6);color:var(--g-ink);letter-spacing:.14em}
+.risk .line{flex:1;width:1px;background:linear-gradient(to bottom,var(--g-ink),rgba(138,106,22,.15));margin:calc(var(--u)*8) 0;position:relative}
+.risk .line::before{content:"";position:absolute;top:-2px;left:50%;width:calc(var(--u)*7);height:calc(var(--u)*7);border-left:1px solid var(--g-ink);border-top:1px solid var(--g-ink);transform:translateX(-50%) rotate(45deg)}
+.risk .vt{writing-mode:vertical-rl;transform:rotate(180deg);text-transform:uppercase}
+.layers{display:flex;flex-direction:column;justify-content:space-between;gap:calc(var(--u)*9)}
+.layer{display:grid;grid-template-columns:calc(var(--u)*150) 1fr;gap:calc(var(--u)*22);padding-bottom:calc(var(--u)*12);border-bottom:1px solid var(--edge-l)}
+.layer:last-child{border-bottom:0;padding-bottom:0}
+.layer h3{font-size:calc(var(--u)*19)}
+.layer .mono{color:var(--g-ink);margin-top:calc(var(--u)*5);display:block;font-size:calc(var(--u)*7)}
+.layer p{font-size:calc(var(--u)*11.8);color:#3D3C37;line-height:1.5}
+
+/* ---------- 05 instruments ---------- */
+.inst-grid{display:grid;grid-template-columns:repeat(3,1fr);margin-top:auto;border-top:1px solid var(--edge-d)}
+.inst{padding:calc(var(--u)*20) calc(var(--u)*26) calc(var(--u)*20) 0;display:flex;flex-direction:column;gap:calc(var(--u)*8);border-bottom:1px solid var(--edge-d)}
+.inst:nth-child(3n+2),.inst:nth-child(3n){padding-left:calc(var(--u)*26);border-left:1px solid var(--edge-d)}
+.inst:nth-child(n+4){border-bottom:0}
+.inst .top{display:flex;justify-content:space-between;align-items:baseline;gap:calc(var(--u)*10)}
+.inst h3{font-size:calc(var(--u)*22)}
+.inst .tag{font-family:var(--mono);font-size:calc(var(--u)*6.8);letter-spacing:.14em;text-transform:uppercase;color:var(--g3);white-space:nowrap}
+.inst p{font-size:calc(var(--u)*11.6);color:#B3B7BD;line-height:1.55}
+.inst ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:calc(var(--u)*5)}
+.inst li{font-family:var(--mono);font-size:calc(var(--u)*6.6);letter-spacing:.08em;color:#C9CCD0;border:1px solid var(--edge-d);padding:calc(var(--u)*3) calc(var(--u)*7)}
+
+/* ---------- 06 funders ---------- */
+.fund-head{display:grid;grid-template-columns:1fr auto;gap:calc(var(--u)*40);align-items:end}
+.big-850{text-align:right}
+.big-850 .v{font-family:var(--disp);font-weight:200;font-size:calc(var(--u)*104);line-height:1.12;padding-top:.04em;letter-spacing:-.03em;
+  background:linear-gradient(100deg,#5A440A 0%,#8A6A16 45%,#B8912A 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.big-850 .k{font-family:var(--mono);font-size:calc(var(--u)*7.6);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:calc(var(--u)*8)}
+.funders{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:auto;border-top:1px solid var(--text)}
+.funder{padding:calc(var(--u)*18) calc(var(--u)*18) 0 0;display:flex;flex-direction:column;gap:calc(var(--u)*9)}
+.funder + .funder{padding-left:calc(var(--u)*18);border-left:1px solid var(--edge-l)}
+.funder .mono{color:var(--g-ink);font-size:calc(var(--u)*7)}
+.funder h3{font-size:calc(var(--u)*20)}
+.funder p{font-size:calc(var(--u)*11.4);color:#3D3C37;line-height:1.5}
+.funder .for{margin-top:auto;padding-top:calc(var(--u)*10);border-top:1px dashed var(--edge-l);font-size:calc(var(--u)*10.4);color:var(--muted)}
+.funder .for b{display:block;font-family:var(--mono);font-weight:400;font-size:calc(var(--u)*6.6);letter-spacing:.14em;text-transform:uppercase;color:var(--text);margin-bottom:calc(var(--u)*3)}
+
+/* ---------- 07 transactions ---------- */
+.tx{display:grid;grid-template-columns:1.25fr 1fr;gap:calc(var(--u)*48);flex:1;min-height:0;margin-top:calc(var(--u)*26)}
+.tx > *{min-width:0}
+.tx-vol{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1.25fr 1fr 1fr;gap:1px;background:var(--edge-d);border:1px solid var(--edge-d)}
+.card{background:var(--ink);padding:calc(var(--u)*16) calc(var(--u)*18);display:flex;flex-direction:column;justify-content:space-between;gap:calc(var(--u)*8)}
+.card.hero{grid-column:1 / -1;background:linear-gradient(135deg,#15130D 0%,#0C0D0F 60%)}
+.card .v{font-family:var(--disp);font-weight:200;font-size:calc(var(--u)*40);line-height:1;letter-spacing:-.02em;color:var(--chalk)}
+.card.hero .v{line-height:1.12;padding-top:.04em;font-size:calc(var(--u)*68);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.card .v small{font-family:var(--mono);font-size:calc(var(--u)*8.5);letter-spacing:.12em;color:var(--steel);margin-left:calc(var(--u)*6)}
+.card.hero .v small{color:var(--g3);-webkit-text-fill-color:var(--g3)}
+.card .what{display:flex;justify-content:space-between;align-items:baseline;gap:calc(var(--u)*10);font-size:calc(var(--u)*12)}
+.card .what span{font-family:var(--mono);font-size:calc(var(--u)*6.8);letter-spacing:.14em;text-transform:uppercase;color:var(--steel)}
+.tx-list{display:flex;flex-direction:column}
+.tx-list .hd{display:grid;grid-template-columns:1fr auto;padding-bottom:calc(var(--u)*9);border-bottom:1px solid var(--g2);font-family:var(--mono);font-size:calc(var(--u)*6.8);letter-spacing:.16em;text-transform:uppercase;color:var(--g3)}
+.row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:calc(var(--u)*12);padding:calc(var(--u)*11.5) 0;border-bottom:1px solid var(--edge-d)}
+.row .n{font-size:calc(var(--u)*13);color:var(--chalk)}
+.row .r{display:block;font-family:var(--mono);font-size:calc(var(--u)*6.8);letter-spacing:.14em;text-transform:uppercase;color:var(--steel);margin-top:calc(var(--u)*3)}
+.chip{font-family:var(--mono);font-size:calc(var(--u)*7);letter-spacing:.1em;text-transform:uppercase;color:var(--g4);border:1px solid rgba(227,196,104,.4);padding:calc(var(--u)*4) calc(var(--u)*9);white-space:nowrap}
+.tx-note{margin-top:auto;padding-top:calc(var(--u)*12);font-size:calc(var(--u)*10);color:var(--steel);line-height:1.5}
+
+/* ---------- 08 sectors ---------- */
+.sec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:calc(var(--u)*1);margin-top:calc(var(--u)*26);background:var(--edge-l);border:1px solid var(--edge-l)}
+.sector{background:var(--paper-2);padding:calc(var(--u)*18) calc(var(--u)*20);display:grid;grid-template-columns:calc(var(--u)*38) 1fr;gap:calc(var(--u)*14);align-items:start}
+.sector svg{width:calc(var(--u)*34);height:calc(var(--u)*34);color:var(--g-ink)}
+.sector h3{font-size:calc(var(--u)*18.5)}
+.sector p{font-size:calc(var(--u)*11.2);color:#4A4842;line-height:1.5;margin-top:calc(var(--u)*5)}
+.regions{margin-top:auto;display:grid;grid-template-columns:auto 1fr;gap:calc(var(--u)*30);align-items:center;padding-top:calc(var(--u)*18)}
+.regions .mono{color:var(--g-ink)}
+.reg-list{display:flex;flex-wrap:wrap;gap:calc(var(--u)*7) calc(var(--u)*22);font-family:var(--disp);font-weight:300;font-size:calc(var(--u)*18);color:var(--text)}
+.reg-list span{display:inline-flex;align-items:center;gap:calc(var(--u)*22)}
+.reg-list span:not(:last-child)::after{content:"";width:calc(var(--u)*5);height:calc(var(--u)*5);transform:rotate(45deg);background:var(--g2)}
+
+/* ---------- 09 process ---------- */
+.proc{display:grid;grid-template-columns:repeat(6,1fr);margin-top:auto;position:relative}
+.proc::before{content:"";position:absolute;left:0;right:0;top:calc(var(--u)*30);height:1px;background:var(--grad);opacity:.8}
+.step{display:flex;flex-direction:column;gap:calc(var(--u)*10);padding-right:calc(var(--u)*18)}
+.step .no{font-family:var(--disp);font-weight:200;font-size:calc(var(--u)*40);line-height:1;color:var(--g3);font-variant-numeric:lining-nums;
+  background:var(--void);width:max-content;padding-right:calc(var(--u)*10);position:relative;z-index:1;height:calc(var(--u)*60);display:flex;align-items:center}
+.step h3{font-size:calc(var(--u)*17.5)}
+.step p{font-size:calc(var(--u)*11);color:#B3B7BD;line-height:1.55}
+.step .who{margin-top:auto;font-family:var(--mono);font-size:calc(var(--u)*6.4);letter-spacing:.14em;text-transform:uppercase;color:var(--steel);padding-top:calc(var(--u)*8);border-top:1px solid var(--edge-d)}
+.proc-foot{display:flex;gap:calc(var(--u)*40);margin-top:calc(var(--u)*26);padding:calc(var(--u)*14) calc(var(--u)*18);border:1px solid var(--edge-d);background:var(--ink)}
+.proc-foot div{display:flex;flex-direction:column;gap:calc(var(--u)*3)}
+.proc-foot span{font-family:var(--mono);font-size:calc(var(--u)*6.6);letter-spacing:.16em;text-transform:uppercase;color:var(--g3)}
+.proc-foot p{font-size:calc(var(--u)*11.2);color:#C9CCD0}
+
+/* ---------- 10 documents ---------- */
+.docs{display:grid;grid-template-columns:.9fr 1fr 1fr;gap:calc(var(--u)*44);flex:1;min-height:0}
+.docs > *{min-width:0}
+.doclist h3{font-size:calc(var(--u)*21);padding-bottom:calc(var(--u)*10);border-bottom:1px solid var(--text);display:flex;justify-content:space-between;align-items:baseline}
+.doclist h3 span{font-family:var(--mono);font-size:calc(var(--u)*7);letter-spacing:.14em;color:var(--g-ink);text-transform:uppercase}
+.doclist ul{list-style:none;margin:0;padding:0}
+.doclist li{display:grid;grid-template-columns:calc(var(--u)*24) 1fr;align-items:start;padding:calc(var(--u)*9) 0;border-bottom:1px solid var(--edge-l);font-size:calc(var(--u)*12.2);line-height:1.4}
+.box{width:calc(var(--u)*11);height:calc(var(--u)*11);border:1px solid var(--g-ink);margin-top:calc(var(--u)*3)}
+.doclist li small{display:block;font-size:calc(var(--u)*10);color:var(--muted);margin-top:calc(var(--u)*2)}
+
+/* ---------- 11 why ---------- */
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:auto;border-top:1px solid var(--edge-d)}
+.why-item{padding:calc(var(--u)*20) calc(var(--u)*28) calc(var(--u)*20) 0;border-bottom:1px solid var(--edge-d);display:flex;flex-direction:column;gap:calc(var(--u)*8)}
+.why-item:nth-child(3n+2),.why-item:nth-child(3n){padding-left:calc(var(--u)*28);border-left:1px solid var(--edge-d)}
+.why-item:nth-child(n+4){border-bottom:0}
+.why-item h3{font-size:calc(var(--u)*20)}
+.why-item p{font-size:calc(var(--u)*11.6);color:#B3B7BD;line-height:1.55}
+.why-item .k{font-family:var(--disp);font-style:italic;font-weight:200;font-size:calc(var(--u)*30);line-height:1;color:var(--g3)}
+
+/* ---------- 12 contact ---------- */
+.contact{background:radial-gradient(ellipse 70% 80% at 100% 0%,rgba(184,145,42,.22),transparent 60%),radial-gradient(ellipse 50% 60% at 0% 100%,rgba(110,84,13,.2),transparent 70%),var(--void)}
+.contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:calc(var(--u)*70);flex:1;min-height:0;align-items:end}
+.contact-grid > *{min-width:0}
+.contact h2{font-size:calc(var(--u)*72);line-height:.98}
+.cards{display:flex;flex-direction:column;border-top:1px solid var(--g2)}
+.ct{display:grid;grid-template-columns:calc(var(--u)*120) 1fr;gap:calc(var(--u)*16);align-items:baseline;padding:calc(var(--u)*15) 0;border-bottom:1px solid var(--edge-d)}
+.ct span{font-family:var(--mono);font-size:calc(var(--u)*7);letter-spacing:.16em;text-transform:uppercase;color:var(--steel)}
+.ct a,.ct strong{font-family:var(--disp);font-weight:300;font-size:calc(var(--u)*21);color:var(--chalk);text-decoration:none;word-break:break-word}
+.ct a:hover{color:var(--g4)}
+.ct a:focus-visible{outline:1px solid var(--g3);outline-offset:4px}
+.disclaimer{margin-top:calc(var(--u)*26);font-size:calc(var(--u)*8.8);line-height:1.55;color:#7D828A;max-width:none;columns:2;column-gap:calc(var(--u)*40)}
+
+/* ---------- scale-up pass ---------- */
+h2{font-size:calc(var(--u)*62)}
+.split h2,.docs h2{font-size:calc(var(--u)*50)}
+.head-lede{margin-top:calc(var(--u)*20)}
+.sit{padding-top:calc(var(--u)*30)} .sit h3{font-size:calc(var(--u)*23)} .sit p{font-size:calc(var(--u)*13)} .sit .ic{width:calc(var(--u)*36);height:calc(var(--u)*36)}
+.inst{padding-block:calc(var(--u)*28)} .inst h3{font-size:calc(var(--u)*26)} .inst p{font-size:calc(var(--u)*12.8)}
+.big-850 .v{font-size:calc(var(--u)*150)}
+.funder{padding-top:calc(var(--u)*24)} .funder h3{font-size:calc(var(--u)*23)} .funder p{font-size:calc(var(--u)*12.6)} .funder .for{font-size:calc(var(--u)*11.4)}
+.sec-grid{flex:1;min-height:0;grid-auto-rows:1fr;margin-top:calc(var(--u)*30)}
+.sector{padding:calc(var(--u)*24) calc(var(--u)*26);align-content:center;grid-template-columns:calc(var(--u)*46) 1fr}
+.sector svg{width:calc(var(--u)*40);height:calc(var(--u)*40)} .sector h3{font-size:calc(var(--u)*22)} .sector p{font-size:calc(var(--u)*12.4)}
+.step h3{font-size:calc(var(--u)*20)} .step p{font-size:calc(var(--u)*12)} .step .no{font-size:calc(var(--u)*46)}
+.why-item{padding-block:calc(var(--u)*26)} .why-item h3{font-size:calc(var(--u)*23)} .why-item p{font-size:calc(var(--u)*12.6)} .why-item .k{font-size:calc(var(--u)*38)}
+.doclist li{padding:calc(var(--u)*11.5) 0;font-size:calc(var(--u)*13)}
+.stack-wrap{margin-top:calc(var(--u)*10)} .h2-tight{font-size:calc(var(--u)*54)} .layer{padding-bottom:calc(var(--u)*9)}
+
+.sit-grid{margin-bottom:calc(var(--u)*10)} .funders{margin-bottom:calc(var(--u)*14)}
+.disclaimer{border-top:1px solid var(--edge-d);padding-top:calc(var(--u)*14);margin-bottom:calc(var(--u)*6)}
+.docs{flex:none}
+.doc-band{margin-top:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:calc(var(--u)*36);padding:calc(var(--u)*18) calc(var(--u)*22);background:var(--paper-2);border:1px solid var(--edge-l);margin-bottom:calc(var(--u)*10)}
+.doc-band div{display:flex;flex-direction:column;gap:calc(var(--u)*4);min-width:0}
+.doc-band span{font-family:var(--mono);font-size:calc(var(--u)*7);letter-spacing:.16em;text-transform:uppercase;color:var(--g-ink)}
+.doc-band p{font-size:calc(var(--u)*12.2);color:#3D3C37;line-height:1.5}
+
+/* ---------- small screens: sheets become free-flowing panels ---------- */
+@media screen and (max-width:760px){
+  h2,.split h2,.docs h2,.h2-tight{font-size:36px}
+  .sheet.cover,.sheet.contact{overflow:hidden}
+  .cover-art{overflow:hidden}
+  .cover-top{flex-direction:column;gap:18px}
+  .cover-tag{text-align:left}
+  .cover-main{margin-top:44px}
+  .card{min-width:0;padding:14px}
+  .card .v{font-size:30px}
+  .card.hero .v{font-size:50px}
+  .card .what{flex-direction:column;gap:2px}
+  .big-850 .v{font-size:84px}
+  .sec-grid{grid-auto-rows:auto}
+  body{padding-block:16px 40px}
+  .book{gap:16px}
+  .sheet{aspect-ratio:auto;--u:1.12px;padding:40px 22px 18px;overflow:visible}
+  .cover{min-height:88vh}
+  .cover-art svg{width:150%;right:-55%;top:-6%;opacity:.7}
+  .cover h1{font-size:46px}
+  h2{font-size:36px}
+  .contact h2{font-size:40px}
+  .cover-meta{grid-template-columns:1fr 1fr;gap:18px 24px}
+  .split,.sit-head,.stack-wrap,.tx,.docs,.contact-grid,.fund-head{grid-template-columns:1fr;gap:28px}
+  .big-850{text-align:left}
+  .sit-grid,.inst-grid,.why,.funders,.sec-grid,.proc{grid-template-columns:1fr;margin-top:28px}
+  .sit + .sit,.funder + .funder{padding-left:0;border-left:0;border-top:1px solid var(--edge-d)}
+  .funder + .funder{border-top-color:var(--edge-l)}
+  .sit,.funder{padding:18px 0}
+  .inst,.why-item{padding:18px 0!important;border-left:0!important;border-bottom:1px solid var(--edge-d)!important}
+  .figs{grid-template-columns:1fr}
+  .fig:nth-child(odd),.fig:nth-child(even){padding:16px 0;border-right:0}
+  .stack-fig{height:420px}
+  .layer{grid-template-columns:1fr;gap:6px}
+  .tx-vol{grid-template-rows:auto}
+  .proc::before{display:none}
+  .step{padding:0 0 20px}
+  .step .no{height:auto}
+  .proc-foot{flex-direction:column;gap:14px}
+  .regions{grid-template-columns:1fr;gap:10px}
+  .ct{grid-template-columns:1fr;gap:4px}
+  .disclaimer{columns:1}
+  .doc-band{grid-template-columns:1fr;gap:16px;margin-top:28px}
+  .contact-grid{margin-top:40px}
+  .folio{flex-wrap:wrap;margin-top:28px}
+  .folio .mid{display:none}
+}
+
+/* ---------- print / PDF ---------- */
+@page{size:297mm 210mm;margin:0}
+@media print{
+  html,body{background:none!important;padding:0!important;width:297mm;margin:0}
+  .book{max-width:none;width:297mm;margin:0;gap:0;display:block}
+  .sheet{overflow:hidden}
+  .sheet{width:297mm;height:210mm;aspect-ratio:auto;--u:0.297mm;box-shadow:none;break-after:page;page-break-after:always;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .sheet:last-child{break-after:auto;page-break-after:auto}
+  /* Chrome draws hairlines around background-clipped text in PDFs: use solid gold in print */
+  em.g,.wordmark .wm,.card.hero .v{background:none!important;-webkit-text-fill-color:#DDBA5E;color:#DDBA5E}
+  .light em.g,.big-850 .v{background:none!important;-webkit-text-fill-color:#8A6A16;color:#8A6A16}
+}
+@media (prefers-reduced-motion:no-preference){
+  .cover-art svg .ring{animation:drift 40s linear infinite;transform-origin:600px 600px}
+  @keyframes drift{to{transform:rotate(360deg)}}
+}
+</style>
+
+<style>
+/* Website toolbar (screen only) */
+.xbar{position:fixed;inset:0 0 auto;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));
+  background:rgba(10,10,11,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid rgba(236,237,238,.08);
+  font-family:"Martian Mono",ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.xbar a{color:#C9CCD0;text-decoration:none;white-space:nowrap}
+.xbar a:hover{color:#F4E1A8}
+.xbar a:focus-visible{outline:1px solid #E3C468;outline-offset:4px}
+.xbar .r{display:flex;align-items:center;gap:18px}
+.xbar .lang b{color:#E3C468;font-weight:400}
+.xbar .dl{color:#0A0A0B;background:linear-gradient(100deg,#B8912A 0%,#E3C468 60%,#F4E1A8 100%);padding:9px 14px}
+.xbar .dl:hover{color:#0A0A0B;filter:brightness(1.06)}
+body{padding-top:84px}
+@media screen and (max-width:760px){body{padding-top:70px}.xbar{font-size:10px;letter-spacing:.1em}.xbar .back span{display:none}.xbar .r{gap:12px}}
+@media print{.xbar{display:none!important}}
+</style>
+</head>
+<body>
+<nav class="xbar" aria-label="Exposé"><a class="back" href="./#kapital">← <span>Zurück zur </span>Website</a><div class="r"><a class="lang" href="../en/expose-capital.html" hreflang="en"><b>DE</b> / EN</a><a class="dl" href="../downloads/Aureon_Expose_Kapital_DE.pdf" download>PDF herunterladen</a></div></nav>
+<main class="book">
+
+<!-- 01 · COVER -->
+<section class="sheet cover dark" aria-label="Titel">
+  <div class="cover-art" aria-hidden="true">
+    <svg viewBox="0 0 1200 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="gl" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#6E540D"/><stop offset=".45" stop-color="#B8912A"/><stop offset=".75" stop-color="#E3C468"/><stop offset="1" stop-color="#F4E1A8"/>
+        </linearGradient>
+      </defs>
+      <g stroke="url(#gl)" fill="none">
+        <circle cx="600" cy="600" r="560" stroke-width=".6" opacity=".35"/>
+        <circle cx="600" cy="600" r="470" stroke-width=".6" opacity=".45"/>
+        <circle cx="600" cy="600" r="380" stroke-width=".8" opacity=".55"/>
+        <circle cx="600" cy="600" r="290" stroke-width="1" opacity=".7"/>
+        <circle cx="600" cy="600" r="200" stroke-width="1.2" opacity=".85"/>
+        <g class="ring"><circle cx="600" cy="600" r="425" stroke-width="1.4" stroke-dasharray="2 14" opacity=".8"/></g>
+        <line x1="40" y1="600" x2="1160" y2="600" stroke-width=".6" opacity=".35"/>
+        <line x1="600" y1="40" x2="600" y2="1160" stroke-width=".6" opacity=".35"/>
+      </g>
+      <g id="dust" fill="#E3C468"></g>
+    </svg>
+  </div>
+  <div class="sheet-body">
+    <div class="cover-top">
+      <div class="wordmark"><span class="wm">AUREON</span></div>
+      <div class="cover-tag">Exposé · <b>Kapital &amp; Finanzierung</b><br>Ausgabe 2026 · Vertraulich</div>
+    </div>
+    <div class="cover-main">
+      <div class="eyebrow">Exposé für Unternehmer &amp; Projektentwickler</div>
+      <h1>Kapital, das mit Ihrem Vorhaben <em class="g">wächst.</em></h1>
+      <p class="lede">Für Wachstum, Übernahmen und große Projekte reicht die Hausbank oft nicht aus. Wir strukturieren Ihren Kapitalbedarf, bereiten das Vorhaben auf und bringen Sie mit den Kapitalgebern an einen Tisch, die zu Größe und Branche passen.</p>
+    </div>
+    <div class="cover-meta">
+      <div><span>Instrumente</span><strong>Senior Debt bis Equity</strong></div>
+      <div><span>Kapitalpartner</span><strong class="num">850+ im Netzwerk</strong></div>
+      <div><span>Regionen</span><strong>DACH · USA · Golfregion</strong></div>
+      <div><span>Ansprechpartner</span><strong>Einer. Von Anfang an.</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 · AUF EINEN BLICK -->
+<section class="sheet light" aria-label="Auf einen Blick">
+  <div class="sheet-body">
+    <div class="split">
+      <div class="glance-left">
+        <div class="eyebrow">Auf einen Blick</div>
+        <h2>Die richtige Finanzierung beginnt mit der richtigen <em class="g">Struktur.</em></h2>
+        <p class="lede">Aureon ist Ihre zentrale Anlaufstelle für Fremd-, Mezzanine- und Eigenkapital. Wir schauen auf Ihr Vorhaben so, wie ein Kapitalgeber es tut: auf Cashflow, Sicherheiten, Kostenstruktur und Exit. Erst dann sprechen wir gezielt die Partner an, die zu genau diesem Vorhaben passen.</p>
+        <ul class="checks">
+          <li>Strukturierung von Finanzierungen ab dem einstelligen Millionenbereich bis in den dreistelligen Millionenbereich</li>
+          <li>Diskrete, gezielte Ansprache statt Streuversand an Dutzende Adressen</li>
+          <li>Ein Ansprechpartner von der ersten Analyse bis zum Closing</li>
+          <li>Deutsch und Englisch, mit Zugang zu Kapital aus Europa, den USA und der Golfregion</li>
+        </ul>
+      </div>
+      <div class="figs">
+        <div class="fig"><div class="v num">850<small>+</small></div><div class="k">Kapitalpartner im Netzwerk: Banken, Family Offices, Fonds und Privatinvestoren</div></div>
+        <div class="fig"><div class="v num">273<small>Mio. €</small></div><div class="k">größtes einzelnes Transaktionsvolumen in der Referenzauswahl</div></div>
+        <div class="fig"><div class="v num">6</div><div class="k">Finanzierungsformen, von Senior Debt über Bridge und Mezzanine bis Equity</div></div>
+        <div class="fig"><div class="v num">1</div><div class="k">Ansprechpartner, der für den Prozess verantwortlich ist</div></div>
+        <div class="fig"><div class="v num">3</div><div class="k">Kernregionen: DACH, USA und Golfregion, Mandate weltweit</div></div>
+        <div class="fig"><div class="v num">17<small>Jahre</small></div><div class="k">Einkaufserfahrung: Wir lesen Kostenstrukturen wie ein Investor</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="folio"><span>Aureon · Kapital &amp; Finanzierung</span><span class="mid">Vertraulich</span><b class="num">02 / 12</b></div>
+</section>
+
+<!-- 03 · AUSGANGSLAGE -->
+<section class="sheet dark" aria-label="Ausgangslage">
+  <div class="sheet-body">
+    <div class="sit-head">
+      <div>
+        <div class="eyebrow">Ausgangslage</div>
+        <h2>Wenn die Hausbank an ihre <em class="g">Grenzen</em> kommt.</h2>
+        <p class="lede head-lede">Ausgeschöpfte Kreditlinien, gebundene Sicherheiten, eine Lücke im Eigenkapital oder schlicht zu wenig Zeit: Wir kennen die typischen Engpässe und die Kapitalgeber, die sie lösen.</p>
+      </div>
+      <p class="quote">Gute Vorhaben scheitern selten an der Idee. Sie scheitern an einer Kapitalstruktur, die nicht zum Projekt passt, oder am falschen Gesprächspartner.</p>
+    </div>
+    <div class="sit-grid">
+      <div class="sit">
+        <svg class="ic" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 26 L12 17 L18 21 L28 8"/><path d="M21 8 H28 V15"/></svg>
+        <h3>Wachstum &amp; Expansion</h3>
+        <p>Neue Standorte, Kapazitäten oder Märkte, deren Volumen den Kreditrahmen der Hausbank übersteigt.</p>
+      </div>
+      <div class="sit">
+        <svg class="ic" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="4" y="10" width="11" height="16"/><rect x="17" y="6" width="11" height="20"/><path d="M10 6 V3 M22 3 V1"/><path d="M15 18 H17"/></svg>
+        <h3>Übernahme &amp; Nachfolge</h3>
+        <p>Firmenkauf, Management-Buy-out oder Generationswechsel mit passender Kaufpreisfinanzierung.</p>
+      </div>
+      <div class="sit">
+        <svg class="ic" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 28 H28"/><path d="M7 28 V12 L16 6 L25 12 V28"/><path d="M12 28 V19 H20 V28"/><path d="M11 14 H13 M19 14 H21"/></svg>
+        <h3>Projekte &amp; Immobilien</h3>
+        <p>Hotel, Wohnen, Energie, Infrastruktur: Finanzierung auf Basis des Projekts und seiner Cashflows.</p>
+      </div>
+      <div class="sit">
+        <svg class="ic" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 22 C9 10, 23 10, 29 22"/><path d="M3 22 H29"/><path d="M9 22 V16 M16 22 V13 M23 22 V16"/></svg>
+        <h3>Überbrückung &amp; Refinanzierung</h3>
+        <p>Bridge-Finanzierungen für Zeitfenster, in denen eine schnelle Entscheidung mehr zählt als der letzte Basispunkt.</p>
+      </div>
+    </div>
+  </div>
+  <div class="folio"><span>Aureon · Kapital &amp; Finanzierung</span><span class="mid">Vertraulich</span><b class="num">03 / 12</b></div>
+</section>
+
+<!-- 04 · KAPITALSTRUKTUR -->
+<section class="sheet light" aria-label="Kapitalstruktur">
+  <div class="sheet-body">
+    <div class="eyebrow">Die Kapitalstruktur</div>
+    <h2 class="h2-tight">Jede Schicht hat ihren <em class="g">Preis</em> und ihre Aufgabe.</h2>
+    <div class="stack-wrap">
+      <div class="stack-fig" role="img" aria-label="Illustrativer Kapitalstack: Senior Debt bis ca. 60 Prozent, Mezzanine bis ca. 80 Prozent, Preferred Equity bis ca. 90 Prozent, darüber Eigenkapital">
+        <div class="axis num"><span style="top:0;transform:none">100 %</span><span style="top:10%">90 %</span><span style="top:20%">80 %</span><span style="top:40%">60 %</span><span style="top:100%;transform:translateY(-100%)">0 %</span></div>
+        <div class="bars">
+          <div class="bar b-eq"><span>Eigenkapital</span><span class="pct">~10 %</span></div>
+          <div class="bar b-pe"><span>Preferred Equity</span><span class="pct">~10 %</span></div>
+          <div class="bar b-mz"><span>Mezzanine</span><span class="pct">~20 %</span></div>
+          <div class="bar b-sd"><span>Senior Debt</span><span class="pct">~60 %</span></div>
+        </div>
+        <div class="risk"><span class="vt">Risiko · Rendite</span><span class="line"></span><span class="vt">Rang · Sicherheit</span></div>
+      </div>
+      <div class="layers">
+        <div class="layer"><div><h3>Eigenkapital</h3><span class="mono">Letzter Rang</span></div><p>Minderheits- und Mehrheitsbeteiligungen. Trägt das höchste Risiko und erhält dafür Mitsprache und den größten Anteil an der Wertsteigerung.</p></div>
+        <div class="layer"><div><h3>Preferred Equity</h3><span class="mono">Vor dem Eigenkapital</span></div><p>Bevorzugtes Eigenkapital mit Vorzugsrendite. Schließt Lücken, ohne die Kontrolle der Gesellschafter aufzugeben.</p></div>
+        <div class="layer"><div><h3>Mezzanine</h3><span class="mono">Nachrangig</span></div><p>Nachrangkapital, das die Eigenkapitalbasis stärkt. Verbessert die Bankfähigkeit und hebt den Finanzierungsrahmen deutlich an.</p></div>
+        <div class="layer"><div><h3>Senior Debt</h3><span class="mono">Erster Rang · besichert</span></div><p>Klassische, besicherte Finanzierung zu den günstigsten Konditionen. Laufzeit und Tilgung passend zum Cashflow.</p></div>
+        <p class="small">Illustrative Richtwerte in Prozent des Gesamtkapitals (Loan-to-Cost). Die tatsächliche Struktur hängt von Vorhaben, Sicherheiten und Kapitalgeber ab.</p>
+      </div>
+    </div>
+  </div>
+  <div class="folio"><span>Aureon · Kapital &amp; Finanzierung</span><span class="mid">Vertraulich</span><b class="num">04 / 12</b></div>
+</section>
+
+<!-- 05 · FINANZIERUNGSFORMEN -->
+<section class="sheet dark" aria-label="Finanzierungsformen">
+  <div class="sheet-body">
+    <div class="eyebrow">Finanzierungsformen</div>
+    <div class="sit-head"><h2>Sechs Instrumente. <em class="g">Eine</em> passende Lösung.</h2>
+    <p class="lede">Wir kombinieren Instrumente so, dass Kosten, Kontrolle und Tempo zu Ihrem Vorhaben passen. Oft liegt die Lösung nicht in einem einzelnen Instrument, sondern in der richtigen Schichtung.</p></div>
+    <div class="inst-grid">
+      <div class="inst">
+        <div class="top"><h3>Senior Debt</h3><span class="tag">Fremdkapital</span></div>
+        <p>Konventionelle, besicherte Finanzierung, abgestimmt auf Laufzeit und Cashflow.</p>
+        <ul><li>Akquisition</li><li>Investition</li><li>Refinanzierung</li></ul>
+      </div>
+      <div class="inst">
+        <div class="top"><h3>Bridge</h3><span class="tag">Kurzfristig</span></div>
+        <p>Schnelles Kapital für Zeitfenster: Ankauf, Baubeginn, Anschlussfinanzierung oder Exit.</p>
+        <ul><li>Ankauf</li><li>Zwischenfinanzierung</li><li>Exit-Brücke</li></ul>
+      </div>
+      <div class="inst">
+        <div class="top"><h3>Mezzanine</h3><span class="tag">Nachrang</span></div>
+        <p>Nachrangiges Kapital, das die Eigenkapitalbasis stärkt, ohne Kontrolle abzugeben.</p>
+        <ul><li>Wachstum</li><li>Eigenkapitallücke</li><li>Projekte</li></ul>
+      </div>
+      <div class="inst">
+        <div class="top"><h3>Preferred Equity</h3><span class="tag">Hybrid</span></div>
+        <p>Vorrangiges Eigenkapital mit Vorzugsrendite, flexibel zwischen Mezzanine und Equity.</p>
+        <ul><li>Projektentwicklung</li><li>Portfolios</li></ul>
+      </div>
+      <div class="inst">
+        <div class="top"><h3>Equity &amp; M&amp;A</h3><span class="tag">Eigenkapital</span></div>
+        <p>Minderheits- und Mehrheitsbeteiligungen, Nachfolge sowie Kauf und Verkauf von Unternehmen.</p>
+        <ul><li>Nachfolge</li><li>Firmenkauf</li><li>Beteiligung</li></ul>
+      </div>
+      <div class="inst">
+        <div class="top"><h3>Projektfinanzierung</h3><span class="tag">Projektbasiert</span></div>
+        <p>Industrie-, Immobilien-, Hotel-, Energie- und Infrastrukturprojekte, finanziert aus der Stärke des Projekts selbst.</p>
+        <ul><li>Hotel</li><li>Energie</li><li>Infrastruktur</li></ul>
+      </div>
+    </div>
+  </div>
+  <div class="folio"><span>Aureon · Kapital &amp; Finanzierung</span><span class="mid">Vertraulich</span><b class="num">05 / 12</b></div>
+</section>
+
+<!-- 06 · KAPITALGEBER -->
+<section class="sheet light" aria-label="Kapitalgeber">
+  <div class="sheet-body">
+    <div class="fund-head">
+      <div>
+        <div class="eyebrow">Kapitalgeber</div>
+        <h2>Der richtige Partner <em class="g">am Tisch.</em></h2>
+        <p class="lede" style="margin-top:calc(var(--u)*16)">Über Jahrzehnte gewachsene Beziehungen, die sich nicht mit Kaltakquise oder Werbebudget aufbauen lassen. Sie bekommen Zugang zu diesem Netzwerk über einen einzigen Ansprechpartner.</p>
+      </div>
+      <div class="big-850"><div class="v num">850+</div><div class="k">Kapitalpartner · ein Zugang</div></div>
+    </div>
+    <div class="funders">
+      <div class="funder"><span class="mono">01</span><h3>Banken</h3><p>Senior Debt, Akquisitions- und Projektfinanzierung mit klaren Sicherheiten.</p><div class="for"><b>Ideal für</b>Besicherte Vorhaben, Akquisitionen</div></div>
+      <div class="funder"><span class="mono">02</span><h3>Family Offices</h3><p>Privates Kapital mit langem Horizont, das schnell und diskret entscheidet.</p><div class="for"><b>Ideal für</b>Nachfolge, Beteiligungen, Sondersituationen</div></div>
+      <div class="funder"><span class="mono">03</span><h3>Fonds</h3><p>Private Debt, Mezzanine und Private Equity mit institutionellen Prozessen.</p><div class="for"><b>Ideal für</b>Wachstum, Buy-outs, größere Tickets</div></div>
+      <div class="funder"><span class="mono">04</span><h3>Private Investoren</h3><p>Unternehmer und Investoren, die Erfahrung und Netzwerk mitbringen.</p><div class="for"><b>Ideal für</b>Minderheiten, Bridge, Co-Investments</div></div>
+      <div class="funder"><span class="mono">05</span><h3>Golfregion</h3><p>Family Offices und private Investoren aus der Golfregion mit Zugängen, die über Jahre gewachsen sind.</p><div class="for"><b>Ideal für</b>Großprojekte, Hotel, Infrastruktur</div></div>
+    </div>
+  </div>
+  <div class="folio"><span>Aureon · Kapital &amp; Finanzierung</span><span class="mid">Vertraulich</span><b class="num">06 / 12</b></div>
+</section>
+
+<!-- 07 · TRANSAKTIONEN -->
+<section class="sheet dark" aria-label="Ausgewählte Transaktionen">
+  <div class="sheet-body">
+    <div class="eyebrow">Ausgewählte Transaktionen</div>
+    <h2>Hier entstehen <em class="g">Deals.</em></h2>
+    <div class="tx">
+      <div class="tx-vol">
+        <div class="card hero"><div class="what"><span>Hotelprojekt</span><span>Deutschland</span></div><div class="v num">273<small>Mio. EUR</small></div></div>
+        <div class="card"><div class="what"><span>Infrastruktur</span><span>Asien</span></div><div class="v num">78<small>Mio. USD</small></div></div>
+        <div class="card"><div class="what"><span>Hotelresort</span><span>Karibik</span></div><div class="v num">32<small>Mio. USD</small></div></div>
+        <div class="card"><div class="what"><span>Erneuerbare Energien</span><span>Italien</span></div><div class="v num">22<small>Mio. EUR</small></div></div>
+        <div class="card"><div class="what"><span>Bridge-Finanzierung</span><span>Hamburg</span></div><div class="v num">11,5<small>Mio. EUR</small></div></div>
+      </div>
+      <div class="tx-list">
+        <div class="hd"><span>Vorhaben · Region</span><span>Struktur</span></div>
+        <div class="row"><div><span class="n">Hotelportfolio</span><span class="r">Deutschland</span></div><span class="chip">Mezzanine</span></div>
+        <div class="row"><div><span class="n">Wohnprojekt</span><span class="r">Rumänien</span></div><span class="chip">Senior Debt</span></div>
+        <div class="row"><div><span class="n">Villenprojekte</span><span class="r">Indonesien</span></div><span class="chip">Projektfinanzierung</span></div>
+        <div class="row"><div><span class="n">Firmenkauf Bauträger</span><span class="r">Unternehmenstransaktion</span></div><span class="chip">M&amp;A</span></div>
+        <div class="row"><div><span class="n">Luxusimmobilie</span><span class="r">Dubai</span></div><span class="chip">Bridge</span></div>
+        <div class="row"><div><span class="n">Hotel</span><span class="r">Afrika</span></div><span class="chip">Finanzierung</span></div>
+        <p class="tx-note">Auswahl anonymisierter Mandate aus unserem Kapitalnetzwerk. Namen und Details auf Anfrage nach Unterzeichnung einer Vertraulichkeitsvereinbarung, soweit die Beteiligten zustimmen.</p>
+      </div>
+    </div>
+  </div>
+  <div class="folio"><span>Aureon · Kapital &amp; Finanzierung</span><span class="mid">Vertraulich</span><b class="num">07 / 12</b></div>
+</section>
+
+<!-- 08 · SEKTOREN -->
+<section class="sheet light" aria-label="Sektoren und Regionen">
+  <div class="sheet-body">
+    <div class="eyebrow">Sektoren &amp; Regionen</div>
+    <h2>Wo wir Kapital <em class="g">bewegen.</em></h2>
+    <div class="sec-grid">
+      <div class="sector"><svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M5 30 H29"/><rect x="8" y="6" width="18" height="24"/><path d="M12 11 H15 M19 11 H22 M12 16 H15 M19 16 H22 M12 21 H15 M19 21 H22"/><path d="M15 30 V25 H19 V30"/></svg><div><h3>Hotel &amp; Hospitality</h3><p>Neubau, Repositionierung und Portfolios, von Stadthotels bis Resorts.</p></div></div>
+      <div class="sector"><svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M4 30 H30"/><path d="M6 30 V15 L14 9 L22 15 V30"/><path d="M22 30 V19 H29 V30"/><path d="M11 30 V22 H17 V30"/></svg><div><h3>Wohnen &amp; Projektentwicklung</h3><p>Wohn- und Mixed-Use-Projekte, Villen, Bauträgerfinanzierung.</p></div></div>
+      <div class="sector"><svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.1"><circle cx="17" cy="12" r="5"/><path d="M17 3 V5 M17 19 V21 M8 12 H10 M24 12 H26 M10.6 5.6 L12 7 M22 17 L23.4 18.4 M23.4 5.6 L22 7 M12 17 L10.6 18.4"/><path d="M6 30 L10 24 H24 L28 30 Z"/><path d="M15 24 L14 30 M19 24 L20 30 M8 27 H26"/></svg><div><h3>Erneuerbare Energien</h3><p>Solar, Wind und Speicher, finanziert auf Basis langfristiger Erträge.</p></div></div>
+      <div class="sector"><svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M3 24 H31"/><path d="M6 24 C10 12, 24 12, 28 24"/><path d="M10 24 V17 M17 24 V14 M24 24 V17"/><path d="M3 29 H31"/></svg><div><h3>Infrastruktur</h3><p>Großprojekte mit langen Laufzeiten und internationalen Kapitalgebern.</p></div></div>
+      <div class="sector"><svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M4 30 V16 L11 20 V16 L18 20 V16 L25 20 V8 H30 V30 Z"/><path d="M9 25 H12 M16 25 H19 M23 25 H26"/></svg><div><h3>Industrie &amp; Mittelstand</h3><p>Wachstum, Nachfolge und Übernahmen. Mit 17 Jahren Automotive-Erfahrung im Rücken.</p></div></div>
+      <div class="sector"><svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M17 3 L19 13 L17 31 L15 13 Z"/><path d="M8 31 V20 H13 V31 M21 31 V17 H26 V31"/><path d="M4 31 H30"/></svg><div><h3>Premium- &amp; Gewerbeimmobilien</h3><p>Luxusimmobilien, Büro und Handel, Ankauf und Zwischenfinanzierung.</p></div></div>
+    </div>
+    <div class="regions">
+      <span class="mono">Mandate in</span>
+      <div class="reg-list"><span>Deutschland</span><span>Europa</span><span>USA</span><span>Golfregion</span><span>Asien</span><span>Afrika</span><span>Karibik</span></div>
+    </div>
+  </div>
+  <div class="folio"><span>Aureon · Kapital &amp; Finanzierung</span><span class="mid">Vertraulich</span><b class="num">08 / 12</b></div>
+</section>
+
+<!-- 09 · ABLAUF -->
+<section class="sheet dark" aria-label="Ablauf">
+  <div class="sheet-body">
+    <div class="eyebrow">Der Ablauf</div>
+    <h2>Vom ersten Gespräch bis zum <em class="g">Closing.</em></h2>
+    <p class="lede head-lede">Ein klarer Prozess mit festen Meilensteinen. Sie wissen jederzeit, wo Ihr Vorhaben steht und wer gerade daran arbeitet.</p>
+    <div class="proc">
+      <div class="step"><span class="no">01</span><h3>Erstgespräch</h3><p>Vorhaben, Kapitalbedarf und Zeitrahmen. Auf Wunsch unter Vertraulichkeitsvereinbarung.</p><span class="who">Kostenfrei · 60 Min.</span></div>
+      <div class="step"><span class="no">02</span><h3>Analyse</h3><p>Wir prüfen Finanzierbarkeit, Sicherheiten und die sinnvolle Kapitalstruktur.</p><span class="who">Ehrliche Einschätzung</span></div>
+      <div class="step"><span class="no">03</span><h3>Aufbereitung</h3><p>Teaser, Finanzierungsunterlage und Zahlenwerk, so wie Kapitalgeber sie erwarten.</p><span class="who">Investorenreif</span></div>
+      <div class="step"><span class="no">04</span><h3>Ansprache</h3><p>Gezielte, diskrete Vorstellung bei ausgewählten Kapitalgebern. Kein Streuversand.</p><span class="who">Nur passende Partner</span></div>
+      <div class="step"><span class="no">05</span><h3>Term Sheet</h3><p>Angebote vergleichen, Konditionen verhandeln, Struktur festzurren.</p><span class="who">Sie entscheiden</span></div>
+      <div class="step"><span class="no">06</span><h3>Closing</h3><p>Begleitung durch Due Diligence und Vertragsphase bis zur Auszahlung.</p><span class="who">Bis zum Abschluss</span></div>
+    </div>
+    <div class="proc-foot">
+      <div><span>Diskretion</span><p>Ihr Vorhaben geht nur an Partner, denen Sie zugestimmt haben.</p></div>
+      <div><span>Ein Ansprechpartner</span><p>Aureon koordiniert alle Beteiligten, Sie behalten den Überblick.</p></div>
+      <div><span>Klarheit</span><p>Passt ein Vorhaben nicht, sagen wir es Ihnen früh und begründet.</p></div>
+    </div>
+  </div>
+  <div class="folio"><span>Aureon · Kapital &amp; Finanzierung</span><span class="mid">Vertraulich</span><b class="num">09 / 12</b></div>
+</section>
+
+<!-- 10 · UNTERLAGEN -->
+<section class="sheet light" aria-label="Unterlagen">
+  <div class="sheet-body">
+    <div class="docs">
+      <div style="display:flex;flex-direction:column;gap:calc(var(--u)*18)">
+        <div class="eyebrow">Unterlagen</div>
+        <h2>Was wir für eine erste <em class="g">Einschätzung</em> brauchen.</h2>
+        <p class="lede">Für das Erstgespräch genügt eine kurze Beschreibung. Für die Ansprache von Kapitalgebern stellen wir mit Ihnen die folgenden Unterlagen zusammen. Was fehlt, erarbeiten wir gemeinsam.</p>
+      </div>
+      <div class="doclist">
+        <h3>Projekte &amp; Immobilien <span>Projekt</span></h3>
+        <ul>
+          <li><span class="box"></span><span>Projektbeschreibung &amp; Exposé<small>Lage, Nutzung, Konzept</small></span></li>
+          <li><span class="box"></span><span>Kapitalbedarf &amp; Mittelverwendung</span></li>
+          <li><span class="box"></span><span>Kosten- und Investitionsplan<small>inkl. Zeitplan</small></span></li>
+          <li><span class="box"></span><span>Grundbuchauszug &amp; Lageplan</span></li>
+          <li><span class="box"></span><span>Baugenehmigung bzw. Planungsstand</span></li>
+          <li><span class="box"></span><span>Wertgutachten, Miet- oder Betreiberkonzept</span></li>
+          <li><span class="box"></span><span>Nachweis Eigenkapital</span></li>
+        </ul>
+      </div>
+      <div class="doclist">
+        <h3>Unternehmen &amp; M&amp;A <span>Firma</span></h3>
+        <ul>
+          <li><span class="box"></span><span>Jahresabschlüsse der letzten drei Jahre</span></li>
+          <li><span class="box"></span><span>Aktuelle BWA mit Summen- und Saldenliste</span></li>
+          <li><span class="box"></span><span>Planung für drei bis fünf Jahre<small>GuV, Liquidität, Investitionen</small></span></li>
+          <li><span class="box"></span><span>Gesellschafter- und Konzernstruktur</span></li>
+          <li><span class="box"></span><span>Bankenspiegel &amp; bestehende Finanzierungen</span></li>
+          <li><span class="box"></span><span>Anlass: Wachstum, Kauf, Nachfolge</span></li>
+          <li><span class="box"></span><span>Managementprofil</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="doc-band">
+      <div><span>Zum Start</span><p>Für das Erstgespräch genügen drei Angaben: Vorhaben, Kapitalbedarf und Zeitrahmen.</p></div>
+      <div><span>Vertraulichkeit</span><p>Unterlagen gehen nur mit Ihrer ausdrücklichen Zustimmung an Kapitalgeber.</p></div>
+      <div><span>Format</span><p>PDF, Excel oder Datenraum. Wir arbeiten mit dem, was Sie bereits haben.</p></div>
+    </div>
+  </div>
+  <div class="folio"><span>Aureon · Kapital &amp; Finanzierung</span><span class="mid">Vertraulich</span><b class="num">10 / 12</b></div>
+</section>
+
+<!-- 11 · WARUM AUREON -->
+<section class="sheet dark" aria-label="Warum Aureon">
+  <div class="sheet-body">
+    <div class="eyebrow">Warum Aureon</div>
+    <h2>Wir kennen beide Seiten des <em class="g">Tisches.</em></h2>
+    <p class="lede head-lede">Als Einkäufer haben wir jahrelang Angebote, Kostenstrukturen und Lieferanten bewertet. Genau diesen Blick richten wir auf Ihr Vorhaben, bevor es ein Kapitalgeber tut.</p>
+    <div class="why">
+      <div class="why-item"><span class="k">Einer.</span><h3>Ein Ansprechpartner</h3><p>Sie sprechen mit einer Person, die für das Ergebnis geradesteht. Keine Weiterleitung, keine Warteschleife.</p></div>
+      <div class="why-item"><span class="k">17 Jahre.</span><h3>Der Blick des Einkäufers</h3><p>Siebzehn Jahre Einkauf in der Industrie. Wir prüfen Kostenstrukturen und Zahlen so, wie es ein Kapitalgeber tun wird, bevor er es tut.</p></div>
+      <div class="why-item"><span class="k">850+</span><h3>Netzwerk statt Datenbank</h3><p>Persönliche Beziehungen zu Banken, Family Offices, Fonds und Investoren, auch in der Golfregion.</p></div>
+      <div class="why-item"><span class="k">Gezielt.</span><h3>Kein Streuversand</h3><p>Ihr Vorhaben geht an wenige, passende Adressen. Das schützt Ihren Ruf am Markt und Ihre Verhandlungsposition.</p></div>
+      <div class="why-item"><span class="k">Drei.</span><h3>Regionen, ein Prozess</h3><p>DACH, USA und Golfregion. Deutsch und Englisch, mit Verständnis für die Erwartungen jedes Marktes.</p></div>
+      <div class="why-item"><span class="k">Bis zum Ende.</span><h3>Begleitung bis Closing</h3><p>Wir bleiben, bis das Kapital fließt. Wir begleiten Due Diligence, Verhandlungen und Vertragsphase.</p></div>
+    </div>
+  </div>
+  <div class="folio"><span>Aureon · Kapital &amp; Finanzierung</span><span class="mid">Vertraulich</span><b class="num">11 / 12</b></div>
+</section>
+
+<!-- 12 · KONTAKT -->
+<section class="sheet contact dark" aria-label="Kontakt">
+  <div class="sheet-body">
+    <div class="cover-top">
+      <div class="wordmark"><span class="wm">AUREON</span></div>
+      <div class="cover-tag">Kontakt<br><b>Kapital &amp; Finanzierung</b></div>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <div class="eyebrow">Nächster Schritt</div>
+        <h2 style="margin-top:calc(var(--u)*18)">Sprechen wir über Ihr <em class="g">Vorhaben.</em></h2>
+        <p class="lede" style="margin-top:calc(var(--u)*20)">Beschreiben Sie uns Ihr Projekt in einem kurzen Gespräch. Wir sagen Ihnen ehrlich, ob und wie wir helfen können.</p>
+      </div>
+      <div class="cards">
+        <div class="ct"><span>E-Mail</span><a href="mailto:info@aureon-trading.com">info@aureon-trading.com</a></div>
+        <div class="ct"><span>Web</span><a href="https://aureon-trading.com/de/#kapital" target="_blank" rel="noopener">aureon-trading.com</a></div>
+        <div class="ct"><span>Termin</span><strong>Erstgespräch, 60 Min.</strong></div>
+        <div class="ct"><span>Regionen</span><strong>DACH · USA · Golfregion</strong></div>
+      </div>
+    </div>
+    <p class="disclaimer">Aureon vermittelt Kontakte zu Kapitalgebern und unterstützt bei der Aufbereitung und Strukturierung von Finanzierungsvorhaben. Aureon ist kein Kreditinstitut und erbringt keine Rechts-, Steuer- oder Anlageberatung. Über Finanzierungen entscheiden ausschließlich die jeweiligen Kapitalgeber. Die dargestellten Transaktionen sind anonymisiert und stammen aus dem Netzwerk, mit dem Aureon zusammenarbeitet. Angaben zur Kapitalstruktur sind illustrative Richtwerte. Dieses Dokument dient ausschließlich der Information, ist vertraulich und stellt kein Angebot dar. Stand: November 2026.</p>
+  </div>
+  <div class="folio"><span>© 2026 Aureon Trading and Consulting</span><span class="mid">Vertraulich</span><b class="num">12 / 12</b></div>
+</section>
+
+</main>
+
+<script>
+// Deterministic gold dust on the cover (same on screen and in the PDF).
+(function(){
+  var g=document.getElementById('dust'); if(!g) return;
+  var s=7; function r(){ s=(s*16807)%2147483647; return (s-1)/2147483646; }
+  var ns='http://www.w3.org/2000/svg', frag=document.createDocumentFragment();
+  for(var i=0;i<260;i++){
+    var a=r()*Math.PI*2, d=180+Math.pow(r(),.6)*420;
+    var c=document.createElementNS(ns,'circle');
+    c.setAttribute('cx',(600+Math.cos(a)*d).toFixed(1));
+    c.setAttribute('cy',(600+Math.sin(a)*d).toFixed(1));
+    c.setAttribute('r',(0.6+r()*1.8).toFixed(2));
+    c.setAttribute('opacity',(0.15+r()*0.65).toFixed(2));
+    frag.appendChild(c);
+  }
+  g.appendChild(frag);
+})();
+</script>
+</body></html>
